@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import FBSDK, {LoginManager} from 'react-native-fbsdk'
+import { StackNavigator, Navigator
+} from 'react-navigation';
+import Home from '../home';
+// import FBSDK, {LoginManager} from 'react-native-fbsdk'
 
 
-export default class Login extends Component {
+export default class Login extends React.Component {
 
    _fb_Auth() {
       // Attempt a login using the Facebook login dialog asking for default permissions.
@@ -22,11 +25,10 @@ export default class Login extends Component {
       //    }
       // );
    };
-
    render() {
       return (
          <View style = {style.container}>
-            <TouchableOpacity onPress={() => {this._fb_Auth}}>
+            <TouchableOpacity onPress={() => { this._fb_Auth()}}>
                <Text style= {{color:'white'}} >
                   Login With Facebook
                </Text>

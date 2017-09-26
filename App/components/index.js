@@ -13,6 +13,5 @@ export default (navigation = StackNavigator({
       connexion: {screen: Connexion},
       home: { screen: Home },
       messages: { screen: Messages },
-      profile: { screen: Profile },
-      
+      profile: { screen: Profile },   
    }));
