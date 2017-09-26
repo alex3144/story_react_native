@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import Actions from 'react-native-router-flux';
 import { StackNavigator, Navigator } from 'react-navigation';
 import { Text, TouchableOpacity, View, Button } from 'react-native';
+import { connect } from 'react-redux';
 import Cards from './cards';
 import CardSections from './cardSections';
 import Home from './home';
 import Profile from './profile';
 import Messages from './messages';
 import Login from './commun/buttonLogin';
-import FBSDK, { LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk'
+import login from '../actions/actions';
+import FBSDK, { LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk';
+import auth from '../api/auth/auth';
 // import FBSDKCore, {FBSDKAccessToken} from 'react-native-fbsdkcore';
 
 // import LinearGradient from 'react-native-linear-gradient';
@@ -21,26 +24,26 @@ const navigation = StackNavigator({
 
 //
 
-export default class Connexion extends React.Component {
-  _fb_Auth() {
-    //Attempt a login using the Facebook login dialog asking for default permissions.
-    LoginManager.logInWithReadPermissions(['public_profile']).then(
-      function (result) {
-        if (result.isCancelled) {
-          alert('Login cancelled');
-        } else {
-          AccessToken.getCurrentAccessToken().then(
-            (data) => {
-              alert(data.accessToken.toString())
-            }
-          ) 
-        }
-      },
-      function (error) {
-        alert('Login fail with error: ' + error);
-      }
-    );
-  };
+export default  class Connexion extends React.Component {
+  // _fb_Auth() {
+  //   //Attempt a login using the Facebook login dialog asking for default permissions.
+  //   LoginManager.logInWithReadPermissions(['public_profile']).then(
+  //     function (result) {
+  //       if (result.isCancelled) {
+  //         alert('Login cancelled');
+  //       } else {
+  //         AccessToken.getCurrentAccessToken().then(
+  //           (data) => {
+  //             alert(data.accessToken.toString())
+  //           }
+  //         ) 
+  //       }
+  //     },
+  //     function (error) {
+  //       alert('Login fail with error: ' + error);
+  //     }
+  //   );
+  // };
 
   static navigationOptions = {
     header: null
@@ -55,7 +58,7 @@ export default class Connexion extends React.Component {
         <Text style= {styles.textTagline} >
           Ecrivez votre histoire
             </Text>
-        <TouchableOpacity style= {styles.button} onPress={() => { this._fb_Auth() }}>
+        <TouchableOpacity style= {styles.button} onPress={() => {  }}>
           {/* <LinearGradient colors={['rgb(15,131,222)', '#rgb(71,154,222)']}> */}
           <Text style= {styles.textButon} >
             Login
@@ -67,6 +70,7 @@ export default class Connexion extends React.Component {
     );
   }
 }
+
 const styles = ({
   container: {
     flex: 1,
@@ -98,5 +102,25 @@ const styles = ({
     padding:10,
     marginBottom:90
   }
-
 });
+
+
+
+// const mapStateToProps = (state, ownProps = {}) => {
+//   return {
+//     isLoginPending:  state.isLoginPending,
+//     isLoginSuccess: state.isLoginSuccess,
+//     loginError: state.loginError
+//   }
+// }
+
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     login : dispatch(login)
+//   }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Connexion)
+
+

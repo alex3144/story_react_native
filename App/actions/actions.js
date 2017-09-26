@@ -1,11 +1,22 @@
 import * as types from './actionTypes';
-
-
-export function login(navProps, res) {
-  console.log(res);
+ 
+function setLoginPending(isLoginPending) {
   return {
-    type: types.LOGIN,
-    nav:navProps,
-    data: res
+    type: types.SET_LOGIN_PENDING,
+    isLoginPending
   };
+}
+ 
+function setLoginSuccess(isLoginSuccess) {
+  return {
+    type: types.SET_LOGIN_SUCCESS,
+    isLoginSuccess
+  };
+}
+ 
+function setLoginError(loginError) {
+  return {
+    type: types.SET_LOGIN_ERROR,
+    loginError
+  }
 }
