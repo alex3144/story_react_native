@@ -74,7 +74,7 @@ const styles = ({
     borderWidth: 2,
     backgroundColor:"#3b5998",
     borderColor: '#3b5998',
-    borderRadius: 8,
+    borderRadius: 20,
     alignItems: 'center', 
     justifyContent: 'center',
     
@@ -86,12 +86,13 @@ const styles = ({
   textTitle: {
     color: 'white',
     fontSize: 80,
-    padding:60
+    marginBottom:10
   },
   textTagline: {
     color: 'white',
     fontSize: 20,
-    padding:10
+    padding:10,
+    marginBottom:90
   }
 
 });
