@@ -48,6 +48,9 @@ export default class Connexion extends React.Component {
             <Text style= {styles.textTitle} >
                   Story
             </Text>
+            <Text style= {styles.textTagline} >
+                  Ecrivez votre histoire
+            </Text>
             <TouchableOpacity style= {styles.button} onPress={() => { this._fb_Auth()}}>
               {/* <LinearGradient colors={['rgb(15,131,222)', '#rgb(71,154,222)']}> */}
                 <Text style= {styles.textButon} >
@@ -74,6 +77,7 @@ const styles = ({
     borderRadius: 8,
     alignItems: 'center', 
     justifyContent: 'center',
+    
   },
   textButon: {
     color:'white',
@@ -81,7 +85,13 @@ const styles = ({
   },
   textTitle: {
     color: 'white',
-    fontsize: 80
+    fontSize: 80,
+    padding:60
+  },
+  textTagline: {
+    color: 'white',
+    fontSize: 20,
+    padding:10
   }
 
 });
