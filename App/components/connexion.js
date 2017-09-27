@@ -9,10 +9,7 @@ import Home from './home';
 import Profile from './profile';
 import Messages from './messages';
 import Login from './commun/buttonLogin';
-import login from '../actions/actions';
-import FBSDK, { LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk';
-import auth from '../api/auth/auth';
-// import FBSDKCore, {FBSDKAccessToken} from 'react-native-fbsdkcore';
+import { _fb_Auth } from '../actionAsync/auth/auth';
 
 // import LinearGradient from 'react-native-linear-gradient';
 
@@ -22,34 +19,37 @@ const navigation = StackNavigator({
   messages: { screen: Messages },
 });
 
-//
 
-export default  class Connexion extends React.Component {
-  // _fb_Auth() {
-  //   //Attempt a login using the Facebook login dialog asking for default permissions.
-  //   LoginManager.logInWithReadPermissions(['public_profile']).then(
-  //     function (result) {
-  //       if (result.isCancelled) {
-  //         alert('Login cancelled');
-  //       } else {
-  //         AccessToken.getCurrentAccessToken().then(
-  //           (data) => {
-  //             alert(data.accessToken.toString())
-  //           }
-  //         ) 
-  //       }
-  //     },
-  //     function (error) {
-  //       alert('Login fail with error: ' + error);
-  //     }
-  //   );
-  // };
+class Connexion extends React.Component {
 
   static navigationOptions = {
     header: null
   };
 
   render() {
+
+    const {isLoginSuccess, _fb_Auth} = this.props
+
+    if(this.props.isLoginSuccess){
+      return(
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgb(54,54,54)' }}>
+        <Text style= {styles.textTitle} >
+          Story
+            </Text>
+        <Text style= {styles.textTagline} >
+         NIQUE VOS MERE 
+            </Text>
+        <TouchableOpacity style= {styles.button} onPress={() => {this.props._fb_Auth()}}>
+          {/* <LinearGradient colors={['rgb(15,131,222)', '#rgb(71,154,222)']}> */}
+          <Text style= {styles.textButon} >
+            Login
+          </Text> 
+          {/* </LinearGradient> */}
+        </TouchableOpacity>
+
+      </View>
+      )
+    }
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgb(54,54,54)' }}>
         <Text style= {styles.textTitle} >
@@ -58,7 +58,7 @@ export default  class Connexion extends React.Component {
         <Text style= {styles.textTagline} >
           Ecrivez votre histoire
             </Text>
-        <TouchableOpacity style= {styles.button} onPress={() => {  }}>
+        <TouchableOpacity style= {styles.button} onPress={() => {this.props._fb_Auth()}}>
           {/* <LinearGradient colors={['rgb(15,131,222)', '#rgb(71,154,222)']}> */}
           <Text style= {styles.textButon} >
             Login
@@ -104,23 +104,17 @@ const styles = ({
   }
 });
 
+const mapStateToProps = (state, ownProps = {}) => {
+  console.log("in view", state)
+  return {
+    isLoginPending:  state.isFetching,
+    isLoginSuccess: state.isAuthenticated,
+    loginError: state.loginError
+  }
+}
 
 
-// const mapStateToProps = (state, ownProps = {}) => {
-//   return {
-//     isLoginPending:  state.isLoginPending,
-//     isLoginSuccess: state.isLoginSuccess,
-//     loginError: state.loginError
-//   }
-// }
 
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     login : dispatch(login)
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Connexion)
+export default connect(mapStateToProps, {_fb_Auth})(Connexion)
 
 
