@@ -7,8 +7,6 @@ import Home from './home';
 import Messages from './messages';
 import Profile from './profile';
 
-
-
 export default (navigation = StackNavigator({
       connexion: {screen: Connexion},
       home: { screen: Home },

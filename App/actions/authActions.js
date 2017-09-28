@@ -6,6 +6,7 @@ export const setLoginPending = function(isLoginPending) {
   return {
     type: types.SET_LOGIN_PENDING,
     isFetching: isLoginPending,
+    isLoginError: false,
     isAuthenticated: false,
   };
 }
@@ -15,6 +16,7 @@ export const  setLoginSuccess = function(isLoginSuccess, token) {
   return {
     type: types.SET_LOGIN_SUCCESS,
     isFetching: isLoginSuccess,
+    isLoginError: false,
     isAuthenticated: true,
     token
   };
@@ -25,6 +27,7 @@ export const setLoginError =  function (loginError, message) {
   return {
     type: types.SET_LOGIN_ERROR,
     isFetching : loginError,
+    isLoginError: true,
     isAuthenticated: false,
     message
   }
@@ -35,6 +38,7 @@ export const  setLoginCanceled = function (loginCancel, message) {
   return {
     type: types.SET_LOGIN_CANCEL,
     isFetching : loginCancel,
+    isLoginError: true,
     isAuthenticated: false,
     message
   }

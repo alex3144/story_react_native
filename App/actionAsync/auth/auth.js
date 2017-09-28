@@ -34,6 +34,7 @@ export const _fb_Auth = function(){
                                         console.log(result)
                                         var user = new user_class( result.email, result.name, result.first_name, result.last_name, data.accesToken, result.id)
                                         alert ("hello  - " + user.name)
+                                        dispatch(setLoginSuccess(true,data.accessToken));
                                     }
                                 }
 

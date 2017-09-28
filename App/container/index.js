@@ -5,13 +5,15 @@ import ReduxThunk from 'redux-thunk';
 import reducers from '../reducers/auth_reducer';
 import Router from '../components/index';
 
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
 class App extends Component {
    componentWillMount() {
    }
 
 
    render() {
-      const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+      
       return (
          <Provider store={store}>
             <Router />

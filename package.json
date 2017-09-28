@@ -13,6 +13,7 @@
 		"react-native-cli": "^2.0.1",
 		"react-native-deprecated-custom-components": "^0.1.1",
 		"react-native-fbsdk": "^0.6.0",
+		"react-native-linear-gradient": "^2.3.0",
 		"react-native-router-flux": "^4.0.0-beta.21",
 		"react-native-swipe-cards": "0.0.8",
 		"react-navigation": "^1.0.0-beta.11",
@@ -29,5 +30,10 @@
 	},
 	"jest": {
 		"preset": "react-native"
+	},
+	"rnpm": {
+		"assets": [
+			"./App/asset/fonts/"
+		]
 	}
 }
