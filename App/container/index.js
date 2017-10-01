@@ -2,28 +2,24 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import configStore from '../config/metrics';
-import Router from '../components/index';
+import firebase from 'firebase';
 import reducers from '../reducers/auth_reducer';
+import Router from '../components/index';
 
 
-const store = createStore(reducers,  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(ReduxThunk));
-
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+const configs = {
+   apiKey: 'AIzaSyBiQ28zeZyRJrJVWEmgsQjaOljOsc20q5U',
+   authDomaine: 'story-dev.firebaseapp.com/',
+   databaseURL: 'https://story-dev.firebaseio.com/'
+};
 class App extends Component {
+
    componentWillMount() {
+      firebase.initializeApp(configs)
    }
-
-
    render() {
-        if (module.hot) {
-          // Enable Webpack hot module replacement for reducers
-          module.hot.accept('./reducers/index', () => {
-            store.replaceReducer(reducers);
-          });
-        }
       
-        
-
       return (
          <Provider store={store}>
             <Router />
