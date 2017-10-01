@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Actions from 'react-native-router-flux';
 import { StackNavigator, Navigator } from 'react-navigation';
-import { Text, TouchableOpacity, View, Button } from 'react-native';
+import { Text, TouchableOpacity, TouchableWithoutFeedback , View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Cards from './cards';
 import CardSections from './cardSections';
@@ -10,6 +10,12 @@ import Profile from './profile';
 import Messages from './messages';
 import Login from './commun/buttonLogin';
 import { _fb_Auth } from '../actionAsync/auth/auth';
+import {imgLogo} from '../asset/images/clap.png';
+import metrics from '../config/metrics';
+import { Image ,TextAnime } from 'react-native-animatable';
+
+
+const IMAGE_WIDTH = metrics.DEVICE_WIDTH * 0.8
 
 // import LinearGradient from 'react-native-linear-gradient';
 
@@ -27,31 +33,17 @@ class Connexion extends React.Component {
   };
 
   render() {
-
     const {isLoginSuccess, _fb_Auth} = this.props
-
-    if(this.props.isLoginSuccess){
-      return(
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgb(54,54,54)' }}>
-        <Text style= {styles.textTitle} >
-          Story
-            </Text>
-        <Text style= {styles.textTagline} >
-         NIQUE VOS MERE 
-            </Text>
-        <TouchableOpacity style= {styles.button} onPress={() => {this.props._fb_Auth()}}>
-          {/* <LinearGradient colors={['rgb(15,131,222)', '#rgb(71,154,222)']}> */}
-          <Text style= {styles.textButon} >
-            Login
-          </Text> 
-          {/* </LinearGradient> */}
-        </TouchableOpacity>
-
-      </View>
-      )
-    }
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgb(54,54,54)' }}>
+        <Image
+          animation={'bounceIn'}
+          duration={1200}
+          delay={200}
+          ref={(ref) => this.logoImgRef = ref}
+          style={styles.logoImg}
+          source={imgLogo}
+        />
         <Text style= {styles.textTitle} >
           Story
             </Text>
@@ -65,7 +57,6 @@ class Connexion extends React.Component {
           </Text> 
           {/* </LinearGradient> */}
         </TouchableOpacity>
-
       </View>
     );
   }
@@ -85,7 +76,15 @@ const styles = ({
     borderRadius: 20,
     alignItems: 'center', 
     justifyContent: 'center',
-
+  },
+  logoImg: {
+    flex: 1,
+    width: IMAGE_WIDTH,
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    marginVertical: 30,
+    opacity:1,
+    backgroundColor: 'red'
   },
   textButon: {
     color: 'white',

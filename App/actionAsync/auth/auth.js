@@ -9,10 +9,6 @@ import user_class from '../../classes/user';
 
 
 export const _fb_Auth = function(){
-
-
-    
-
     //Attempt a login using the Facebook login dialog asking for default permissions.
     return (dispatch) => {
         dispatch(setLoginPending(true));
@@ -36,7 +32,6 @@ export const _fb_Auth = function(){
                                         alert ("hello  - " + user.name)
                                     }
                                 }
-
                                 ///graph request
                                    const infoRequest = new GraphRequest('/me', {
                                     parameters: {
