@@ -1,6 +1,8 @@
 import * as types from './actionTypes';
 import auth from '../actionAsync/auth/auth';
  
+//Each function change the state of the store
+//Waiting
 export const setLoginPending = function(isLoginPending) {
   console.log("setLoginPending ACTION")
   return {
@@ -10,7 +12,7 @@ export const setLoginPending = function(isLoginPending) {
     isAuthenticated: false,
   };
 }
- 
+//Succes
 export const  setLoginSuccess = function(isLoginSuccess, token) {
   console.log("setLoginSuccess ACTION")
   return {
@@ -21,7 +23,7 @@ export const  setLoginSuccess = function(isLoginSuccess, token) {
     token
   };
 }
- 
+//Error
 export const setLoginError =  function (loginError, message) {
   console.log("setLoginError ACTION")
   return {
@@ -32,7 +34,7 @@ export const setLoginError =  function (loginError, message) {
     message
   }
 }
-
+//Cancel
 export const  setLoginCanceled = function (loginCancel, message) {
   console.log("setLoginCanceled ACTION")
   return {

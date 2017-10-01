@@ -19,7 +19,7 @@ export default function auth(state = {
         isFetching: false,
         isAuthenticated: true,
         isLoginError: false,
-        errorMessage: ''
+        errorMessage: '',
       })
     case types.SET_LOGIN_ERROR:
       return Object.assign({}, state, {

@@ -1,15 +1,48 @@
 import React, { Component } from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import { StackNavigator, Navigator
-} from 'react-navigation';
 import Connexion from './connexion';
 import Home from './home';
 import Messages from './messages';
 import Profile from './profile';
 
-export default (navigation = StackNavigator({
-      connexion: {screen: Connexion},
-      home: { screen: Home },
-      messages: { screen: Messages },
-      profile: { screen: Profile },   
-   }));
+
+const RouterComponent = () => {
+      return (
+            <Router
+                  navigationBarStyle={styles.navBarStyle}
+                  rightButtonTextStyle={styles.buttonTextStyle}
+                  leftButtonTextStyle={styles.buttonTextStyle}
+            >
+                  <Scene >
+                        <Scene
+                              key="login"
+                              component={Connexion} 
+                              hideNavBar={true} 
+                              initial={true}
+                        />
+                        <Scene
+                              onLeft={() => Actions.profile()}
+                              leftTitle="Profile"
+                              key="home"
+                              component={Home}
+                              panHandlers={null}
+                        />
+                        <Scene
+                              key="profile"
+                              component={Profile}
+                        />
+                  </Scene>
+            </Router>
+      );
+};
+
+export default RouterComponent;
+
+const styles = {
+      navBarStyle: {
+            backgroundColor: 'rgb(54,54,54)',
+      },
+      buttonTextStyle: {
+            color: 'white'
+      }
+}

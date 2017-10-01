@@ -1,41 +1,39 @@
-
 import React from 'react';
-import { Animated, Text, View } from 'react-native';
+import { Animated, View } from 'react-native';
 
+//Animation
 export default class OpacityAnim extends React.Component {
-   state = {
-      fadeAnim: new Animated.Value(0),  // Initial value for opacity: 0
-   }
-   componentWillMount() {
-
-   }
-
-   componentDidMount() {
-      setTimeout(
-         () => {
-            Animated.timing(                // Animate over time
-               this.state.fadeAnim,         // The animated value to drive
-               {
-                  toValue: 1,               // Animate to opacity: 1 (opaque)
-                  duration: 1000,          // Make it take a while
-               }
-            ).start();
-         },
-         3000  );                             // Starts the animation
+  state = {
+    fadeAnim: new Animated.Value(0),  // Initial value for opacity: 0
+  }
+  componentWillMount() {
   }
 
-   render() {
-      let { fadeAnim } = this.state;
+  componentDidMount() {
+    setTimeout(
+      () => {
+        Animated.timing(
+          this.state.fadeAnim,
+          {
+            toValue: 1,
+            duration: 1000,
+          }
+        ).start();
+      },
+    ); 
+  }
+  render() {
+    let { fadeAnim } = this.state;
 
-      return (
-         <Animated.View                 // Special animatable View
-            style={{
-               ...this.props.style,
-               opacity: fadeAnim,         // Bind opacity to animated value
-            }}
-         >
-            {this.props.children}
-         </Animated.View>
-      );
-   }
+    return (
+      <Animated.View
+        style={{
+          ...this.props.style,
+          opacity: fadeAnim,
+        }}
+      >
+        {this.props.children}
+      </Animated.View>
+    );
+  }
 }

@@ -1,3 +1,4 @@
+//Object User
 export default class User {
     constructor(facebook_id, email, name, first_name, last_name, token) {
         this.email = email;
