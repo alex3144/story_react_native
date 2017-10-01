@@ -37,22 +37,26 @@ export const _fb_Auth = function () {
                                             alert("Erreur lors de la connexion");
                                         } else {
                                             /// Create user 
-                                            let user = new User_class(result.email, result.name, result.first_name, result.last_name, data.accesToken, result.id)
+                                            console.log(result, data)
+                                            
+                                            let user = new User_class(result.id, result.email,result.name, result.first_name, result.last_name, data.accessToken, result.picture, 0, "Type1", null)
                                             /// Check if user is in firebase database 
                                             firebase.database().ref('/users/' + connexion.uid).once('value').then(function (snapshot) {
                                                 let exists = snapshot.val() != null;
 
                                                 if (!exists) {
                                                     /// Save user in firebase database 
+                                                    console.log("User doesn't exist :" , user)
                                                     firebase.database().ref('/users/' + connexion.uid).set(result);
                                                     dispatch(setLoginSuccess(true, result.name));
                                                     Actions.home({user: user})
                                                     console.log(user)
                                                     // alert("hello  - " + result.name)
                                                 }else{
+                                                    console.log("User exist:" , user)
                                                     dispatch(setLoginSuccess(true, result.name));
                                                     Actions.home({user: user})
-                                                    console.log(user)
+                                                    
                                                     // alert("hello  - " + result.name)
                                                 }
                                             }, (error) => {
@@ -64,7 +68,7 @@ export const _fb_Auth = function () {
                                     const infoRequest = new GraphRequest('/me', {
                                         parameters: {
                                             fields: {
-                                                string: 'email, name, first_name, middle_name, last_name, picture.type(large), cover, birthday, location, friends'
+                                                string: 'email,name,first_name,last_name,picture.type(large)'
                                             }
                                         }
                                     }, responseInfoCallback);
@@ -86,5 +90,7 @@ export const _fb_Auth = function () {
         );
     }
 };
+
+
 
 
