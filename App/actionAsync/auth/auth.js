@@ -5,7 +5,7 @@ import FBSDK, {
     GraphRequestManager
 } from 'react-native-fbsdk';
 import { Actions } from 'react-native-router-flux';
-import Home from '../../components/home';
+import Nickname from '../../components/nickname';
 import firebase from 'firebase';
 import { setLoginPending, setLoginSuccess, setLoginError, setLoginCanceled } from '../../actions/authActions';
 import User_class from '../../classes/user';
@@ -47,15 +47,15 @@ export const _fb_Auth = function () {
                                                 if (!exists) {
                                                     /// Save user in firebase database 
                                                     console.log("User doesn't exist :" , user)
-                                                    firebase.database().ref('/users/' + connexion.uid).set(result);
+                                                    firebase.database().ref('/users/' + connexion.uid).set(user);
                                                     dispatch(setLoginSuccess(true, result.name));
-                                                    Actions.home({user: user})
+                                                    Actions.nickname({user: user})
                                                     console.log(user)
                                                     // alert("hello  - " + result.name)
                                                 }else{
                                                     console.log("User exist:" , user)
                                                     dispatch(setLoginSuccess(true, result.name));
-                                                    Actions.home({user: user})
+                                                    Actions.nickname({user: user})
                                                     
                                                     // alert("hello  - " + result.name)
                                                 }
@@ -75,7 +75,7 @@ export const _fb_Auth = function () {
                                     new GraphRequestManager().addRequest(infoRequest).start()
                                 }, (error) => {
                                     console.log(error + " ----- Erreur de connection firebase credential ----- ")
-                                    reject(error)
+                                    alert(error)
                                 })
                             }
                         }, (error) => {

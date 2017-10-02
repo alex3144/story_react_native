@@ -4,6 +4,7 @@ import Connexion from './connexion';
 import Home from './home';
 import Messages from './messages';
 import Profile from './profile';
+import Nickname from './nickname';
 
 
 const RouterComponent = () => {
@@ -19,6 +20,12 @@ const RouterComponent = () => {
                               component={Connexion} 
                               hideNavBar={true} 
                               initial={true}
+                        />
+                        <Scene
+                              key="nickname"
+                              component={Nickname} 
+                              hideNavBar={true} 
+                              panHandlers={null}
                         />
                         <Scene
                               onLeft={() => Actions.profile()}
