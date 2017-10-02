@@ -14,6 +14,10 @@ export default class Home extends Component {
 
   changeText(text){
     console.log(text)
+    if(text.length > 2){
+      console.log(this.state.pressStatus)
+      this.setState({pressStatus: true})
+    }
   }
 
 
@@ -40,7 +44,7 @@ export default class Home extends Component {
                 />
             </View>
             <View>
-                <TouchableOpacity style = {this.state.pressStatus ? styles.disabled : styles.buton}>
+                <TouchableOpacity style = {this.state.pressStatus? styles.disabled : styles.buton}>
                     <Text  style= {styles.textButon} >
                         Ok
                     </Text>
