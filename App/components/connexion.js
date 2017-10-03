@@ -13,10 +13,10 @@ import {Bubbles} from 'react-native-loader';
 
 export class Connexion extends Component {
 
-  // componentWillMount() {
-  //   console.log("component will mount")
-  //   this.props._tchek_user()
-  // };
+  componentWillMount() {
+    console.log("component will mount")
+    this.props._tchek_user()
+  };
 
   render() {
     const { isLoginSuccess,isLoginPending, _fb_Auth , _tchek_user} = this.props;

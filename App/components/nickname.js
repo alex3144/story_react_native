@@ -32,7 +32,7 @@ export class Nickname extends Component {
     if(!this.props.isFetching){
       return (
           <TouchableOpacity
-            onPress= {() => {this.props._nickname(this.state.text)}}
+            onPress= {() => {this.props._nickname(this.state.text, this.props.user)}}
             disabled={this.props.disabled}>
             <View style = {[styles.buton,{opacity: this.props.opacity}]} >
                 <Text  style= {styles.textButon} >

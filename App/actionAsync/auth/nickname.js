@@ -7,10 +7,11 @@ import {
 import Home from '../../components/home';
 import User_class from '../../classes/user';
 import { Actions } from 'react-native-router-flux';
+import {AsyncStorage} from 'react-native'
 
-export const _nickname = function (nickname) {
+export const _nickname = function (nickname, data) {
     //Attempt a login using the Facebook login dialog asking for default permissions.
-    console.log("in actions", nickname)
+    console.log("in actions", data)
     return (dispatch) => {
         dispatch(setNicknamePending(true));
         var userFirebase = firebase.auth().currentUser;
@@ -22,6 +23,13 @@ export const _nickname = function (nickname) {
                 if(!exists){
                     firebase.database().ref('/users/' + userFirebase.uid).child('nickname').set(nickname).then(function(res){
                         console.log("nickname done");
+                        
+                        //stockage profil localstorage
+                        const SETTINGS_KEY = 'current_user'
+                        data.nickname = nickname
+                        console.log(data.user)
+                        const settingsObj = {user: data}
+                        AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                         Actions.home()
                     }, (error) => {
                         console.log(error)

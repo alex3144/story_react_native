@@ -63,10 +63,10 @@ export const _fb_Auth = function () {
                                                         AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                                         console.log("---- lolal storage plug ----- ")
                                                         dispatch(setLoginSuccess(true, res));
-                                                        Actions.nickname()
+                                                        Actions.nickname({user: user})
                                                     }, (error) => {
-                                                        alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
                                                         console.log(" ---- error in user save ----- ", error)
+                                                        alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
                                                     })
                                                 }else{
                                                     console.log(" ---- user exist ------ " , user)
