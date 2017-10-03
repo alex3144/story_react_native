@@ -10,9 +10,6 @@ export default class Home extends Component {
       <View style={styles.container}>
 
         <View style={styles.containerText}>
-          <Text style={styles.textStyle}>
-            Bonjour {this.props.user.name}
-          </Text>
         </View>
         <View style={styles.containerButton}>
           <TouchableOpacity style= {styles.boutton}>

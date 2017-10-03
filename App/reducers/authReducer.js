@@ -6,6 +6,7 @@ export default function auth(state = {
   // isAuthenticated: localStorage.getItem('id_token') ? true : false
   isAuthenticated: false,
 }, action) {
+  // console.log(action);
   switch (action.type) {
     case types.SET_LOGIN_PENDING:
       return Object.assign({}, state, {
