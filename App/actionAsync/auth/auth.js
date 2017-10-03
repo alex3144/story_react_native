@@ -37,6 +37,7 @@ export const _fb_Auth = function () {
                                 firebase.auth().signInWithCredential(credential).then((connexion) => {
 
                                     /// Call Facebook Graph API 
+                                    
                                     /// Callback facebook call API
                                     const responseInfoCallback = (error, result) => {
                                         if (error) {
@@ -45,6 +46,7 @@ export const _fb_Auth = function () {
                                         } else {
                                             /// Create user 
                                             let user = new User_class(result.id, result.email,result.name, result.first_name, result.last_name, data.accessToken, result.picture, 0, "Type1", null)
+
                                             /// Check if user is in firebase database 
 
                                             firebase.database().ref('/users/' + connexion.uid).once('value').then(function (snapshot) {
