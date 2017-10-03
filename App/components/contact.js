@@ -15,7 +15,7 @@ export default class Contact extends Component {
    render() {
       return (
          <View style={styles.container}>
-            <Text>Contact
+            <Text style={styles.textStyle}>Contact
             </Text>
          </View>
       )
@@ -25,6 +25,8 @@ export default class Contact extends Component {
 const styles ={
    container: {
       flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
       backgroundColor: 'rgb(54,54,54)',   
       width: StyleDimention.DEVICE_WIDTH,
       height: StyleDimention.DEVICE_HEIGHT, 
@@ -32,5 +34,10 @@ const styles ={
       paddingTop: StyleDimention.CARD_PADDING_Y,
       paddingBottom: StyleDimention.CARD_PADDING_Y,
     },
+    textStyle:{
+      fontFamily: "TypoGraphica",
+      fontSize:25,
+      color:'white'
+    }
 
 };

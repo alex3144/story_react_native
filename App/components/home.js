@@ -3,42 +3,69 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Animated,
+  Image,
+  ScrollView,
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 import StyleDimention from '../style/dimention';
 import Profil from './profile';
 import Contact from './contact';
 
+
 export default class Home extends Component {
-  onSwipe(index) {
-    console.log(index)
+  constructor(props) {
+    super(props);
+    this.state = { opacity: new Animated.Value(1) }
   }
+
+  onSwipperOn(index) {
+    console.log(" ---- swippe start", index)
+  }
+  opacityAnime(index) {
+
+      console.log(" ---- swippe start", index)
+    this.state.opacity.interpolate({
+      inputRange: [1, 1],
+      outputRange: [1, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+    })
+    console.log(this.state.opacity)
+  }
+
   render() {
+    // const opacityAnime = this.state.opacity.interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+    // });
     return (
       <Swiper
         style={styles.wrapper}
         horizontal={false}
         showsPagination={false}
         loop={false}
-        onScrollBeginDrag={2}
-        onIndexChanged={this.onSwipe}
-        loadMinimalSize={0}
+        /* onIndexChanged={(index) => this.opacityAnime(index)} */
         index={1}
-        onScrollBeginDrag={(e, { index }, context) => this.setState({ swiperOldIndex: index })}
-        onMomentumScrollEnd={(e, { index }, context) => this.setState({ swiperCurrentIndex: index })}
-
+        ref='swiper'
+        onScrollBeginDrag={() => this.opacityAnime()}
       >
-        <Profil />
         <View style={styles.container}>
+          <Profil />
+        </View>
+        <View style={[styles.container]}>
           <View style={styles.containerSection}>
-            <TouchableOpacity style= {styles.buttonProfil}>
+            <TouchableOpacity style= {styles.buttonProfil} onPress={() => this.refs.swiper.scrollBy(-1)}>
 
             </TouchableOpacity>
             <Text style= {styles.textPseudo} >
               CaroleZer
               </Text>
           </View>
+          <TouchableOpacity style= {styles.buttonListe}>
+            <Text style= {styles.textButtonJoin} >
+              Mes scénarios
+                    </Text>
+          </TouchableOpacity>
           <View style={styles.containerSection}>
             <TouchableOpacity style= {styles.buttonCreate}>
               <Text style= {styles.textButtonCreate} >
@@ -53,22 +80,21 @@ export default class Home extends Component {
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity style= {styles.buttonContact}>
+            <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
 
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.container}>
+          <Contact />
+        </View>
 
-
-        <Contact />
       </Swiper>
     );
   }
 
 }
 const styles = {
-  wrapper: {
-  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -82,7 +108,7 @@ const styles = {
   },
   containerSection: {
     alignItems: 'center',
-    marginBottom: 150,
+    marginBottom: 110,
   },
   buttonProfil: {
     alignItems: 'center',
@@ -116,7 +142,6 @@ const styles = {
   buttonCreate: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 30,
     height: 59,
     width: 180,
     borderRadius: 100,
@@ -131,7 +156,20 @@ const styles = {
   buttonJoin: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 30,
+    height: 59,
+    width: 180,
+    borderRadius: 100,
+    opacity: 1,
+    backgroundColor: 'white',
+    marginBottom: 33,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  buttonListe: {
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 59,
     width: 180,
     borderRadius: 100,
