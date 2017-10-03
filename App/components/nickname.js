@@ -1,26 +1,74 @@
 import React, { Component } from 'react';
 import {TextInput, Keyboard} from 'react-native';
 import styleDimention from '../style/dimention';
-import { StyleSheet, Image, Text, TouchableOpacity, View, Button, ScrollView} from 'react-native';
-import Profile from './profile';
+import { StyleSheet, Image, Text, TouchableOpacity, View, Button, ScrollView, LayoutAnimation} from 'react-native';
+import { connect } from 'react-redux'; // Jest error
+import { _nickname, } from '../actionAsync/auth/nickname';
+import {setChangeTextValide, setChangeTextInvalide} from '../actions/nicknameActions';
+import {Bubbles} from 'react-native-loader';
 
-export default class Home extends Component {
+export class Nickname extends Component {
     constructor(props) {
       super(props);
-      this.state = { text: '' };
-      this.state.pressStatus = false
+      this.state = {text: ''}
   }
+
 
   changeText(text){
     console.log(text)
+    this.setState({text: text})
+    if(text.length > 2){
+      this.props.setChangeTextValide(text)
+    }else{
+      this.props.setChangeTextInvalide()
+    }
   }
+
+  componentWillReceiveProps (nextProps) {
+    console.log("nextProps", nextProps)  
+  }
+
+   renderButton (){
+    if(!this.props.isFetching){
+      return (
+          <TouchableOpacity
+            onPress= {() => {this.props._nickname(this.state.text)}}
+            disabled={this.props.disabled}>
+            <View style = {[styles.buton,{opacity: this.props.opacity}]} >
+                <Text  style= {styles.textButon} >
+                    Ok
+                </Text>
+            </View>
+          </TouchableOpacity>
+      )
+    }else{
+      console.log(this.props.isFetching)
+      return (
+          <Bubbles size={10} color="#FFF" />
+      )
+    }
+   }
+
+   renderText (){
+    if(this.props.isNicknameError){
+      return (
+        <Text  style= {styles.textError} >
+           Ce pseudo est déjà utilisé
+        </Text>
+      )
+    }else{
+      <Text  style= {styles.textError} >
+      </Text>
+    }
+  }
+   
 
 
   render() {
     return (
         <ScrollView scrollEnabled={false} style={styles.container}>
           <View style={styles.flexColumnTop}>
-              <Text style= {styles.textTitle} >
+              <Text style= {styles.textTitle}>
                   Story Name
               </Text>
               <Text style= {styles.textTaglineFirst} >
@@ -34,16 +82,13 @@ export default class Home extends Component {
             <View>
                 <TextInput
                     style={styles.nicknameInput}
-                    onChangeText={(text) => this.changeText({text})}
+                    onChangeText={this.changeText.bind(this)}
                     placeholder="saisie ton pseudo ..."
                 />
+                {this.renderText ()}
             </View>
-            <View>
-                <TouchableOpacity style = {this.state.pressStatus ? styles.disabled : styles.buton}>
-                    <Text  style= {styles.textButon} >
-                        Ok
-                    </Text>
-                </TouchableOpacity>
+            <View style={styles.marginBottom}>
+              {this.renderButton()}
             </View>
         </View>
       </ScrollView>
@@ -52,10 +97,33 @@ export default class Home extends Component {
 }
 
 
+const mapStateToProps = (test ) => {
+  console.log("in nickname view", test)
+  const {isNicknameGood, isFetching, isNicknameError, disabled, opacity, text} = test.nicknameReducer
+  return {
+    isNicknameGood,
+    isFetching,
+    isNicknameError,
+    disabled,
+    opacity
+  }
+}
+export default connect(mapStateToProps, {_nickname, setChangeTextValide, setChangeTextInvalide})(Nickname)
+
+
 const styles = {
   textStyle: {
     color: 'white',
     fontSize: 17,
+  },
+  flexContainer:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  textError:{
+    color:'red',
+    textAlign:'center',
+    
   },
   flexColumnTop: {
       flex:1,
@@ -74,7 +142,7 @@ const styles = {
     shadowOpacity: 0.5,
     shadowRadius: 4,
     height: 45,
-    marginBottom:197,
+    marginBottom:15,
     borderRadius:10, 
     borderColor:'white',
     backgroundColor:'white',
@@ -104,17 +172,6 @@ const styles = {
     textShadowColor: 'rgba(0,0,0,0.5)',
     fontFamily: "TypoGraphica",
   }, 
-  disabled: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 30,
-    height:59,
-    width:180,
-    borderRadius:100,
-    opacity:0.1,
-    backgroundColor:'rgb(248,194,28)',
-    marginBottom: 33,
-  },
   buton: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -122,9 +179,11 @@ const styles = {
     height:59,
     width:180,
     borderRadius:100,
-    opacity:1,
     backgroundColor:'rgb(248,194,28)',
     marginBottom: 33,
+  },
+  marginBottom: {
+    marginTop: 180,
   },
   textButon: {
     color:'white',

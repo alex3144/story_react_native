@@ -1,5 +1,4 @@
 import * as types from './actionTypes';
-import auth from '../actionAsync/auth/auth';
  
 //Each function change the state of the store
 //Waiting

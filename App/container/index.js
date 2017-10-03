@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
-import reducers from '../reducers/auth_reducer';
+import reducers from '../reducers';
 import Router from '../components/index';
 
 

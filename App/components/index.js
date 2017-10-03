@@ -18,6 +18,7 @@ const RouterComponent = () => {
                               key="login"
                               component={Connexion}
                               hideNavBar={true}
+                              initial={true}
                         />
                         <Scene
                               key="nickname"
@@ -30,7 +31,7 @@ const RouterComponent = () => {
                               key="home"
                               component={Home}
                               panHandlers={null}
-                              initial={true}
+                              
                         />
                         <Scene
                               hideNavBar={true}

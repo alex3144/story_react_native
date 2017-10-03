@@ -6,56 +6,69 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux'; // Jest error
 import AnimPulse from './animations/animPulse';
 import AnimOpacity from './animations/animeOpacity';
-import { _fb_Auth } from '../actionAsync/auth/auth';
+import { _tchek_user, _fb_Auth } from '../actionAsync/auth/auth';
 import LinearGradient from 'react-native-linear-gradient';
+import {Bubbles} from 'react-native-loader';
 
 
 export class Connexion extends Component {
-  
+
+  componentWillMount() {
+    console.log("component will mount")
+    this.props._tchek_user()
+  };
+
   render() {
-    const { isLoginSuccess, _fb_Auth } = this.props;
-    return (
-      <View style={styles.container}>
-        <AnimOpacity style={styles.containerSecond}>
-          <Text style= {styles.textTitle} >Story
-            <Text style={{fontSize:16}}>®
-            </Text>
-          </Text>
-          <Text style= {styles.textTagline} >
-            Ecrivez votre histoire
-            </Text>
-          <TouchableOpacity style= {styles.buttonFacebook} onPress={() => { this.props._fb_Auth() }}>
-            < LinearGradient colors={['rgb(15,131,222)', 'rgb(71,154,222)']} style={styles.linearGradientFacebook} >
-              <Text style= {styles.textButon} >
-                Connexion Facebook
-              </Text>
-            </ LinearGradient>
-          </TouchableOpacity>
-          <View style= {styles.textBottom}>
-            <Text style={styles.textColor}>
-              Nous ne publions rien sur facebook.
-            </Text>
-            <Text style={styles.textColor}>
-              En vous inscrivant, vous acceptez nos
-              CGU et Politique de confidentialité.
-            </Text>
-          </View>
-        </AnimOpacity>
+    const { isLoginSuccess,isLoginPending, _fb_Auth , _tchek_user} = this.props;
+    if(this.props.isLoginPending){
+      return (
+      <View style={[styles.container, styles.flexContainer]}>
+        <Bubbles size={10} color="#FFF" />
       </View>
-    );
+      )
+    }else{ 
+      return (
+          <View style={styles.container}>
+            <AnimOpacity style={styles.containerSecond}>
+              <Text style= {styles.textTitle} >Story
+                <Text style={{fontSize:16}}>®
+                </Text>
+              </Text>
+              <Text style= {styles.textTagline} >
+                Ecrivez votre histoire
+                </Text>
+              <TouchableOpacity style= {styles.buttonFacebook} onPress={() => { this.props._fb_Auth() }}>
+                < LinearGradient colors={['rgb(15,131,222)', 'rgb(71,154,222)']} style={styles.linearGradientFacebook} >
+                  <Text style= {styles.textButon} >
+                    Connexion Facebook
+                  </Text>
+                </ LinearGradient>
+              </TouchableOpacity>
+              <View style= {styles.textBottom}>
+                <Text style={styles.textColor}>
+                  Nous ne publions rien sur facebook.
+                </Text>
+                <Text style={styles.textColor}>
+                  En vous inscrivant, vous acceptez nos
+                  CGU et Politique de confidentialité.
+                </Text>
+              </View>
+            </AnimOpacity>
+          </View>
+        );
+      }
   }
 }
 
-const mapStateToProps = (state, ownProps = {}) => {
+const mapStateToProps = (state) => {
   console.log("in connexion view", state)
   return {
-    isLoginPending: state.isFetching,
-    isLoginSuccess: state.isAuthenticated,
-    loginError: state.isLoginError,
-    message: state.message
+    isLoginPending: state.authReducer.isFetching,
+    isLoginSuccess: state.authReducer.isAuthenticated,
+    loginError: state.authReducer.isLoginError,
   }
 }
-export default connect(mapStateToProps, { _fb_Auth })(Connexion)
+export default connect(mapStateToProps, { _fb_Auth, _tchek_user})(Connexion)
 
 const styles = ({
   contentContainer: {
@@ -69,6 +82,10 @@ const styles = ({
     padding: StyleDimention.CARD_PADDING_X,
     paddingTop: StyleDimention.CARD_PADDING_Y,
     paddingBottom: StyleDimention.CARD_PADDING_Y,
+  },
+  flexContainer:{
+    justifyContent:'center',
+    alignItems:'center'
   },
   containerSecond: {
     flex: 1,
