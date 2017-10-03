@@ -10,9 +10,10 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 import StyleDimention from '../style/dimention';
+import { _currentUser, } from '../actionAsync/profile/profile';
 import Profil from './profile';
 import Contact from './contact';
-
+import { connect } from 'react-redux';
 
 export default class Home extends Component {
   constructor(props) {
@@ -92,8 +93,8 @@ export default class Home extends Component {
       </Swiper>
     );
   }
-
 }
+
 const styles = {
   container: {
     flex: 1,
