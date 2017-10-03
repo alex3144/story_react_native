@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {TextInput, Keyboard} from 'react-native';
 import styleDimention from '../style/dimention';
 import { StyleSheet, Image, Text, TouchableOpacity, View, Button, ScrollView, LayoutAnimation} from 'react-native';
-import Messages from './messages';
 import { connect } from 'react-redux'; // Jest error
 import { _nickname, } from '../actionAsync/auth/nickname';
 import {setChangeTextValide, setChangeTextInvalide} from '../actions/nicknameActions';
+import {Bubbles} from 'react-native-loader';
 
 export class Nickname extends Component {
     constructor(props) {
@@ -29,18 +29,39 @@ export class Nickname extends Component {
   }
 
    renderButton (){
-     return (
-        <TouchableOpacity  
-          onPress= {() => {this.props._nickname(this.state.text)}}
-          disabled={this.props.disabled}>
-          <View style = {[styles.buton,{opacity: this.props.opacity}]} >
-              <Text  style= {styles.textButon} >
-                  Ok
-              </Text>
-          </View>
-        </TouchableOpacity>
-     )
+    if(!this.props.isFetching){
+      return (
+          <TouchableOpacity
+            onPress= {() => {this.props._nickname(this.state.text)}}
+            disabled={this.props.disabled}>
+            <View style = {[styles.buton,{opacity: this.props.opacity}]} >
+                <Text  style= {styles.textButon} >
+                    Ok
+                </Text>
+            </View>
+          </TouchableOpacity>
+      )
+    }else{
+      console.log(this.props.isFetching)
+      return (
+          <Bubbles size={10} color="#FFF" />
+      )
+    }
    }
+
+   renderText (){
+    if(this.props.isNicknameError){
+      return (
+        <Text  style= {styles.textError} >
+           Ce pseudo est déjà utilisé
+        </Text>
+      )
+    }else{
+      <Text  style= {styles.textError} >
+      </Text>
+    }
+  }
+   
 
 
   render() {
@@ -64,17 +85,10 @@ export class Nickname extends Component {
                     onChangeText={this.changeText.bind(this)}
                     placeholder="saisie ton pseudo ..."
                 />
+                {this.renderText ()}
             </View>
-            <View>
+            <View style={styles.marginBottom}>
               {this.renderButton()}
-                {/* <TouchableOpacity  
-                style = {[styles.buton, {opacity: this.props.opacity}]} 
-                onPress= {() => {this.props._nickname(this.state.text)}}
-                disabled={this.props.disabled}>
-                    <Text  style= {styles.textButon} >
-                        Ok
-                    </Text>
-                </TouchableOpacity> */}
             </View>
         </View>
       </ScrollView>
@@ -102,6 +116,15 @@ const styles = {
     color: 'white',
     fontSize: 17,
   },
+  flexContainer:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  textError:{
+    color:'red',
+    textAlign:'center',
+    
+  },
   flexColumnTop: {
       flex:1,
       flexDirection: 'column',
@@ -119,7 +142,7 @@ const styles = {
     shadowOpacity: 0.5,
     shadowRadius: 4,
     height: 45,
-    marginBottom:197,
+    marginBottom:15,
     borderRadius:10, 
     borderColor:'white',
     backgroundColor:'white',
@@ -158,6 +181,9 @@ const styles = {
     borderRadius:100,
     backgroundColor:'rgb(248,194,28)',
     marginBottom: 33,
+  },
+  marginBottom: {
+    marginTop: 180,
   },
   textButon: {
     color:'white',

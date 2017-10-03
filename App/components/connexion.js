@@ -60,12 +60,12 @@ export class Connexion extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps = {}) => {
+const mapStateToProps = (state) => {
   console.log("in connexion view", state)
   return {
-    isLoginPending: state.isFetching,
-    isLoginSuccess: state.isAuthenticated,
-    loginError: state.isLoginError,
+    isLoginPending: state.authReducer.isFetching,
+    isLoginSuccess: state.authReducer.isAuthenticated,
+    loginError: state.authReducer.isLoginError,
   }
 }
 export default connect(mapStateToProps, { _fb_Auth, _tchek_user})(Connexion)

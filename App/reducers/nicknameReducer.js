@@ -10,9 +10,9 @@ export default function nickname(state = {
   console.log("in ninkname reducer", action);
   switch (action.type) {
     case types.SET_NICKNAME_PENDING:
-      return { ...state, isFetching: true};
+      return { ...state, isNicknameError: false, isFetching: true};
     case types.SET_NICKNAME_SUCCESS:
-      return { ...state, isFetching: false, isNicknameGood: true};
+      return { ...state, isFetching: false, isNicknameError: false, isNicknameGood: true};
     case types.SET_NICKNAME_ERROR:
       return { ...state, isFetching: false, isNicknameGood: false, isNicknameError: true};
     case types.SET_CHANGE_TEXT_VALIDE:

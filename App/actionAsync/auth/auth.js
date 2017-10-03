@@ -63,7 +63,7 @@ export const _fb_Auth = function () {
                                                         AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                                         console.log("---- lolal storage plug ----- ")
                                                         dispatch(setLoginSuccess(true, res));
-                                                        Actions.nickname({user: user})
+                                                        Actions.nickname()
                                                     }, (error) => {
                                                         alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
                                                         console.log(" ---- error in user save ----- ", error)
@@ -75,7 +75,7 @@ export const _fb_Auth = function () {
                                                     AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                                     console.log("---- lolal storage plug ----- ")
                                                     dispatch(setLoginSuccess(true, result));
-                                                    Actions.nickname({user: user})
+                                                    Actions.home()
                                                 }
                                             }, (error) => {
                                                 alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
@@ -121,7 +121,7 @@ export const _tchek_user = function(){
             console.log("tcheck user" , value)
             if(value != null){
                 console.log(value)
-                Actions.nickname()
+                Actions.home()
             }
         }).done();
     }
