@@ -2,41 +2,45 @@ import React, { Component } from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import Connexion from './connexion';
 import Home from './home';
-import Messages from './messages';
 import Profile from './profile';
 import Nickname from './nickname';
+import Contact from './contact';
 
 
 const RouterComponent = () => {
       return (
             <Router
                   navigationBarStyle={styles.navBarStyle}
-                  rightButtonTextStyle={styles.buttonTextStyle}
-                  leftButtonTextStyle={styles.buttonTextStyle}
+                  leftButtonTextStyle={null}
             >
                   <Scene >
                         <Scene
                               key="login"
-                              component={Connexion} 
-                              hideNavBar={true} 
-                              initial={true}
+                              component={Connexion}
+                              hideNavBar={true}
                         />
                         <Scene
                               key="nickname"
-                              component={Nickname} 
-                              hideNavBar={true} 
+                              component={Nickname}
+                              hideNavBar={true}
                               panHandlers={null}
                         />
                         <Scene
-                              onLeft={() => Actions.profile()}
-                              leftTitle="Profile"
+                              hideNavBar={true}
                               key="home"
                               component={Home}
                               panHandlers={null}
+                              initial={true}
                         />
                         <Scene
+                              hideNavBar={true}
                               key="profile"
                               component={Profile}
+                        />
+                        <Scene
+                              hideNavBar={true}
+                              key="contact"
+                              component={Contact}
                         />
                   </Scene>
             </Router>

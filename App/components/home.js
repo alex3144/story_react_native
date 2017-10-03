@@ -1,72 +1,158 @@
 import React, { Component } from 'react';
-import styleDimention from '../style/dimention';
-import { StyleSheet, Image, Text, TouchableOpacity, View, Button } from 'react-native';
-import Messages from './messages';
-import Profile from './profile';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import {Actions} from 'react-native-router-flux';
+import Swiper from 'react-native-swiper';
+import StyleDimention from '../style/dimention';
+import Profil from './profile';
+import Contact from './contact';
 
 export default class Home extends Component {
+  onSwipe(index) {
+    console.log(index)
+  }
   render() {
     return (
-      <View style={styles.container}>
+      <Swiper
+        style={styles.wrapper}
+        horizontal={false}
+        showsPagination={false}
+        loop={false}
+        onScrollBeginDrag={2}
+        onIndexChanged={this.onSwipe}
+        loadMinimalSize={0}
+        index={1}
+        onScrollBeginDrag={(e, { index }, context) => this.setState({ swiperOldIndex: index })}
+        onMomentumScrollEnd={(e, { index }, context) => this.setState({ swiperCurrentIndex: index })}
 
-        <View style={styles.containerText}>
-          <Text style={styles.textStyle}>
-            Bonjour {this.props.user.name}
-          </Text>
-        </View>
-        <View style={styles.containerButton}>
-          <TouchableOpacity style= {styles.boutton}>
-            <Text style= {styles.textButon} >
-              Nouveau scénario
-              </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style= {styles.boutton}>
+      >
+        <Profil />
+        <View style={styles.container}>
+          <View style={styles.containerSection}>
+            <TouchableOpacity style= {styles.buttonProfil}>
 
-            <Text style= {styles.textButon} >
-              Rejoindre un scénario
+            </TouchableOpacity>
+            <Text style= {styles.textPseudo} >
+              CaroleZer
               </Text>
-          </TouchableOpacity>
+          </View>
+          <View style={styles.containerSection}>
+            <TouchableOpacity style= {styles.buttonCreate}>
+              <Text style= {styles.textButtonCreate} >
+                Creer
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style= {styles.buttonJoin}>
+              <Text style= {styles.textButtonJoin} >
+                Rejoindre
+                    </Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity style= {styles.buttonContact}>
+
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    )
+
+
+        <Contact />
+      </Swiper>
+    );
   }
+
 }
-
-
 const styles = {
-  textStyle: {
-    color: 'white',
-    fontSize: 20,
+  wrapper: {
   },
   container: {
     flex: 1,
-    backgroundColor: 'rgb(54,54,54)',   
-    width: styleDimention.DEVICE_WIDTH,
-    height: styleDimention.DEVICE_HEIGHT, 
-    padding: styleDimention.CARD_PADDING_X,
-    paddingTop: styleDimention.CARD_PADDING_Y,
-    paddingBottom: styleDimention.CARD_PADDING_Y,
-  },
-  containerText: {
-    marginTop:40,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: 'rgb(54,54,54)',
+    width: StyleDimention.DEVICE_WIDTH,
+    height: StyleDimention.DEVICE_HEIGHT,
+    padding: StyleDimention.CARD_PADDING_X,
+    paddingTop: StyleDimention.CARD_PADDING_Y,
+    paddingBottom: StyleDimention.CARD_PADDING_Y,
   },
-  containerButton: {
-    flex: 1,
+  containerSection: {
+    alignItems: 'center',
+    marginBottom: 150,
+  },
+  buttonProfil: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgb(54,54,54)',
+    height: 60,
+    width: 60,
+    borderRadius: 100,
+    opacity: 1,
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
-  boutton: {
-    width: 200,
-    height: 50,
-    backgroundColor: "white",
-    borderColor: '#3b5998',
-    borderRadius: 40,
+  textPseudo: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 20,
+    fontFamily: "ProximaNovaSoft-Regular",
+  },
+  buttonContact: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 30
-  }
-};
+    height: 60,
+    width: 60,
+    borderRadius: 100,
+    opacity: 1,
+    backgroundColor: 'rgb(248,194,28)',
+    marginBottom: 33,
+  },
+  buttonCreate: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 30,
+    height: 59,
+    width: 180,
+    borderRadius: 100,
+    opacity: 1,
+    backgroundColor: '#BB62CB',
+    marginBottom: 33,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  buttonJoin: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 30,
+    height: 59,
+    width: 180,
+    borderRadius: 100,
+    opacity: 1,
+    backgroundColor: 'white',
+    marginBottom: 33,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  textButtonCreate: {
+    color: 'white',
+    fontSize: 24,
+    fontFamily: "ProximaNovaSoft-Regular",
+  },
+  textButtonJoin: {
+    fontWeight: 'bold',
+    color: '#95DDFB',
+    fontSize: 24,
+    fontFamily: "ProximaNovaSoft-Regular",
+  },
+}
+

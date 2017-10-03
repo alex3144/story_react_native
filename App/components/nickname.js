@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {TextInput, Keyboard} from 'react-native';
 import styleDimention from '../style/dimention';
 import { StyleSheet, Image, Text, TouchableOpacity, View, Button, ScrollView} from 'react-native';
-import Messages from './messages';
 import Profile from './profile';
 
 export default class Home extends Component {
