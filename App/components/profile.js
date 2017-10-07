@@ -6,7 +6,8 @@ import {
   Dimensions,
   View,
   ScrollView,
-  Image
+  Image,
+  StatusBar
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Svg } from 'react-native-svg';
@@ -48,13 +49,16 @@ class Profile extends Component {
         <View style={styles.container}>
 
           <View style={styles.navBarStyle}>
-            <TouchableOpacity  onPress={()=>Actions.reglages()}>
+            <TouchableOpacity  onPress={()=>Actions.reglages(this.props.user)}>
               <Image style={styles.imageRoulette} source={roulette}/>
             </TouchableOpacity>
           </View>
 
 
           <View style={styles.containerSection}>
+          <StatusBar
+               backgroundColor="white"
+            />
             <View>
               <TouchableOpacity>
                 <View style={styles.borderContainerStylo}>

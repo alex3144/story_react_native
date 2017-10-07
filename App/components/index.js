@@ -20,7 +20,7 @@ const RouterComponent = () => {
                               key="login"
                               component={Connexion}
                               hideNavBar={true}
-                              initial={true}
+                              initial={true} 
                         />
                         <Scene
                               key="nickname"
@@ -53,7 +53,8 @@ const RouterComponent = () => {
                         <Scene
                               hideNavBar={true}
                               key="reglages"
-                              component={Reglages} 
+                              component={Reglages}
+                              
                         />
                   </Scene>
             </Router>

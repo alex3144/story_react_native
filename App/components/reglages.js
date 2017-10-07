@@ -7,7 +7,8 @@ import {
    View,
    ScrollView,
    Image,
-   Switch
+   Switch,
+   StatusBar
 } from 'react-native';
 import { Svg } from 'react-native-svg';
 import { connect } from 'react-redux';
@@ -22,7 +23,9 @@ class Reglages extends Component {
    }
    render() {
       return (
+         
          <ScrollView style={styles.container}>
+            <StatusBar barStyle={'default'}/>
             <View style= {styles.containerNarBar}>
                <View style={styles.cardNavBar}>
                </View>
@@ -366,28 +369,28 @@ const styles = {
       height: 260,
       justifyContent: 'center',
    },
-   containerDisable:{
+   containerDisable: {
       height: 180,
       justifyContent: 'center',
-      alignItems:'center',
+      alignItems: 'center',
    },
-   buttonConnexion:{
-         alignItems: 'center',
-         justifyContent: 'center',
-         borderWidth:1,
-         borderColor:'rgb(248,194,28)',
-         width:208,
-         height:53,
-         borderRadius:30,
+   buttonConnexion: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderWidth: 1,
+      borderColor: 'rgb(248,194,28)',
+      width: 208,
+      height: 53,
+      borderRadius: 30,
    },
-   textConnexion:{
-      color:'rgb(248,194,28)',
+   textConnexion: {
+      color: 'rgb(248,194,28)',
       fontFamily: "ProximaNovaSoft-Regular",
       fontSize: 16,
    },
-   textDelete:{
-      marginTop:38,
-      color:'rgb(137,137,137)',
+   textDelete: {
+      marginTop: 38,
+      color: 'rgb(137,137,137)',
       fontFamily: "ProximaNovaSoft-Regular",
       fontSize: 16,
    },
