@@ -63,8 +63,11 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>ProximaNovaSoft-Regular.otf</string>
 		<string>TypoGraphica.otf</string>
+		<string>ProximaNovaSoft-Regular.otf</string>
+		<string>ProximaNovaSoft-Semibold.otf</string>
+		<string>ProximaNovaSoft-Bold.otf</string>
+		<string>ProximaNovaSoft-Medium.otf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
