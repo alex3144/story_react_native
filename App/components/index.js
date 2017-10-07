@@ -5,6 +5,8 @@ import Home from './home';
 import Profile from './profile';
 import Nickname from './nickname';
 import Contact from './contact';
+import Points from './points';
+import Reglages from './reglages';
 
 
 const RouterComponent = () => {
@@ -34,7 +36,7 @@ const RouterComponent = () => {
                               
                         />
                         <Scene
-                              hideNavBar={true}
+                              hideNavBar={false}
                               key="profile"
                               component={Profile}
                         />
@@ -42,6 +44,16 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="contact"
                               component={Contact}
+                        />
+                        <Scene
+                              hideNavBar={true}
+                              key="points"
+                              component={Points} 
+                        />
+                        <Scene
+                              hideNavBar={true}
+                              key="reglages"
+                              component={Reglages} 
                         />
                   </Scene>
             </Router>
