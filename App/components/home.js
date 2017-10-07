@@ -14,88 +14,177 @@ import { _currentUser, } from '../actionAsync/profile/profile';
 import Profil from './profile';
 import Contact from './contact';
 import { connect } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { opacity: new Animated.Value(1) }
+    this.state = {scrollY: new Animated.Value(0), springValue: new Animated.Value (0.3) };
   }
 
   onSwipperOn(index) {
     console.log(" ---- swippe start", index)
   }
   opacityAnime(index) {
-
-      console.log(" ---- swippe start", index)
-    this.state.opacity.interpolate({
-      inputRange: [1, 1],
-      outputRange: [1, 0]  // 0 : 150, 0.5 : 75, 1 : 0
-    })
-    console.log(this.state.opacity)
+    console.log("index", index)
   }
 
+  _onMomentumScrollEnd(e,state,context) {
+    console.log("scroll finish")
+  }
+
+  handleScroll(event) {
+    console.log("handel scroll")
+    console.log(event.nativeEvent.contentOffset.y);
+   }
+
+  //  handleScrollDynamique(event) {
+  //   console.log("handleScrollDynamique", event.nativeEvent.contentOffset.y);
+  //   this.setState({margin: event.nativeEvent.contentOffset.y})
+  //  }
+   
+
+
   render() {
-    // const opacityAnime = this.state.opacity.interpolate({
-    //   inputRange: [0, 1],
-    //   outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+
+    // const imageTranslate = this.state.scrollY.interpolate({
+    //   inputRange: [0, HEADER_SCROLL_DISTANCE],
+    //   outputRange: [0, -50],
+    //   extrapolate: 'clamp',
     // });
+
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE],
+      outputRange: [100, StyleDimention.DEVICE_HEIGHT],
+      extrapolate: 'clamp',
+    });
+
+    const imageOpacity = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+      outputRange: [1, 0.5, 0.2],
+      extrapolate: 'clamp',
+    });
+    const imageTranslate = this.state.scrollY.interpolate({
+      inputRange: [0, 500],
+      outputRange: [100,500],
+      extrapolate: 'clamp',
+    });
+    
     return (
-      <Swiper
-        style={styles.wrapper}
-        horizontal={false}
-        showsPagination={false}
-        loop={false}
-        /* onIndexChanged={(index) => this.opacityAnime(index)} */
-        index={1}
-        ref='swiper'
-        onScrollBeginDrag={() => this.opacityAnime()}
-      >
-        <View style={styles.container}>
-          <Profil />
-        </View>
-        <View style={[styles.container]}>
-          <View style={styles.containerSection}>
-            <TouchableOpacity style= {styles.buttonProfil} onPress={() => this.refs.swiper.scrollBy(-1)}>
-
+      /* Global View */
+      
+        <Swiper
+          style={[styles.wrapper]}
+          horizontal={false}
+          showsPagination={false}
+          loop={false}
+          onScroll={() => this.refs.test.transitionTo({marginTop: 500})}
+          scrollEventThrottle={16}
+          /* scrollResponderHandleTouchMove={this.handleScrollDynamique} */
+          /* onIndexChanged={(index) => this.opacityAnime(index)} */
+          index = {0}
+          ref = 'swiper'
+          onMomentumScrollEnd ={() => this._onMomentumScrollEnd()}
+          onScrollBeginDrag={() => this.opacityAnime()}
+        > 
+          {/* Profil View */}
+          {/* <View style={[styles.container]}> */}
+            <Animatable.View style={[styles.container,{opacity: 1}]}>
+                  {/* <Animated.Image
+                style={[
+                  styles.backgroundImage,
+                  {transform: [{translateY: imageTranslate}]},
+                ]}
+                source={require('../images/chat.jpg')}
+              /> */}
+              <Animatable.View   ref= "test" delay={700} onAnimationEnd={{marginTop: 0}} style={[styles.container,{opacity: 1}]}>
+                <TouchableOpacity  style= {[styles.buttonProfil, {position: 'absolute',  zIndex: 1}]} onPress={() => this.refs.swiper.scrollBy(-1)}>
+                <View >
+                  <Text style= {{color: this.state.colorText}} >
+                        {this.state.margin}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              </Animatable.View >
+            </Animatable.View>
+          {/* </View> */}
+            {/* <Profil /> */}
+          
+          {/* Home View */}
+          <View style={styles.container}>
+            <View style={[styles.containerSection] }>
+            <TouchableOpacity style= {[styles.buttonProfil, {position: 'absolute',  zIndex: 1}]} onPress={() => this.refs.swiper.scrollBy(-1)}>
+              <View >
+                <Text style= {{color: this.state.colorText}} >
+                      {this.state.margin}
+                </Text>
+              </View>
             </TouchableOpacity>
-            <Text style= {styles.textPseudo} >
-              CaroleZer
+              <Text style= {styles.textPseudo} >
+                {this.state.showText}
               </Text>
-          </View>
-          <TouchableOpacity style= {styles.buttonListe}>
-            <Text style= {styles.textButtonJoin} >
-              Mes scénarios
-                    </Text>
-          </TouchableOpacity>
-          <View style={styles.containerSection}>
-            <TouchableOpacity style= {styles.buttonCreate}>
-              <Text style= {styles.textButtonCreate} >
-                Creer
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style= {styles.buttonJoin}>
+            </View>
+            <TouchableOpacity style= {styles.buttonListe}>
               <Text style= {styles.textButtonJoin} >
-                Rejoindre
-                    </Text>
+                Mes scénarios
+              </Text>
             </TouchableOpacity>
+            <View style={styles.containerSection}>
+              <TouchableOpacity style= {styles.buttonCreate}>
+                <Text style= {styles.textButtonCreate} >
+                  Creer
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style= {styles.buttonJoin}>
+                <Text style= {styles.textButtonJoin} >
+                  Rejoindre
+                      </Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View>
-            <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
-
-            </TouchableOpacity>
+          {/* Contact View */}
+          <View style={styles.container}>
+            <Contact />
           </View>
-        </View>
-        <View style={styles.container}>
-          <Contact />
-        </View>
-
-      </Swiper>
-    );
+        </Swiper>
+    )
   }
 }
 
+
+const HEADER_MAX_HEIGHT = 500;
+const HEADER_MIN_HEIGHT = 0;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+
 const styles = {
+
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: null,
+    height: 50,
+    borderRadius:100,
+    resizeMode: 'cover',
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#03A9F4',
+    overflow: 'hidden',
+  },
+
+  // scrollViewContent: {
+  //   marginTop: HEADER_MAX_HEIGHT,
+  // },
+
   container: {
     flex: 1,
     alignItems: 'center',
