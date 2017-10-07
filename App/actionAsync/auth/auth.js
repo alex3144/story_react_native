@@ -37,31 +37,31 @@ export const _fb_Auth = function () {
                                 firebase.auth().signInWithCredential(credential).then((connexion) => {
 
                                     /// Call Facebook Graph API 
+                                    
                                     /// Callback facebook call API
                                     const responseInfoCallback = (error, result) => {
                                         if (error) {
                                             console.log(" ---- erreur lors de la connexion -----")
                                             alert("Erreur lors de la connexion");
                                         } else {
-                                            /// Create user 
-                                            let user = new User_class(result.id, result.email,result.name, result.first_name, result.last_name, data.accessToken, result.picture, 0, "Type1", null)
+                                            
+
                                             /// Check if user is in firebase database 
 
                                             firebase.database().ref('/users/' + connexion.uid).once('value').then(function (snapshot) {
 
                                                 let exists = snapshot.val() != null;
+
                                                 if (!exists) {
+                                                    /// Create user 
+                                                    let user = new User_class(result.id, result.email,result.name, result.first_name, result.last_name, data.accessToken, result.picture, 0, "Type1", null)
                                                     /// Save user in firebase database 
-                                                    console.log("User doesn't exist :" , user)
+                                                    console.log("---- User doesn't exist ----- " , user)
                                                     if(user.email == undefined){
                                                         user.email = null
                                                     }
                                                     firebase.database().ref('/users/' + connexion.uid).set(user).then(function(res){
                                                         console.log(" ---- user is save ----- ")
-                                                        const SETTINGS_KEY = 'facebook_token'
-                                                        const settingsObj = {lastUpdate: Date.now(), token: data.accessToken, uid: connexion.uid}
-                                                        AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
-                                                        console.log("---- lolal storage plug ----- ")
                                                         dispatch(setLoginSuccess(true, res));
                                                         Actions.nickname({user: user})
                                                     }, (error) => {
@@ -69,11 +69,11 @@ export const _fb_Auth = function () {
                                                         alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
                                                     })
                                                 }else{
-                                                    console.log(" ---- user exist ------ " , user)
-                                                    const SETTINGS_KEY = 'facebook_token'
-                                                    const settingsObj = {lastUpdate: Date.now(), token: data.accessToken, uid: connexion.uid}
+
+                                                    console.log(" ---- user exist ------ " , snapshot.val())
+                                                    const SETTINGS_KEY = 'current_user'
+                                                    const settingsObj = {user: snapshot.val()}
                                                     AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
-                                                    console.log("---- lolal storage plug ----- ")
                                                     dispatch(setLoginSuccess(true, result));
                                                     Actions.home()
                                                 }
@@ -115,10 +115,10 @@ export const _fb_Auth = function () {
 };
 
 export const _tchek_user = function(){
-    console.log("tcheck user")
+    console.log(" ----- tcheck user ------ ")
     return (dispatch) => {
-        AsyncStorage.getItem("facebook_token").then((value) => {
-            console.log("tcheck user" , value)
+        AsyncStorage.getItem("current_user").then((value) => {
+            console.log("tcheck_user" , value)
             if(value != null){
                 console.log(value)
                 Actions.home()

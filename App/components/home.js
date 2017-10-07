@@ -15,11 +15,12 @@ import { _currentUser, } from '../actionAsync/profile/profile';
 import Profil from './profile';
 import Contact from './contact';
 import { connect } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { opacity: new Animated.Value(1) }
+    this.state = {scrollY: new Animated.Value(0), springValue: new Animated.Value (0.3) };
   }
 
   render() {
@@ -57,15 +58,34 @@ export default class Home extends Component {
             </TouchableOpacity>
             <TouchableOpacity style= {styles.buttonJoin}>
               <Text style= {styles.textButtonJoin} >
-                Rejoindre
-                    </Text>
+                Mes scénarios
+              </Text>
             </TouchableOpacity>
+            <View style={styles.containerSection}>
+              <TouchableOpacity style= {styles.buttonCreate}>
+                <Text style= {styles.textButtonCreate} >
+                  Creer
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style= {styles.buttonJoin}>
+                <Text style= {styles.textButtonJoin} >
+                  Rejoindre
+                      </Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View>
-            <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
-
-            </TouchableOpacity>
+          {/* Contact View */}
+          <View style={styles.container}>
+            <Contact />
           </View>
+<<<<<<< HEAD
+        </Swiper>
+    )
+=======
         </View>
         <View style={styles.containerContact}>
           <Contact />
@@ -73,10 +93,43 @@ export default class Home extends Component {
 
       </Swiper>
     );
+>>>>>>> 68d46c02a4ab78b03d5dcbbb13b9b528e14dfe64
   }
 }
 
+
+const HEADER_MAX_HEIGHT = 500;
+const HEADER_MIN_HEIGHT = 0;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+
 const styles = {
+<<<<<<< HEAD
+
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: null,
+    height: 50,
+    borderRadius:100,
+    resizeMode: 'cover',
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#03A9F4',
+    overflow: 'hidden',
+  },
+
+  // scrollViewContent: {
+  //   marginTop: HEADER_MAX_HEIGHT,
+  // },
+
+  container: {
+=======
   //main layout container
   containerProfile: {
     flex: 1,
@@ -96,6 +149,7 @@ const styles = {
     paddingBottom: StyleDimention.CARD_PADDING_Y,
   },
   containerContact: {
+>>>>>>> 68d46c02a4ab78b03d5dcbbb13b9b528e14dfe64
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
