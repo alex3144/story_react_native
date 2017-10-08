@@ -32,7 +32,6 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* story_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* story_appTests.m */; };
-		45A1CD99C9E346D4AF1660CF /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AF465E049EF489C94D7D924 /* libRCTFBSDK.a */; };
 		5006C0DA1F7AFD1F00F85C23 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006C0D61F7AFD1F00F85C23 /* Bolts.framework */; };
 		5006C0DB1F7AFD1F00F85C23 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006C0D71F7AFD1F00F85C23 /* FBSDKCoreKit.framework */; };
 		5006C0DC1F7AFD1F00F85C23 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006C0D81F7AFD1F00F85C23 /* FBSDKLoginKit.framework */; };
@@ -40,6 +39,7 @@
 		5006C11B1F7D65CB00F85C23 /* TypoGraphica.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5006C11A1F7D65CB00F85C23 /* TypoGraphica.otf */; };
 		5006C11D1F7D677500F85C23 /* react-native-linear-gradient in Resources */ = {isa = PBXBuildFile; fileRef = 5006C11C1F7D677500F85C23 /* react-native-linear-gradient */; };
 		5006C1271F7D683000F85C23 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006C1241F7D67FE00F85C23 /* libBVLinearGradient.a */; };
+		5012180E1F8A89A200651E3B /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 508B56631F7A729100ECD6A0 /* libRCTFBSDK.a */; };
 		501F52B31F819EC4003BDC59 /* ProximaNovaSoft-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 501F52B21F819EC4003BDC59 /* ProximaNovaSoft-Regular.otf */; };
 		50200FA61F84F8C3000C155A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50200FA51F84F8C3000C155A /* Images.xcassets */; };
 		505722E51F8513580044BA0E /* ProximaNovaSoft-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 505722E41F8513580044BA0E /* ProximaNovaSoft-Semibold.otf */; };
@@ -353,7 +353,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = story_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = story_app/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		2AF465E049EF489C94D7D924 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* story_app-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "story_app-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* story_app-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "story_app-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006C0D61F7AFD1F00F85C23 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
@@ -409,7 +408,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				45A1CD99C9E346D4AF1660CF /* libRCTFBSDK.a in Frameworks */,
+				5012180E1F8A89A200651E3B /* libRCTFBSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
