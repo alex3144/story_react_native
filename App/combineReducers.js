@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import AuthReducer from './container/connexion/authReducer';
 import NicknameReducer from './container/nickname/nicknameReducer';
-import ProfileReducer from './container/profile/profileReducer';
+import ProfileReducer from './container/home/homeReducer';
 
 export default combineReducers({
   authReducer: AuthReducer,

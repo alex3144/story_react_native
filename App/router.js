@@ -7,6 +7,7 @@ import Nickname from './container/nickname/nickname';
 import Contact from './container/contact/contact';
 import Level from './container/level/level';
 import Parameters from './container/parameters/parameters';
+import Photo from './container/photo/photo'
 
 
 const RouterComponent = () => {
@@ -53,7 +54,11 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="parameters"
                               component={Parameters}
-
+                        />
+                        <Scene
+                              hideNavBar={true}
+                              key="photo"
+                              component={Photo}
                         />
                   </Scene>
             </Router>

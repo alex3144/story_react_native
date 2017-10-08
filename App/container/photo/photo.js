@@ -8,9 +8,11 @@ import {
    ScrollView,
    Image
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { _currentUser, } from '../profile/profileThunk';
+import { _currentUser, } from '../home/homeThunk';
 import StyleDimention from '../../style/dimention';
+import close from '../../asset/images/close.png'
 
 
 class Photo extends Component {
@@ -21,8 +23,8 @@ class Photo extends Component {
       return (
          <View style={styles.container}>
             <View style={styles.navBarStyle}>
-               <TouchableOpacity onPress={() => Actions.profile(this.props.user)}>
-                  <Image style={styles.imageRoulette} source={roulette} />
+               <TouchableOpacity onPress={() => Actions.home({index:-1})}>
+                  <Image style={styles.imageClose} source={close} />
                </TouchableOpacity>
             </View>
             <View>
@@ -53,6 +55,11 @@ const styles = {
       padding: StyleDimention.CARD_PADDING_X,
       paddingTop: StyleDimention.CARD_PADDING_Y,
       paddingBottom: StyleDimention.CARD_PADDING_Y,
+   },
+   imageClose: {
+      width: 28,
+      height: 28,
+      marginLeft: 300,
    },
 
 };

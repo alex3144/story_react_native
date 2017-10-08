@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import {
    getCurentUser
-} from './profileActions';
+} from './homeActions';
 import { Actions } from 'react-native-router-flux';
 import {AsyncStorage} from 'react-native'
 

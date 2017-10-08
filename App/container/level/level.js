@@ -9,7 +9,7 @@ import {
    Image
 } from 'react-native';
 import { connect } from 'react-redux';
-import { _currentUser, } from '../profile/profileThunk';
+import { _currentUser, } from '../home/homeThunk';
 import StyleDimention from '../../style/dimention';
 import LinearGradient from 'react-native-linear-gradient';
 

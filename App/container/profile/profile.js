@@ -9,9 +9,8 @@ import {
   Image,
   StatusBar
 } from 'react-native';
-import { Actions } from 'react-native-router-flux'; 
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { _currentUser, } from '../profile/profileThunk';
 import StyleDimention from '../../style/dimention';
 import roulette from '../../asset/images/roulette.png';
 import ninja from '../../asset/images/ninja.png';
@@ -22,10 +21,11 @@ import insta from '../../asset/images/insta.png';
 
 
 
-class Profile extends Component {
-  componentDidMount() {
-    this.props._currentUser();
-  }
+export default class Profile extends Component {
+  // componentDidMount() {
+  //   this.props._currentUser();
+  //   console.log(" ------------ in profile willMount view ----------------")
+  // }
   renderTextPoint() {
     if (this.props.user.level.level.point == 0) {
       return (
@@ -48,29 +48,28 @@ class Profile extends Component {
         <View style={styles.container}>
 
           <View style={styles.navBarStyle}>
-            <TouchableOpacity  onPress={()=>Actions.parameters(this.props.user)}>
-              <Image style={styles.imageRoulette} source={roulette}/>
+            <TouchableOpacity onPress={() => Actions.parameters(this.props.user)}>
+              <Image style={styles.imageRoulette} source={roulette} />
             </TouchableOpacity>
           </View>
 
 
           <View style={styles.containerSection}>
             <View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => Actions.photo()}>
                 <View style={styles.borderContainerStylo}>
                   <View style={styles.innerContainerStylo}>
                     <Image style={styles.imageStylo} source={stylo} />
                   </View>
                 </View>
-                <Image style={styles.photoStyle} source={[this.props.user.picture.data.data.url]} />
+                <Image style={styles.photoStyle} source={{uri: this.props.user.picture.data.data.url}} />
               </TouchableOpacity>
               <Image style={styles.imageNinja} source={ninja} />
-
             </View>
             <Text style={styles.textStyle}>
               {this.props.user.nickname}
             </Text>
-            <TouchableOpacity style={styles.buttonPoint} onPress={()=>Actions.level()}>
+            <TouchableOpacity style={styles.buttonPoint} onPress={() => Actions.level()}>
               <Image style={styles.imageCoupe} source={level} />
               {this.renderTextPoint()}
             </TouchableOpacity>
@@ -100,14 +99,14 @@ class Profile extends Component {
     }
   }
 }
-const mapStateToProps = (state) => {
-  console.log("in profile view", state.profileReducer)
-  const { user } = state.profileReducer
-  return {
-    user
-  }
-}
-export default connect(mapStateToProps, { _currentUser })(Profile)
+// const mapStateToProps = (state) => {
+//   console.log(" ------------ in profile mapStateToProps view ----------------", state.profileReducer)
+//   const { user } = state.profileReducer
+//   return {
+//     user
+//   }
+// }
+// export default connect(mapStateToProps, { _currentUser })(Profile)
 
 const styles = {
   container: {
@@ -134,8 +133,8 @@ const styles = {
     marginBottom: 20,
   },
   navBarStyle: {
-    paddingTop:18,
-    paddingBottom:0,
+    paddingTop: 18,
+    paddingBottom: 0,
 
   },
 
@@ -193,12 +192,12 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth:1,
-    borderColor:'rgb(248,194,28)',
-    width:166,
-    height:46,
-    borderRadius:30,
-    paddingBottom:5,
+    borderWidth: 1,
+    borderColor: 'rgb(248,194,28)',
+    width: 166,
+    height: 46,
+    borderRadius: 30,
+    paddingBottom: 5,
   },
   //--------------------------------
   // style botton social linklink 
@@ -212,7 +211,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom:30,
+    marginBottom: 30,
   },
   imageFb: {
     width: 42,

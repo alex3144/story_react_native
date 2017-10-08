@@ -1,4 +1,4 @@
-import * as types from './profileActionTypes';
+import * as types from './homeActionTypes';
 
 //Each function change the state of the store
 

@@ -14,16 +14,29 @@ import StyleDimention from '../../style/dimention';
 import Profil from '../profile/profile';
 import Contact from '../contact/contact';
 import { connect } from 'react-redux';
-import * as Animatable from 'react-native-animatable';
+import { _currentUser, } from '../home/homeThunk';
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {scrollY: new Animated.Value(0), springValue: new Animated.Value (0.3) };
+class Home extends Component {
+
+  componentDidMount() {
+    console.log(" ------------ in home willMount view ----------------")
+    this.props._currentUser();
   }
-
+  buttonTopProfil(){
+    if(this.props.user != null){
+      return(
+      <Text style= {styles.textPseudo} >
+        {this.props.user.name}
+      </Text>
+      )
+    }else{
+      return(
+      <Text style= {styles.textPseudo} >
+      </Text>
+      )
+    }
+  }
   render() {
-
     return (
       <Swiper
         style={styles.wrapper}
@@ -34,7 +47,7 @@ export default class Home extends Component {
         ref='swiper'
       >
         <View style={[styles.containerProfile]}>
-          <Profil />
+          <Profil user={this.props.user}/>
           {/* <TouchableOpacity style= {styles.buttonProfile} onPress={() => this.refs.swiper.scrollBy(1)} /> */}
         </View>
 
@@ -45,9 +58,7 @@ export default class Home extends Component {
           />
           <View style={styles.containerSection}>
             <TouchableOpacity style= {styles.buttonProfile} onPress={() => this.refs.swiper.scrollBy(-1)} />
-            <Text style= {styles.textPseudo} >
-              CaroleZer
-              </Text>
+            {this.buttonTopProfil()}
           </View>
           <View style={styles.containerSection}>
             <TouchableOpacity style= {styles.buttonCreate}>
@@ -60,12 +71,11 @@ export default class Home extends Component {
                 Mes scénarios
               </Text>
             </TouchableOpacity>
-            
           </View>
           <View>
-              <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.containerContact}>
           <Contact />
@@ -75,7 +85,14 @@ export default class Home extends Component {
     );
   }
 }
-
+const mapStateToProps = (state, props) => {
+  console.log("------------ in home mapStateToProps view ------------", state.profileReducer ,props);
+  const  user  = state.profileReducer
+  return(
+    user
+  )
+}
+export default connect(mapStateToProps, { _currentUser})(Home)
 
 const HEADER_MAX_HEIGHT = 500;
 const HEADER_MIN_HEIGHT = 0;

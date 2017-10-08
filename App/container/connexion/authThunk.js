@@ -113,12 +113,12 @@ export const _fb_Auth = function () {
 };
 
 export const _tchek_user = function(){
-    console.log(" ----- tcheck user ------ ")
+    console.log(" ----- in tcheck user ------ ")
     return (dispatch) => {
         AsyncStorage.getItem("current_user").then((value) => {
-            console.log("tcheck_user" , value)
+            // console.log("tcheck_user" , value)
             if(value != null){
-                console.log(value)
+                // console.log(value)
                 Actions.home()
             }
         }).done();
