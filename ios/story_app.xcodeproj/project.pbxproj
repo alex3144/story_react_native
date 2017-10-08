@@ -41,7 +41,6 @@
 		5006C11D1F7D677500F85C23 /* react-native-linear-gradient in Resources */ = {isa = PBXBuildFile; fileRef = 5006C11C1F7D677500F85C23 /* react-native-linear-gradient */; };
 		5006C1271F7D683000F85C23 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006C1241F7D67FE00F85C23 /* libBVLinearGradient.a */; };
 		501F52B31F819EC4003BDC59 /* ProximaNovaSoft-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 501F52B21F819EC4003BDC59 /* ProximaNovaSoft-Regular.otf */; };
-		50200FA61F84F8C3000C155A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50200FA51F84F8C3000C155A /* Images.xcassets */; };
 		505722E51F8513580044BA0E /* ProximaNovaSoft-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 505722E41F8513580044BA0E /* ProximaNovaSoft-Semibold.otf */; };
 		5057230D1F8513680044BA0E /* ProximaNovaSoft-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5057230C1F8513680044BA0E /* ProximaNovaSoft-Medium.otf */; };
 		5057230F1F8513710044BA0E /* ProximaNovaSoft-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5057230E1F8513710044BA0E /* ProximaNovaSoft-Bold.otf */; };
@@ -1155,7 +1154,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				501F52B31F819EC4003BDC59 /* ProximaNovaSoft-Regular.otf in Resources */,
-				50200FA61F84F8C3000C155A /* Images.xcassets in Resources */,
 				5006C11B1F7D65CB00F85C23 /* TypoGraphica.otf in Resources */,
 				5006C11D1F7D677500F85C23 /* react-native-linear-gradient in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
@@ -1333,7 +1331,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = APPIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 4XCBJ3CWDS;
@@ -1363,7 +1361,7 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = APPIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4XCBJ3CWDS;
 				FRAMEWORK_SEARCH_PATHS = (

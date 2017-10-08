@@ -8,7 +8,6 @@ import {
    ScrollView,
    Image
 } from 'react-native';
-import { Svg } from 'react-native-svg';
 import { connect } from 'react-redux';
 import { _currentUser, } from '../actionAsync/profile/profile';
 import StyleDimention from '../style/dimention';
