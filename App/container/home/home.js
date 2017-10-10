@@ -92,7 +92,7 @@ const mapStateToProps = (state, props) => {
     user
   )
 }
-export default connect(mapStateToProps, { _currentUser})(Home)
+export default connect(mapStateToProps, { _currentUser})(Home);
 
 const HEADER_MAX_HEIGHT = 500;
 const HEADER_MIN_HEIGHT = 0;

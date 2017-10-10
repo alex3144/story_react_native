@@ -56,7 +56,7 @@ export default class Profile extends Component {
 
           <View style={styles.containerSection}>
             <View>
-              <TouchableOpacity onPress={() => Actions.photo()}>
+              <TouchableOpacity onPress={() => Actions.photo(this.props.user)}>
                 <View style={styles.borderContainerStylo}>
                   <View style={styles.innerContainerStylo}>
                     <Image style={styles.imageStylo} source={stylo} />

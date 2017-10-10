@@ -3,7 +3,7 @@ import {
    getCurentUser
 } from './homeActions';
 import { Actions } from 'react-native-router-flux';
-import {AsyncStorage} from 'react-native'
+import {AsyncStorage} from 'react-native';
 
 export const _currentUser = function () {
    console.log('----- in asynchrone get current user ----- ')

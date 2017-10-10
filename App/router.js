@@ -34,6 +34,7 @@ const RouterComponent = () => {
                               key="home"
                               component={Home}
                               panHandlers={null}
+                              
                         />
                         <Scene
                               hideNavBar={true}
@@ -59,6 +60,7 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="photo"
                               component={Photo}
+                              
                         />
                   </Scene>
             </Router>
