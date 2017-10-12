@@ -49,7 +49,7 @@ export const setChangeTextValide = function () {
     isNicknameGood: false,
     isNicknameError: false,
     opacity: 1,
-    disabled: false
+    disabled: false,
   };
 }
 

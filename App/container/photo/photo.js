@@ -10,41 +10,88 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { _currentUser, } from '../home/homeThunk';
+import { _currentUser } from '../home/homeThunk';
+import { setButtonModifier, setButtonPellicule } from './photoAction';
 import StyleDimention from '../../style/dimention';
-import close from '../../asset/images/close.png'
+import close from '../../asset/images/close.png';
 
 
-class Photo extends Component {
-   componentDidMount() {
-      this.props._currentUser();
-   }
-   render() {
-      return (
-         <View style={styles.container}>
-            <View style={styles.navBarStyle}>
-               <TouchableOpacity onPress={() => Actions.home({index:-1})}>
-                  <Image style={styles.imageClose} source={close} />
+export class Photo extends Component {
+
+   renderButton() {
+      if (this.props.isChange == true) {
+         return (
+            <View style={styles.containerButton}>
+               <TouchableOpacity style={styles.buttonYellow} onPress={() => this.props.setButtonPellicule()}>
+                  <Text style={styles.textButtonChange}>
+                     Modifier
+                  </Text>
+            </TouchableOpacity>
+            </View>
+         )
+      } else {
+         return (
+            <View style={styles.containerButton}>
+               <TouchableOpacity style={styles.buttonWhite}>
+                  <Text style={styles.textButtonPicture}>
+                     PELLICULE
+                  </Text>
+               </TouchableOpacity>
+               <TouchableOpacity style={styles.buttonWhite} onPress={() => this.props.setButtonModifier()}>
+                  <Text style={styles.textButtonCancel}>
+                     ANNULER
+                  </Text>
                </TouchableOpacity>
             </View>
-            <View>
+         )
+      }
+   }
+   renderNavBar(){
+      if (this.props.isChange == true) {
+         return (
+            <View style={styles.containerNavBar}>
+                  <TouchableOpacity>
+                     <Image style={styles.navBarClose} source={close} />
+                  </TouchableOpacity>
+               </View>
+         )
+      } else {
+         return (
+            <View style={styles.containerNavBar}>
+                  
             </View>
-            <View>
+         )
+      }
+   }
+
+   render() {
+      if ((this.props.user =! null)) {
+         return (
+            <View style={styles.container}>
+               <View>
+                  {this.renderNavBar()}
+               </View>
+
+               <View style={styles.containerPhoto}>
+                  <Image style={styles.stylePhoto} source={{ uri: this.props.picture.data.data.url }} />
+               </View>
+               {this.renderButton()}
             </View>
-         </View>
-      )
+         )
+      }
    }
 }
-const mapStateToProps = (state) => {
-   console.log("in change photo view", state.profileReducer)
-   const { user } = state.profileReducer
-   return {
-      user
-   }
+const mapStateToProps = (state, props) => {
+   const isChange = state.photoReducer;
+   console.log("------------ in photo mapStateToProps view ------------", state.profileReducer, props, isChange);
+   return (
+      isChange
+   )
 }
-export default connect(mapStateToProps, { _currentUser })(Photo)
+export default connect(mapStateToProps, { setButtonModifier, setButtonPellicule })(Photo);
 
 const styles = {
+   //genaral
    container: {
       flex: 1,
       alignItems: 'center',
@@ -56,10 +103,77 @@ const styles = {
       paddingTop: StyleDimention.CARD_PADDING_Y,
       paddingBottom: StyleDimention.CARD_PADDING_Y,
    },
-   imageClose: {
+   //-----------------------------------------------
+   //navbar
+   navBarClose: {
       width: 28,
       height: 28,
-      marginLeft: 300,
    },
+   containerNavBar:{
+      marginLeft: 300,
+      height:28
+   },
+   //-----------------------------------------------
+   //pitcture
+   stylePhoto: {
+      width: StyleDimention.DEVICE_WIDTH - 20,
+      height: 386,
+      borderRadius: 20,
+   },
+   containerPhoto: {
+      borderRadius: 20,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 5 },
+      shadowOpacity: 0.5,
+      shadowRadius: 4,
+   },
+   //-----------------------------------------------
+   //button
+   containerButton:{
+      height: 150,
+      justifyContent:'center',
+      alignItems:'center',
+   },
+   buttonYellow: {
+      backgroundColor: 'rgb(248,194,28)',
+      borderRadius: 30,
+      width: 180,
+      height: 56,
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   buttonWhite: {
+      backgroundColor: 'white',
+      borderRadius: 12,
+      width: StyleDimention.DEVICE_WIDTH - 20,
+      height: 56,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom:10
+   },
+   textButtonChange: {
+      paddingTop: 5,
+      color: 'white',
+      fontSize: 27,
+      fontFamily: "ProximaNovaSoft-Medium",
+   },
+   textButtonCancel:{
+      paddingTop: 5,
+      color: 'rgb(54,54,54)',
+      fontSize: 27,
+      fontFamily: "ProximaNovaSoft-Medium",
+   },
+   textButtonPicture:{
+      paddingTop: 5,
+      color: 'rgb(248,194,28)',
+      fontSize: 27,
+      fontFamily: "ProximaNovaSoft-Medium",
+   }
+
+   //-----------------------------------------------
+
+
+
+
 
 };

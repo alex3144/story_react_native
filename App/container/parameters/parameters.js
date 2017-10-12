@@ -8,20 +8,34 @@ import {
    ScrollView,
    Image,
    Switch,
-   StatusBar
+   StatusBar,
+   Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 import {Actions} from 'react-native-router-flux'
-import { _currentUser, } from '../home/homeThunk';
+import { _currentUser } from '../home/homeThunk';
+import { _disconnexion } from './parametersThunk';
 import StyleDimention from '../../style/dimention';
 import LinearGradient from 'react-native-linear-gradient';
-
 
 class Reglages extends Component {
    componentDidMount() {
       this.props._currentUser();
    }
+  
    render() {
+      const alertDeconnexion =()=>{
+            return(
+                  Alert.alert(
+                        'Oups!',
+                        'Voulez vous vraiment vous deconneter',
+                        [
+                              {text: 'OK', onPress: () => this.props._disconnexion()},
+                              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                        ],
+                  )
+            );
+         }
       return (
          
          <ScrollView style={styles.container}>
@@ -163,8 +177,9 @@ class Reglages extends Component {
                </TouchableOpacity>
             </View>
 
+            
             <View style={styles.containerDisable}>
-               <TouchableOpacity style={styles.buttonConnexion}>
+               <TouchableOpacity style={styles.buttonConnexion} onPress={alertDeconnexion}>
                   <Text style={styles.textConnexion}>
                      Se déconnecter
                   </Text>
@@ -186,11 +201,13 @@ class Reglages extends Component {
                </Text>
 
                </LinearGradient>
-            </View>
+            </View>            
+            
          </ScrollView>
       )
    }
 }
+
 const mapStateToProps = (state) => {
    console.log("in profile view", state.profileReducer)
    const { user } = state.profileReducer
@@ -198,7 +215,7 @@ const mapStateToProps = (state) => {
       user
    }
 }
-export default connect(mapStateToProps, { _currentUser })(Reglages)
+export default connect(mapStateToProps, { _disconnexion,_currentUser })(Reglages)
 
 const styles = {
    //Style
