@@ -39,6 +39,7 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="profile"
                               component={Profile}
+                              direction='vertical'
                         />
                         <Scene
                               hideNavBar={true}

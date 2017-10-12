@@ -18,27 +18,69 @@ import { _currentUser, } from '../home/homeThunk';
 
 class Home extends Component {
 
+  state = {
+    progress: new Animated.Value(0),  // Initial value for opacity: 0
+  }
+
+
+  animeImage(){
+    
+  }
+  
+
+
   componentDidMount() {
     console.log(" ------------ in home willMount view ----------------")
     this.props._currentUser();
+    Animated.timing(
+      this.state.progress, {toValue: 1, duration: 10000}
+    ).start();
+    const rotate =  this.state.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg']
+    });
+    const styleRotate = { transform: [{ rotate }]};
   }
   buttonTopProfil(){
     if(this.props.user != null){
       return(
-      <Text style= {styles.textPseudo} >
+      <Text style= {styles.textPseudo} >
         {this.props.user.name}
       </Text>
       )
     }else{
       return(
-      <Text style= {styles.textPseudo} >
+      <Text style= {styles.textPseudo} >
       </Text>
       )
     }
   }
+
+  PictureTopProfil(){
+    const progress = new Animated.Value(0);
+    Animated.timing(
+      this.state.progress, {toValue: 1, duration: 1000}
+    ).start();
+    const rotate = this.state.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg']
+   });
+   const style = { transform: [{ rotate }]};
+    if(this.props.user != null){
+      return(
+        <Animated.View style={ style }>
+          <Image style={[styles.photoStyle]} source={{uri: this.props.user.picture.data.data.url}} />
+        </Animated.View>
+      )
+    }else{
+      return(
+        null
+      )
+    }
+  }
   render() {
+
     return (
-      <View>
       <Swiper
         style={styles.wrapper}
         horizontal={false}
@@ -46,45 +88,92 @@ class Home extends Component {
         loop={false}
         index={1}
         ref='swiper'
-      > 
-
-        {/* Profil View */}
-        <View style={[styles.containerProfile]}>
-          <Profil user={this.props.user}/>
-          {/* <TouchableOpacity style= {styles.buttonProfile} onPress={() => this.refs.swiper.scrollBy(1)} /> */}
-        </View>
-
-        {/* Home View */}
-        <View style={[styles.containerHome]}>
-          <StatusBar
-            backgroundColor="transparent"
-            barStyle="light-content"
-          />
-          <View style={styles.containerSection}>
-            <TouchableOpacity style= {styles.buttonProfile} onPress={() => this.refs.swiper.scrollBy(-1)} />
-            {this.buttonTopProfil()}
+      >
+      <View style={[styles.mainContainer]}>
+         {this.PictureTopProfil()}
+         {this.buttonTopProfil()}
+        <Swiper
+          style={styles.wrapper}
+          horizontal={false}
+          showsPagination={false}
+          loop={false}
+          index={1}
+          ref='swiper'
+        >
+          <View style={[styles.containerProfile]}>
+            <Profil user={this.props.user}/>
+            {/* <TouchableOpacity style= {styles.buttonProfile} onPress={() => this.refs.swiper.scrollBy(1)} /> */}
           </View>
-          <View>
-            <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
-            </TouchableOpacity>
-            <TouchableOpacity style= {styles.buttonJoin}>
-              <Text style= {styles.textButtonJoin} >
-                Mes scénarios
-              </Text>
-            </TouchableOpacity>
+          <View style={[styles.containerHome]}>
+            <StatusBar
+              backgroundColor="transparent"
+              barStyle="light-content"
+            />
+            <View style={styles.containerSection}>
+              <TouchableOpacity style= {styles.buttonCreate}>
+                <Text style= {styles.textButtonCreate} >
+                  Creer
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style= {styles.buttonJoin}>
+                <Text style= {styles.textButtonJoin} >
+                  Mes scénarios
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View>
-            <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
-            </TouchableOpacity>
+          <View style={styles.containerContact}>
+            <Contact />
           </View>
-        </View>
-
-        {/* Contact View */}
-        <View style={styles.containerContact}>
-          <Contact />
-        </View>
-      </Swiper>
+        </Swiper>
       </View>
+      <View style={[styles.mainContainer]}>
+         {this.PictureTopProfil()}
+         {this.buttonTopProfil()}
+        <Swiper
+          style={styles.wrapper}
+          horizontal={false}
+          showsPagination={false}
+          loop={false}
+          index={1}
+          ref='swiper'
+        >
+          <View style={[styles.containerProfile]}>
+            <Profil user={this.props.user}/>
+            {/* <TouchableOpacity style= {styles.buttonProfile} onPress={() => this.refs.swiper.scrollBy(1)} /> */}
+          </View>
+          <View style={[styles.containerHome]}>
+            <StatusBar
+              backgroundColor="transparent"
+              barStyle="light-content"
+            />
+            <View style={styles.containerSection}>
+              <TouchableOpacity style= {styles.buttonCreate}>
+                <Text style= {styles.textButtonCreate} >
+                  Creer
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style= {styles.buttonJoin}>
+                <Text style= {styles.textButtonJoin} >
+                  Mes scénarios
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity style= {styles.buttonContact} onPress={() => this.refs.swiper.scrollBy(1)}>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.containerContact}>
+            <Contact />
+          </View>
+        </Swiper>
+      </View>
+      </Swiper>
     );
   }
 }
@@ -108,6 +197,21 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'rgb(54,54,54)',
+  },
+
+  mainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'transparent',
+  },
+  photoStyle: {
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'white',
+    marginTop: 30,
   },
   containerHome: {
     flex: 1,
@@ -211,6 +315,3 @@ const styles = {
   },
   //-----------------------------------------
 }
-
-
-
