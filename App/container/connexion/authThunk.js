@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { setLoginPending, setLoginSuccess, setLoginError, setLoginCanceled } from './authActions';
 import User_class from '../../classes/user';
-import {AsyncStorage} from 'react-native'
+import { AsyncStorage } from 'react-native'
 
 
 export const _fb_Auth = function () {
@@ -35,14 +35,14 @@ export const _fb_Auth = function () {
                                 firebase.auth().signInWithCredential(credential).then((connexion) => {
 
                                     /// Call Facebook Graph API 
-                                    
+
                                     /// Callback facebook call API
                                     const responseInfoCallback = (error, result) => {
                                         if (error) {
                                             console.log(" ---- erreur lors de la connexion -----")
                                             alert("Erreur lors de la connexion");
                                         } else {
-                                            
+
 
                                             /// Check if user is in firebase database 
 
@@ -52,25 +52,25 @@ export const _fb_Auth = function () {
 
                                                 if (!exists) {
                                                     /// Create user 
-                                                    let user = new User_class(result.id, result.email,result.name, result.first_name, result.last_name, data.accessToken, result.picture, 0, "Type1", null)
+                                                    let user = new User_class(result.id, result.email, result.name, result.first_name, result.last_name, data.accessToken, result.picture, 0, "Type1", null)
                                                     /// Save user in firebase database 
-                                                    console.log("---- User doesn't exist ----- " , user)
-                                                    if(user.email == undefined){
+                                                    console.log("---- User doesn't exist ----- ", user)
+                                                    if (user.email == undefined) {
                                                         user.email = null
                                                     }
-                                                    firebase.database().ref('/users/' + connexion.uid).set(user).then(function(res){
+                                                    firebase.database().ref('/users/' + connexion.uid).set(user).then(function (res) {
                                                         console.log(" ---- user is save ----- ")
                                                         dispatch(setLoginSuccess(true, res));
-                                                        Actions.nickname({user: user})
+                                                        Actions.home({ user: user })
                                                     }, (error) => {
                                                         console.log(" ---- error in user save ----- ", error)
                                                         alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
                                                     })
-                                                }else{
+                                                } else {
 
-                                                    console.log(" ---- user exist ------ " , snapshot.val())
+                                                    console.log(" ---- user exist ------ ", snapshot.val())
                                                     const SETTINGS_KEY = 'current_user'
-                                                    const settingsObj = {user: snapshot.val()}
+                                                    const settingsObj = { user: snapshot.val() }
                                                     AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                                     dispatch(setLoginSuccess(true, result));
                                                     Actions.home()
@@ -112,12 +112,12 @@ export const _fb_Auth = function () {
     }
 };
 
-export const _tchek_user = function(){
+export const _tchek_user = function () {
     console.log(" ----- in tcheck user ------ ")
     return (dispatch) => {
         AsyncStorage.getItem("current_user").then((value) => {
             // console.log("tcheck_user" , value)
-            if(value != null){
+            if (value != null) {
                 // console.log(value)
                 Actions.home()
             }

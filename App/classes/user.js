@@ -1,15 +1,41 @@
 //Object User
-import Level from './level'
+import Picture from './picture';
+import Location from './location';
+import Conversations from './conversations';
+
 export default class User {
-    constructor(facebook_id, email, name, first_name, last_name, token, picture, point, avatar, nickname) {
-        this.email = email;
-        this.name = name;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.token = token;
-        this.facebook_id = facebook_id;
-        this.picture =  {data: picture};
-        this.nickname = nickname;
-        this.level = new Level(point, avatar)
+    constructor(
+        age,
+        avatarUrl,
+        fbId,
+        daySwippe,
+        firstName,
+        lastName,
+        gender,
+        likeByDay,
+        uid,
+        bio,
+        work,
+        conversationsId,
+        data,
+        city,
+        lat,
+        long,
+
+    ) {
+        this.age = age;
+        this.avatarUrl = avatarUrl;
+        this.fbId = fbId;
+        this.daySwippe = daySwippe;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.likeByDay = likeByDay;
+        this.uid = uid;
+        this.bio = bio;
+        this.work = work;
+        this.picture = new Picture(data);
+        this.location = new Location(city, lat, long);
+        this.conversationsId = []
     }
 }
