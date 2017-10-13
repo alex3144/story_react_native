@@ -8,6 +8,7 @@ import Contact from './container/contact/contact';
 import Level from './container/level/level';
 import Parameters from './container/parameters/parameters';
 import Photo from './container/photo/photo'
+import Messagerie from'./container/messagerie/messagerie';
 
 
 const RouterComponent = () => {
@@ -22,6 +23,7 @@ const RouterComponent = () => {
                               component={Connexion}
                               hideNavBar={true}
                               initial={true}
+                              
                         />
                         <Scene
                               hideNavBar={true}
@@ -61,6 +63,12 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="photo"
                               component={Photo}
+                              
+                        />
+                        <Scene
+                              hideNavBar={true}
+                              key="messagerie"
+                              component={Messagerie}
                               
                         />
                   </Scene>
