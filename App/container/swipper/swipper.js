@@ -78,13 +78,11 @@ class Swipper extends Component {
               </View>
             </View>
             <View style={styles.componentNavBar}>
-              <View style={styles.buttonNavBar}>
-                <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(1)}>
-                  <Text style={styles.textNavbar}>
-                    Home
+              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(1)}>
+                <Text style={styles.textNavbar}>
+                  Home
                   </Text>
-                </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -99,13 +97,11 @@ class Swipper extends Component {
         <View style={styles.container}>
           <View style={styles.containerNavBar}>
             <View style={styles.componentNavBar}>
-              <View style={styles.buttonNavBar}>
-                <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(-1)}>
-                  <Text style={styles.textNavbar}>
-                    Profile
-              </Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(-1)}>
+                <Text style={styles.textNavbar}>
+                  Profile
+                  </Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.componentNavBar}>
               <View>
@@ -115,13 +111,11 @@ class Swipper extends Component {
               </View>
             </View>
             <View style={styles.componentNavBar}>
-              <View style={styles.buttonNavBar}>
-                <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(1)}>
-                  <Text style={styles.textNavbar}>
-                    Message
-              </Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(1)}>
+                <Text style={styles.textNavbar}>
+                  Message
+                  </Text>
+              </TouchableOpacity>
             </View>
           </View>
           <Home user={this.props.user} />
@@ -134,13 +128,12 @@ class Swipper extends Component {
         <View style={styles.container}>
           <View style={styles.containerNavBar}>
             <View style={styles.componentNavBar}>
-              <View style={styles.buttonNavBar}>
-                <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(-1)}>
-                  <Text style={styles.textNavbar}>
-                    Home
+
+              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(-1)}>
+                <Text style={styles.textNavbar}>
+                  Home
                   </Text>
-                </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={styles.componentNavBar}>
               <View >
@@ -202,10 +195,6 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
 
-  },
-  buttonNavBar: {
-    marginLeft: 20,
-    marginRight: 20,
   },
   textNavbar: {
     color: 'black',

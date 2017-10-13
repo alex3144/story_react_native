@@ -128,7 +128,7 @@ const styles = {
     fontSize: 24,
     fontFamily: "ProximaNovaSoft-Bold",
     paddingTop: 5,
-    color: 'white',
+    color: 'black',
     marginTop: 20,
     marginBottom: 20,
   },
@@ -146,7 +146,7 @@ const styles = {
     width: 160,
     borderRadius: 80,
     borderWidth: 4,
-    borderColor: 'white',
+    borderColor: 'black',
     marginBottom: 15,
   },
   //--------------------------------
@@ -202,7 +202,7 @@ const styles = {
   //--------------------------------
   // style botton social linklink 
   textFbStyle: {
-    color: 'white',
+    color: 'black',
     fontSize: 20,
     fontFamily: "ProximaNovaSoft-Semibold",
     marginTop: 8
@@ -248,7 +248,7 @@ const styles = {
     width: 60,
     borderRadius: 100,
     opacity: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.3,
