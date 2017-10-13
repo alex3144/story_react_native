@@ -3,12 +3,12 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import Connexion from './container/connexion/connexion';
 import Home from './container/home/home';
 import Profile from './container/profile/profile';
-import Nickname from './container/nickname/nickname';
+import Swipper from './container/swipper/swipper';
 import Contact from './container/contact/contact';
-import Level from './container/level/level';
+
 import Parameters from './container/parameters/parameters';
 import Photo from './container/photo/photo'
-import Messagerie from'./container/messagerie/messagerie';
+import Messagerie from './container/messagerie/messagerie';
 
 
 const RouterComponent = () => {
@@ -23,12 +23,11 @@ const RouterComponent = () => {
                               component={Connexion}
                               hideNavBar={true}
                               initial={true}
-                              
                         />
                         <Scene
                               hideNavBar={true}
-                              key="nickname"
-                              component={Nickname}
+                              key="swipper"
+                              component={Swipper}
                               panHandlers={null}
                         />
                         <Scene
@@ -36,7 +35,6 @@ const RouterComponent = () => {
                               key="home"
                               component={Home}
                               panHandlers={null}
-                              
                         />
                         <Scene
                               hideNavBar={true}
@@ -51,11 +49,6 @@ const RouterComponent = () => {
                         />
                         <Scene
                               hideNavBar={true}
-                              key="level"
-                              component={Level}
-                        />
-                        <Scene
-                              hideNavBar={true}
                               key="parameters"
                               component={Parameters}
                         />
@@ -63,13 +56,12 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="photo"
                               component={Photo}
-                              
                         />
                         <Scene
                               hideNavBar={true}
                               key="messagerie"
                               component={Messagerie}
-                              
+
                         />
                   </Scene>
             </Router>
