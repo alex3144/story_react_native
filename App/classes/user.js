@@ -1,41 +1,36 @@
 //Object User
-import Picture from './picture';
 import Location from './location';
 import Conversations from './conversations';
 
 export default class User {
     constructor(
+        email,
         age,
         avatarUrl,
         fbId,
-        daySwippe,
         firstName,
         lastName,
         gender,
-        likeByDay,
         uid,
-        bio,
-        work,
-        conversationsId,
-        data,
-        city,
+        picture,
         lat,
         long,
 
-    ) {
+    ) { 
+        this.email = email;
         this.age = age;
         this.avatarUrl = avatarUrl;
         this.fbId = fbId;
-        this.daySwippe = daySwippe;
+        this.daySwippe = new Date();
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.likeByDay = likeByDay;
+        this.likeByDay = 20;
         this.uid = uid;
-        this.bio = bio;
-        this.work = work;
-        this.picture = new Picture(data);
-        this.location = new Location(city, lat, long);
+        this.bio = null;
+        this.work = null;
+        this.picture = picture
+        this.location = new Location(lat, long);
         this.conversationsId = []
     }
 }

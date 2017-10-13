@@ -22,14 +22,13 @@ const RouterComponent = () => {
                               key="login"
                               component={Connexion}
                               hideNavBar={true}
-
+                              initial={true}
                         />
                         <Scene
                               hideNavBar={true}
                               key="swipper"
                               component={Swipper}
                               panHandlers={null}
-                              initial={true}
                         />
                         <Scene
                               hideNavBar={true}
@@ -41,6 +40,7 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="profile"
                               component={Profile}
+                              direction='vertical'
                         />
                         <Scene
                               hideNavBar={true}

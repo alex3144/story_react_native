@@ -11,7 +11,7 @@ import User_class from '../../classes/user';
 import { AsyncStorage } from 'react-native'
 
 
-export const _fb_Auth = function () {
+export const _fb_Auth = function (long, lat) {
 
     //Attempt a login using the Facebook login dialog asking for default permissions.
 
@@ -27,73 +27,102 @@ export const _fb_Auth = function () {
                 } else {
 
                     ///  -----------------   Authentification process   ---------------------- 
+
                     /// Get facebook Access Token
                     AccessToken.getCurrentAccessToken().then(
                         (data) => {
                             if (data) {
                                 const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
                                 firebase.auth().signInWithCredential(credential).then((connexion) => {
-
-                                    /// Call Facebook Graph API 
-
-                                    /// Callback facebook call API
-                                    const responseInfoCallback = (error, result) => {
-                                        if (error) {
-                                            console.log(" ---- erreur lors de la connexion -----")
-                                            alert("Erreur lors de la connexion");
-                                        } else {
-
-
-                                            /// Check if user is in firebase database 
-
-                                            firebase.database().ref('/users/' + connexion.uid).once('value').then(function (snapshot) {
-
-                                                let exists = snapshot.val() != null;
-
-                                                if (!exists) {
-                                                    /// Create user 
-                                                    let user = new User_class(result.id, result.email, result.name, result.first_name, result.last_name, data.accessToken, result.picture, 0, "Type1", null)
-                                                    /// Save user in firebase database 
-                                                    console.log("---- User doesn't exist ----- ", user)
-                                                    if (user.email == undefined) {
-                                                        user.email = null
-                                                    }
-                                                    firebase.database().ref('/users/' + connexion.uid).set(user).then(function (res) {
-                                                        console.log(" ---- user is save ----- ")
-                                                        dispatch(setLoginSuccess(true, res));
-                                                        Actions.home({ user: user })
-                                                    }, (error) => {
-                                                        console.log(" ---- error in user save ----- ", error)
-                                                        alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
-                                                    })
+                                    firebase.database().ref('/users/' + connexion.uid).once('value').then(function (snapshot) {
+                                        let exists = snapshot.val() != null;
+                                        if (!exists) {
+                                            console.log("------- no exist --------")
+                                            const responseInfoCallback = (error, result) => {
+                                                if (error) {
+                                                    console.log(" ---- erreur lors de la connexion -----", error)
+                                                    alert("Erreur lors de la connexion", error);
                                                 } else {
+                                                    const responseAlbumPhotoCallback = (error, resultPhoto) => {
+                                                        let pictures = [];
+                                                        pictures.push(resultPhoto.data[0], resultPhoto.data[1], resultPhoto.data[2])
+                                                        
+                                                        if(result.email == undefined){
+                                                            result.email = null
+                                                        }
+                                                        
+                                                        let user = new User_class(
+                                                            result.email,
+                                                            result.birthday,
+                                                            result.picture.data.url,
+                                                            result.id,
+                                                            result.first_name,
+                                                            result.last_name,
+                                                            result.gender,
+                                                            connexion.uid,
+                                                            pictures,
+                                                            lat,
+                                                            long
+                                                        )
 
-                                                    console.log(" ---- user exist ------ ", snapshot.val())
-                                                    const SETTINGS_KEY = 'current_user'
-                                                    const settingsObj = { user: snapshot.val() }
-                                                    AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
-                                                    dispatch(setLoginSuccess(true, result));
-                                                    Actions.home()
-                                                }
-                                            }, (error) => {
-                                                alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
-                                                console.log(error + "----- Erreur de connection firebase database -----")
-                                            })
-                                        }
-                                    }
+                                                        console.log("---- User doesn't exist ----- ", user)
+                                                        
+                                                        firebase.database().ref('/users/' + connexion.uid).set(user).then(function (res) {
+                                                            console.log(" ---- user is save ----- ")
+                                                            const SETTINGS_KEY = 'current_user'
+                                                            const settingsObj = { user: user }
+                                                            AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
+                                                            dispatch(setLoginSuccess(true));
+                                                            Actions.swipper({user: user})
+                                                        }, (error) => {
+                                                            console.log(" ---- error in user save ----- ", error)
+                                                            alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
+                                                        })
+                                                    }
 
-                                    /// Construct Graph request
+                                                    const responseAlbumIdCallback = (error, result) => {
 
-                                    const infoRequest = new GraphRequest('/me', {
-                                        parameters: {
-                                            fields: {
-                                                string: 'email,name,first_name,last_name,picture.type(large)'
+                                                        // CALL REQUEST FOR PROFIL PICTURE SOURCE
+
+                                                        const albumPhotoRequest = new GraphRequest('/' + result.data[0].id +'/photos' , {
+                                                            parameters: {
+                                                                fields: {
+                                                                    string: 'source',
+                                                                    limit : '3'
+                                                                    
+                                                                }
+                                                            }
+                                                        }, responseAlbumPhotoCallback);
+                                                        new GraphRequestManager().addRequest(albumPhotoRequest).start()   
+                                                    }
+
+                                                    const albumIdRequest = new GraphRequest('/me/albums', {
+                                                    }, responseAlbumIdCallback);
+
+                                                    new GraphRequestManager().addRequest(albumIdRequest).start()   
+                                                } 
                                             }
+
+                                            const infoRequest = new GraphRequest('/me', {
+                                                parameters: {
+                                                    fields: {
+                                                        string: 'first_name, education, last_name,email,birthday,gender,picture'
+                                                    }
+                                                }
+                                            }, responseInfoCallback);
+
+                                            new GraphRequestManager().addRequest(infoRequest).start() 
+                                            
+                                      
+                                        } else {
+                                            console.log(" ---- user exist ------ ")
+                                            const SETTINGS_KEY = 'current_user'
+                                            const settingsObj = { user: snapshot.val() }
+                                            AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
+                                            dispatch(setLoginSuccess(true));
+                                            Actions.swipper({user: snapshot.val()})
                                         }
-                                    }, responseInfoCallback);
-
-                                    new GraphRequestManager().addRequest(infoRequest).start()
-
+                                    })
                                 }, (error) => {
                                     console.log(error + " ----- Erreur de connection firebase credential ----- ")
                                     alert(error)
@@ -117,9 +146,9 @@ export const _tchek_user = function () {
     return (dispatch) => {
         AsyncStorage.getItem("current_user").then((value) => {
             // console.log("tcheck_user" , value)
-            if (value != null) {
-                // console.log(value)
-                Actions.home()
+            if (value.user != null) {
+                console.log(value)
+                Actions.swipper({user: value})
             }
         }).done();
     }

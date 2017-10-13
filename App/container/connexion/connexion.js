@@ -11,11 +11,38 @@ import AnimOpacity from './animeOpacity';
 
 
 class Connexion extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      latitude: null,
+      longitude: null,
+      error: null,
+    };
+  }
+
 
   componentWillMount() {
+    
     console.log("-------------- in connexion willMount view -------------------")
+
     this.props._tchek_user()
+
+    ///ASK PERMISION FOR GEOLOCATION
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
   };
+
+
 
   render() {
     const { isLoginSuccess, isLoginPending, _fb_Auth, _tchek_user } = this.props;
@@ -36,7 +63,7 @@ class Connexion extends Component {
             <Text style= {styles.textTagline} >
               Ecrivez votre histoire
                 </Text>
-            <TouchableOpacity style= {styles.buttonFacebook} onPress={() => { this.props._fb_Auth() }}>
+            <TouchableOpacity style= {styles.buttonFacebook} onPress={() => { this.props._fb_Auth(this.state.latitude, this.state.longitude) }}>
               < LinearGradient colors={['rgb(15,131,222)', 'rgb(71,154,222)']} style={styles.linearGradientFacebook} >
                 <Text style= {styles.textButon} >
                   Connexion Facebook

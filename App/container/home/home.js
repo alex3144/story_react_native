@@ -74,7 +74,15 @@ class Home extends Component {
   }
   componentWillMount() {
     console.log(" ------------ in home willMount view ----------------")
-    this.props._currentUser();
+    // this.props._currentUser();
+    // Animated.timing(
+    //   this.state.progress, {toValue: 1, duration: 10000}
+    // ).start();
+    // const rotate =  this.state.progress.interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: ['0deg', '360deg']
+    // });
+    // const styleRotate = { transform: [{ rotate }]};
   }
 
   Card(x) {
