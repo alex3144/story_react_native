@@ -113,7 +113,7 @@ const styles = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'rgb(54,54,54)',
+    backgroundColor: 'white',//'rgb(54,54,54)',
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
     padding: StyleDimention.CARD_PADDING_X,
