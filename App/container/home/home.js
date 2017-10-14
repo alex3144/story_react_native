@@ -146,6 +146,7 @@ class Home extends Component {
     );
   }
 }
+
 const mapStateToProps = (state, props) => {
   console.log("------------ in home mapStateToProps view ------------", state.profileReducer, props);
   const user = state.profileReducer

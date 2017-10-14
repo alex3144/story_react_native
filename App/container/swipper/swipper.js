@@ -163,7 +163,7 @@ class Swipper extends Component {
   }
 }
 const mapStateToProps = (state, props) => {
-  console.log("------------ in swipper mapStateToProps view ------------", state.profileReducer, props);
+  console.log("------------ in home mapStateToProps view ------------", state.profileReducer, props);
   const user = state.profileReducer
   return (
     user

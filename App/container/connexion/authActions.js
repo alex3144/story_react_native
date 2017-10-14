@@ -12,14 +12,13 @@ export const setLoginPending = function(isLoginPending) {
   };
 }
 //Succes
-export const  setLoginSuccess = function(isLoginSuccess, token) {
+export const  setLoginSuccess = function(isLoginSuccess) {
   console.log("setLoginSuccess ACTION")
   return {
     type: types.SET_LOGIN_SUCCESS,
     isFetching: isLoginSuccess,
     isLoginError: false,
     isAuthenticated: true,
-    token
   };
 }
 //Error

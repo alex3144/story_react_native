@@ -73,7 +73,7 @@ export class Photo extends Component {
                </View>
 
                <View style={styles.containerPhoto}>
-                  <Image style={styles.stylePhoto} source={{ uri: this.props.picture.data.data.url }} />
+                  <Image style={styles.stylePhoto} source={{ uri: this.props.picture[0].source }} />
                </View>
                {this.renderButton()}
             </View>
