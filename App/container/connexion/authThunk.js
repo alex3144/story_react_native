@@ -146,7 +146,7 @@ export const _tchek_user = function () {
     return (dispatch) => {
         AsyncStorage.getItem("current_user").then((value) => {
             // console.log("tcheck_user" , value)
-            if (value.user != null) {
+            if (value != null) {
                 console.log(value)
                 Actions.swipper({user: value})
             }

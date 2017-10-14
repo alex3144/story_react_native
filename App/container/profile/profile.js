@@ -26,21 +26,21 @@ export default class Profile extends Component {
   //   this.props._currentUser();
   //   console.log(" ------------ in profile willMount view ----------------")
   // }
-  renderTextPoint() {
-    if (this.props.user.level.level.point == 0) {
-      return (
-        <Text style={styles.pointTextStyle}>
-          {this.props.user.level.level.point} point
-        </Text>
-      )
-    } else {
-      return (
-        <Text style={styles.pointTextStyle}>
-          {this.props.user.level.level.point} points
-        </Text>
-      )
-    }
-  }
+  // renderTextPoint() {
+  //   if () {
+  //     return (
+  //       <Text style={styles.pointTextStyle}>
+  //         {/* {this.props.user.level.level.point} point */}
+  //       </Text>
+  //     )
+  //   } else {
+  //     return (
+  //       <Text style={styles.pointTextStyle}>
+  //         {/* {this.props.user.level.level.point} points */}
+  //       </Text>
+  //     )
+  //   }
+  // }
 
   render() {
     if (this.props.user != null) {
@@ -62,16 +62,16 @@ export default class Profile extends Component {
                     <Image style={styles.imageStylo} source={stylo} />
                   </View>
                 </View>
-                <Image style={styles.photoStyle} source={{uri: this.props.user.picture.data.data.url}} />
+                {/* <Image style={styles.photoStyle} source={{uri: this.props.picture.data.data.url}} /> */}
               </TouchableOpacity>
               <Image style={styles.imageNinja} source={ninja} />
             </View>
             <Text style={styles.textStyle}>
-              {this.props.user.nickname}
+              {/* {this.props.user.nickname} */}
             </Text>
             <TouchableOpacity style={styles.buttonPoint} onPress={() => Actions.level()}>
               <Image style={styles.imageCoupe} source={level} />
-              {this.renderTextPoint()}
+              
             </TouchableOpacity>
           </View>
 
