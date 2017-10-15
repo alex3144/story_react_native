@@ -12,12 +12,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import StyleDimention from '../../style/dimention';
-import roulette from '../../asset/images/roulette.png';
-import ninja from '../../asset/images/ninja.png';
-import stylo from '../../asset/images/crayon.png';
-import level from '../../asset/images/level.png';
-import fb from '../../asset/images/fb.png';
-import insta from '../../asset/images/insta.png';
+import fb from '../../asset/images/fb.png'
 
 
 
@@ -25,21 +20,6 @@ export default class Profile extends Component {
   // componentDidMount() {
   //   this.props._currentUser();
   //   console.log(" ------------ in profile willMount view ----------------")
-  // }
-  // renderTextPoint() {
-  //   if () {
-  //     return (
-  //       <Text style={styles.pointTextStyle}>
-  //         {/* {this.props.user.level.level.point} point */}
-  //       </Text>
-  //     )
-  //   } else {
-  //     return (
-  //       <Text style={styles.pointTextStyle}>
-  //         {/* {this.props.user.level.level.point} points */}
-  //       </Text>
-  //     )
-  //   }
   // }
 
   render() {
@@ -49,7 +29,7 @@ export default class Profile extends Component {
 
           <View style={styles.navBarStyle}>
             <TouchableOpacity onPress={() => Actions.parameters(this.props.user)}>
-              <Image style={styles.imageRoulette} source={roulette} />
+              <Text> Parametre </Text>
             </TouchableOpacity>
           </View>
 
@@ -57,22 +37,12 @@ export default class Profile extends Component {
           <View style={styles.containerSection}>
             <View>
               <TouchableOpacity onPress={() => Actions.photo(this.props.user)}>
-                <View style={styles.borderContainerStylo}>
-                  <View style={styles.innerContainerStylo}>
-                    <Image style={styles.imageStylo} source={stylo} />
-                  </View>
-                </View>
-                {/* <Image style={styles.photoStyle} source={{uri: this.props.picture.data.data.url}} /> */}
+                <Image style={styles.photoStyle} source={{uri: this.props.user.picture[0].source}} />
               </TouchableOpacity>
-              <Image style={styles.imageNinja} source={ninja} />
             </View>
             <Text style={styles.textStyle}>
               {/* {this.props.user.nickname} */}
             </Text>
-            <TouchableOpacity style={styles.buttonPoint} onPress={() => Actions.level()}>
-              <Image style={styles.imageCoupe} source={level} />
-              
-            </TouchableOpacity>
           </View>
 
 
@@ -145,7 +115,7 @@ const styles = {
     height: 160,
     width: 160,
     borderRadius: 80,
-    borderWidth: 4,
+    borderWidth: 1,
     borderColor: 'black',
     marginBottom: 15,
   },

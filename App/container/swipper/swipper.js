@@ -11,8 +11,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 import StyleDimention from '../../style/dimention';
-import Profil from '../profile/profile';
-import Contact from '../contact/contact';
+import ProfilCurrent from '../profileCurrent/profileCurrent';
 import Home from '../home/home';
 import Messagerie from '../messagerie/messagerie'
 import SwipeCards from 'react-native-swipe-cards';
@@ -28,24 +27,24 @@ class Swipper extends Component {
     }
   }
   componentWillMount() {
-    console.log(" ------------ in swipper willMount view ----------------")
+    // console.log(" ------------ in swipper willMount view ----------------")
     this.props._currentUser();
   }
 
   disableSwipe(index) {
     if (index == 1) {
-      console.log("-----------in disableFuction swiper false-------------", index)
+      // console.log("-----------in disableFuction swiper false-------------", index)
       this.setState({ isEnable: !this.state.isEnable });
     }
     else {
-      console.log("-----------in disableFuction swiper true-------------", index)
+      // console.log("-----------in disableFuction swiper true-------------", index)
       this.setState({ isEnable: true });
     }
   }
 
   componentWillReceiveProps(props, nextProps) {
-    console.log("props", props)
-    console.log("props", nextProps)
+    // console.log("props", props)
+    // console.log("props", nextProps)
   }
 
 
@@ -86,7 +85,7 @@ class Swipper extends Component {
             </View>
           </View>
 
-          <Profil user={this.props.user} />
+          <ProfilCurrent user={this.props.user} />
         </View>
 
 
@@ -128,7 +127,6 @@ class Swipper extends Component {
         <View style={styles.container}>
           <View style={styles.containerNavBar}>
             <View style={styles.componentNavBar}>
-
               <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(-1)}>
                 <Text style={styles.textNavbar}>
                   Home
@@ -146,7 +144,6 @@ class Swipper extends Component {
               <View >
               </View>
             </View>
-
           </View>
           <Messagerie user={this.props.user} />
         </View>
@@ -156,8 +153,8 @@ class Swipper extends Component {
   }
 }
 const mapStateToProps = (state, props) => {
-  console.log("------------ in swipper mapStateToProps view ------------", state.profileReducer, props);
-  const user = state.profileReducer
+  // console.log("------------ in home mapStateToProps view ------------", state.homeReducer, props);
+  const user = state.homeReducer
   return (
     user
   )

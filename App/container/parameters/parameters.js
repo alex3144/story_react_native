@@ -209,8 +209,8 @@ class Reglages extends Component {
 }
 
 const mapStateToProps = (state) => {
-   console.log("in profile view", state.profileReducer)
-   const { user } = state.profileReducer
+//    console.log("---------------in profile map state to props view ----------------", state.homeReducer)
+   const { user } = state.homeReducer
    return {
       user
    }

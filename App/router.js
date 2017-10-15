@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import Connexion from './container/connexion/connexion';
 import Home from './container/home/home';
-import Profile from './container/profile/profile';
+import ProfileCurrent from './container/profileCurrent/profileCurrent';
 import Swipper from './container/swipper/swipper';
 import Contact from './container/contact/contact';
 
@@ -22,14 +22,14 @@ const RouterComponent = () => {
                               key="login"
                               component={Connexion}
                               hideNavBar={true}
-                             
+                              initial={true}
                         />
                         <Scene
                               hideNavBar={true}
                               key="swipper"
                               component={Swipper}
                               panHandlers={null}
-                              initial={true}
+                              
                         />
                         <Scene
                               hideNavBar={true}
@@ -39,8 +39,8 @@ const RouterComponent = () => {
                         />
                         <Scene
                               hideNavBar={true}
-                              key="profile"
-                              component={Profile}
+                              key="profileCurrent"
+                              component={ProfileCurrent}
                               direction='vertical'
                         />
                         <Scene

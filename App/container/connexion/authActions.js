@@ -3,7 +3,7 @@ import * as types from './authActionTypes';
 //Each function change the state of the store
 //Waiting
 export const setLoginPending = function(isLoginPending) {
-  console.log("setLoginPending ACTION")
+  // console.log("setLoginPending ACTION")
   return {
     type: types.SET_LOGIN_PENDING,
     isFetching: isLoginPending,
@@ -12,19 +12,18 @@ export const setLoginPending = function(isLoginPending) {
   };
 }
 //Succes
-export const  setLoginSuccess = function(isLoginSuccess, token) {
-  console.log("setLoginSuccess ACTION")
+export const  setLoginSuccess = function(isLoginSuccess) {
+  // console.log("setLoginSuccess ACTION")
   return {
     type: types.SET_LOGIN_SUCCESS,
     isFetching: isLoginSuccess,
     isLoginError: false,
     isAuthenticated: true,
-    token
   };
 }
 //Error
 export const setLoginError =  function (loginError, message) {
-  console.log("setLoginError ACTION")
+  // console.log("setLoginError ACTION")
   return {
     type: types.SET_LOGIN_ERROR,
     isFetching : loginError,
@@ -35,7 +34,7 @@ export const setLoginError =  function (loginError, message) {
 }
 //Cancel
 export const  setLoginCanceled = function (loginCancel, message) {
-  console.log("setLoginCanceled ACTION")
+  // console.log("setLoginCanceled ACTION")
   return {
     type: types.SET_LOGIN_CANCEL,
     isFetching : loginCancel,

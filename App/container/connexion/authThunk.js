@@ -37,7 +37,7 @@ export const _fb_Auth = function (long, lat) {
                                     firebase.database().ref('/users/' + connexion.uid).once('value').then(function (snapshot) {
                                         let exists = snapshot.val() != null;
                                         if (!exists) {
-                                            console.log("------- no exist --------")
+                                            // console.log("------- no exist --------")
                                             const responseInfoCallback = (error, result) => {
                                                 if (error) {
                                                     console.log(" ---- erreur lors de la connexion -----", error)
@@ -50,7 +50,6 @@ export const _fb_Auth = function (long, lat) {
                                                         if(result.email == undefined){
                                                             result.email = null
                                                         }
-                                                        
                                                         let user = new User_class(
                                                             result.email,
                                                             result.birthday,
@@ -73,7 +72,7 @@ export const _fb_Auth = function (long, lat) {
                                                             const settingsObj = { user: user }
                                                             AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                                             dispatch(setLoginSuccess(true));
-                                                            Actions.swipper({user: user})
+                                                            Actions.swipper(user)
                                                         }, (error) => {
                                                             console.log(" ---- error in user save ----- ", error)
                                                             alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
@@ -120,7 +119,7 @@ export const _fb_Auth = function (long, lat) {
                                             const settingsObj = { user: snapshot.val() }
                                             AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                             dispatch(setLoginSuccess(true));
-                                            Actions.swipper({user: snapshot.val()})
+                                            Actions.swipper(snapshot.val())
                                         }
                                     })
                                 }, (error) => {
@@ -145,10 +144,10 @@ export const _tchek_user = function () {
     console.log(" ----- in tcheck user ------ ")
     return (dispatch) => {
         AsyncStorage.getItem("current_user").then((value) => {
-            // console.log("tcheck_user" , value)
+            console.log("tcheck_user" , value)
             if (value != null) {
                 console.log(value)
-                Actions.swipper({user: value})
+                Actions.swipper(value)
             }
         }).done();
     }

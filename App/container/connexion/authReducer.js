@@ -12,7 +12,6 @@ export default function auth(state = {
         isFetching: true,
         isAuthenticated: false,
         isLoginError: false,
-        user: action.token
       })
     case types.SET_LOGIN_SUCCESS:
       return Object.assign({}, state, {

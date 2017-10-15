@@ -10,3 +10,24 @@ export const getCurentUser = function(user) {
      user
    };
   }
+export const getMatch = function(match){
+  console.log("getMatch ACTION", match)
+  return{
+    type: types.GET_MATCH,
+    match
+  };
+}
+
+export const onLeftAction = function(){
+  console.log("onLeftAction")
+  return{
+    type: types.ON_LEFT_ACTION
+  }
+}
+
+export const onRightAction = function(){
+  console.log("onRightAction")
+  return{
+    type: types.ON_RIGHT_ACTION
+  }
+}

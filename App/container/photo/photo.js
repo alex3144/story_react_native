@@ -73,7 +73,7 @@ export class Photo extends Component {
                </View>
 
                <View style={styles.containerPhoto}>
-                  <Image style={styles.stylePhoto} source={{ uri: this.props.picture.data.data.url }} />
+                  <Image style={styles.stylePhoto} source={{ uri: this.props.picture[0].source }} />
                </View>
                {this.renderButton()}
             </View>
@@ -83,7 +83,7 @@ export class Photo extends Component {
 }
 const mapStateToProps = (state, props) => {
    const isChange = state.photoReducer;
-   console.log("------------ in photo mapStateToProps view ------------", state.profileReducer, props, isChange);
+//    console.log("------------ in photo mapStateToProps view ------------", state.profileReducer, props, isChange);
    return (
       isChange
    )

@@ -11,104 +11,43 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 import StyleDimention from '../../style/dimention';
-import Profil from '../profile/profile';
-import Contact from '../contact/contact';
-import Message from '../messagerie/messagerie'
 import SwipeCards from 'react-native-swipe-cards';
 import { connect } from 'react-redux';
-import { _currentUser, } from '../home/homeThunk';
-
-
-
-const Cards = [{
-  "id": 1,
-  "first_name": "Denise",
-  "age": 21,
-  "friends": 9,
-  "interests": 38,
-
-}, {
-  "id": 2,
-  "first_name": "Cynthia",
-  "age": 27,
-  "friends": 16,
-  "interests": 49,
-
-}, {
-  "id": 3,
-  "first_name": "Maria",
-  "age": 29,
-  "friends": 2,
-  "interests": 39,
-
-}, {
-  "id": 4,
-  "first_name": "Jessica",
-  "age": 20,
-  "friends": 18,
-  "interests": 50,
-
-}, {
-  "id": 5,
-  "first_name": "Julie",
-  "age": 28,
-  "friends": 2,
-  "interests": 13,
-
-}, {
-  "id": 6,
-  "first_name": "Anna",
-  "age": 24,
-  "friends": 12,
-  "interests": 44,
-
-}]
+import { _currentUser, _match } from '../home/homeThunk';
 
 
 class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      cards: Cards
-    }
-  }
   componentWillMount() {
-    console.log(" ------------ in home willMount view ----------------")
-    // this.props._currentUser();
-    // Animated.timing(
-    //   this.state.progress, {toValue: 1, duration: 10000}
-    // ).start();
-    // const rotate =  this.state.progress.interpolate({
-    //   inputRange: [0, 1],
-    //   outputRange: ['0deg', '360deg']
-    // });
-    // const styleRotate = { transform: [{ rotate }]};
+    this.props._match()
+  }
+  componentWillReceiveProps(){
+    console.log(this.props.match)
   }
 
   Card(x) {
     return (
       <View style={styles.containerCard}>
-          <View style={styles.cardPitcture} />
-          <View style={styles.cardInfo}>
-            <Text style={styles.cardText}>{x.first_name}, </Text>
-            <Text style={styles.cardText}>{x.age}</Text>
-          </View>
+        <Image style={styles.cardPitcture} source={{uri: x.pictures.data[0].source.replace('http://', 'https://')}}/>
+        <View style={styles.cardInfo}>
+          <Text style={styles.cardText}>{x.first_name}, </Text>
+          <Text style={styles.cardText}>{x.age}</Text>
         </View>
+      </View>
     )
   }
 
 
-  handleYup(card) {
-    console.log(`Yup for ${card.text}`)
+  handleYes(card) {
+    console.log(`Yes for ${card.text}`)
   }
 
-  handleNope(card) {
-    console.log(`Nope for ${card.text}`)
+  handleNo(card) {
+    console.log(`No for ${card.text}`)
   }
   noMore() {
     return (
       <View style={styles.card} >
-        <Text>No More Cards</Text>
+        <Text>...</Text>
       </View>
     )
   }
@@ -126,34 +65,29 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-
-        {/* <View style={styles.containerCard}> */}
         <SwipeCards
           ref={'swiper'}
-          cards={this.state.cards}
+          cards={this.props.match}
           containerStyle={{ backgroundColor: 'white', alignItems: 'center' }}
           renderCard={(cardData) => this.Card(cardData)}
           renderNoMoreCards={() => this.noMore()}
-          handleYup={this.handleYup}
-          handleNope={this.handleNope} />
-        {/* </View> */}
-
-
+          handleYup={this.handleYes}
+          handleNope={this.handleNo} />
         <View style={styles.containerButton}>
-
         </View>
       </View>
     );
   }
 }
-const mapStateToProps = (state, props) => {
-  console.log("------------ in home mapStateToProps view ------------", state.profileReducer, props);
-  const user = state.profileReducer
-  return (
-    user
-  )
+
+const mapStateToProps = (state) => {
+  console.log("------------ in home mapStateToProps view ------------", state.homeReducer.match);
+  return {
+    user: state.homeReducer.user, 
+    match: state.homeReducer.match
+  }
 }
-export default connect(mapStateToProps, { _currentUser })(Home);
+export default connect(mapStateToProps, { _currentUser,_match })(Home);
 
 const HEADER_MAX_HEIGHT = 500;
 const HEADER_MIN_HEIGHT = 0;
@@ -199,15 +133,14 @@ const styles = {
     fontWeight: '300',
     color: 'black'
   },
-  card:{
-    borderRadius:20
+  card: {
+    borderRadius: 20
   },
   //--------------------------------
   //button Like and Dislike style
   containerButton: {
 
   },
-
   //--------------------------------
 
 }

@@ -24,7 +24,7 @@ class Connexion extends Component {
 
   componentWillMount() {
     
-    console.log("-------------- in connexion willMount view -------------------")
+    // console.log("--------- in connexion willMount view --------------")
 
     this.props._tchek_user()
 
@@ -87,7 +87,7 @@ class Connexion extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("-------------- in connexion mapStateToProps view -------------------", state)
+  // console.log("--------- in connexion mapStateToProps view ------------", state)
   return {
     isLoginPending: state.authReducer.isFetching,
     isLoginSuccess: state.authReducer.isAuthenticated,
