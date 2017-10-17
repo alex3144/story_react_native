@@ -72,7 +72,7 @@ export const _fb_Auth = function (long, lat) {
                                                             const settingsObj = { user: user }
                                                             AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                                             dispatch(setLoginSuccess(true));
-                                                            Actions.swipper(user)
+                                                            Actions.swiper(user)
                                                         }, (error) => {
                                                             console.log(" ---- error in user save ----- ", error)
                                                             alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
@@ -119,7 +119,7 @@ export const _fb_Auth = function (long, lat) {
                                             const settingsObj = { user: snapshot.val() }
                                             AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                             dispatch(setLoginSuccess(true));
-                                            Actions.swipper(snapshot.val())
+                                            Actions.swiper(snapshot.val())
                                         }
                                     })
                                 }, (error) => {
@@ -147,7 +147,7 @@ export const _tchek_user = function () {
             console.log("tcheck_user" , value)
             if (value != null) {
                 console.log(value)
-                Actions.swipper(value)
+                Actions.swiper(value)
             }
         }).done();
     }

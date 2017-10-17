@@ -23,7 +23,8 @@ class Swipper extends Component {
   constructor() {
     super()
     this.state = {
-      isEnable: false
+      isEnable: false,
+      index: 1
     }
   }
   componentWillMount() {
@@ -54,7 +55,7 @@ class Swipper extends Component {
         horizontal={true}
         showsPagination={false}
         loop={false}
-        index={1}
+        index={this.state.index}
         scrollEnabled={this.state.isEnable}
         onMomentumScrollEnd={(e, state, context) => this.disableSwipe(state.index)}
         ref='swiper'>

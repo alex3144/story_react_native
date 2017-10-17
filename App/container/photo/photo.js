@@ -50,8 +50,8 @@ export class Photo extends Component {
       if (this.props.isChange == true) {
          return (
             <View style={styles.containerNavBar}>
-                  <TouchableOpacity>
-                     <Image style={styles.navBarClose} source={close} />
+                  <TouchableOpacity onPress={()=>Actions.swiper()}>
+                     <Text>back</Text>
                   </TouchableOpacity>
                </View>
          )
@@ -96,7 +96,7 @@ const styles = {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-between',
-      backgroundColor: 'rgb(54,54,54)',
+      backgroundColor: 'white',//'rgb(54,54,54)',
       width: StyleDimention.DEVICE_WIDTH,
       height: StyleDimention.DEVICE_HEIGHT,
       padding: StyleDimention.CARD_PADDING_X,
@@ -135,7 +135,7 @@ const styles = {
       alignItems:'center',
    },
    buttonYellow: {
-      backgroundColor: 'rgb(248,194,28)',
+      backgroundColor: 'black',//'rgb(248,194,28)',
       borderRadius: 30,
       width: 180,
       height: 56,
@@ -143,7 +143,7 @@ const styles = {
       alignItems: 'center',
    },
    buttonWhite: {
-      backgroundColor: 'white',
+      backgroundColor: 'black',
       borderRadius: 12,
       width: StyleDimention.DEVICE_WIDTH - 20,
       height: 56,
@@ -159,13 +159,13 @@ const styles = {
    },
    textButtonCancel:{
       paddingTop: 5,
-      color: 'rgb(54,54,54)',
+      color: 'white',//'rgb(54,54,54)',
       fontSize: 27,
       fontFamily: "ProximaNovaSoft-Medium",
    },
    textButtonPicture:{
       paddingTop: 5,
-      color: 'rgb(248,194,28)',
+      color: 'white',//'rgb(248,194,28)',
       fontSize: 27,
       fontFamily: "ProximaNovaSoft-Medium",
    }
