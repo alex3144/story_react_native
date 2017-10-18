@@ -297,6 +297,13 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
+		50B5F6DC1F967E29000DFF15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50B5F6D81F967E29000DFF15 /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -366,6 +373,21 @@
 		5057230E1F8513710044BA0E /* ProximaNovaSoft-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNovaSoft-Bold.otf"; path = "../App/asset/fonts/ProximaNovaSoft-Bold.otf"; sourceTree = "<group>"; };
 		508A4D231F82C8D1007DBA63 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		508A4D501F82C99F007DBA63 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		50B5F6A11F967DCC000DFF15 /* RNFirebaseDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseDatabase.h; sourceTree = "<group>"; };
+		50B5F6A21F967DCC000DFF15 /* RNFirebaseDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseDatabase.m; sourceTree = "<group>"; };
+		50B5F6A31F967DCC000DFF15 /* RNFirebaseDatabaseReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseDatabaseReference.h; sourceTree = "<group>"; };
+		50B5F6A41F967DCC000DFF15 /* RNFirebaseDatabaseReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseDatabaseReference.m; sourceTree = "<group>"; };
+		50B5F6CC1F967DCC000DFF15 /* RNFirebaseStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseStorage.h; sourceTree = "<group>"; };
+		50B5F6CD1F967DCC000DFF15 /* RNFirebaseStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseStorage.m; sourceTree = "<group>"; };
+		50B5F6CF1F967DCC000DFF15 /* RNFirebaseFirestore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseFirestore.h; sourceTree = "<group>"; };
+		50B5F6D01F967DCC000DFF15 /* RNFirebaseFirestore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseFirestore.m; sourceTree = "<group>"; };
+		50B5F6D11F967DCC000DFF15 /* RNFirebaseFirestoreCollectionReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseFirestoreCollectionReference.h; sourceTree = "<group>"; };
+		50B5F6D21F967DCC000DFF15 /* RNFirebaseFirestoreCollectionReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseFirestoreCollectionReference.m; sourceTree = "<group>"; };
+		50B5F6D31F967DCC000DFF15 /* RNFirebaseFirestoreDocumentReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseFirestoreDocumentReference.h; sourceTree = "<group>"; };
+		50B5F6D41F967DCC000DFF15 /* RNFirebaseFirestoreDocumentReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseFirestoreDocumentReference.m; sourceTree = "<group>"; };
+		50B5F6D61F967DCE000DFF15 /* RNFirebaseAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFirebaseAuth.h; sourceTree = "<group>"; };
+		50B5F6D71F967DCE000DFF15 /* RNFirebaseAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseAuth.m; sourceTree = "<group>"; };
+		50B5F6D81F967E29000DFF15 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		50F972E61F9630A600D2408A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
 		50F9730D1F9630A600D2408A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		50F9730E1F9630A600D2408A /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -551,6 +573,10 @@
 		5006C0D51F7AFD1E00F85C23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50B5F6D51F967DCE000DFF15 /* auth */,
+				50B5F6A01F967DCC000DFF15 /* database */,
+				50B5F6CE1F967DCC000DFF15 /* firestore */,
+				50B5F6CB1F967DCC000DFF15 /* storage */,
 				508A4D231F82C8D1007DBA63 /* ART.xcodeproj */,
 				50F972E61F9630A600D2408A /* Bolts.framework */,
 				50F9730D1F9630A600D2408A /* FBSDKCoreKit.framework */,
@@ -595,6 +621,60 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		50B5F6A01F967DCC000DFF15 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				50B5F6A11F967DCC000DFF15 /* RNFirebaseDatabase.h */,
+				50B5F6A21F967DCC000DFF15 /* RNFirebaseDatabase.m */,
+				50B5F6A31F967DCC000DFF15 /* RNFirebaseDatabaseReference.h */,
+				50B5F6A41F967DCC000DFF15 /* RNFirebaseDatabaseReference.m */,
+			);
+			name = database;
+			path = "../node_modules/react-native-firebase/ios/RNFirebase/database";
+			sourceTree = "<group>";
+		};
+		50B5F6CB1F967DCC000DFF15 /* storage */ = {
+			isa = PBXGroup;
+			children = (
+				50B5F6CC1F967DCC000DFF15 /* RNFirebaseStorage.h */,
+				50B5F6CD1F967DCC000DFF15 /* RNFirebaseStorage.m */,
+			);
+			name = storage;
+			path = "../node_modules/react-native-firebase/ios/RNFirebase/storage";
+			sourceTree = "<group>";
+		};
+		50B5F6CE1F967DCC000DFF15 /* firestore */ = {
+			isa = PBXGroup;
+			children = (
+				50B5F6CF1F967DCC000DFF15 /* RNFirebaseFirestore.h */,
+				50B5F6D01F967DCC000DFF15 /* RNFirebaseFirestore.m */,
+				50B5F6D11F967DCC000DFF15 /* RNFirebaseFirestoreCollectionReference.h */,
+				50B5F6D21F967DCC000DFF15 /* RNFirebaseFirestoreCollectionReference.m */,
+				50B5F6D31F967DCC000DFF15 /* RNFirebaseFirestoreDocumentReference.h */,
+				50B5F6D41F967DCC000DFF15 /* RNFirebaseFirestoreDocumentReference.m */,
+			);
+			name = firestore;
+			path = "../node_modules/react-native-firebase/ios/RNFirebase/firestore";
+			sourceTree = "<group>";
+		};
+		50B5F6D51F967DCE000DFF15 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				50B5F6D61F967DCE000DFF15 /* RNFirebaseAuth.h */,
+				50B5F6D71F967DCE000DFF15 /* RNFirebaseAuth.m */,
+			);
+			name = auth;
+			path = "../node_modules/react-native-firebase/ios/RNFirebase/auth";
+			sourceTree = "<group>";
+		};
+		50B5F6D91F967E29000DFF15 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50B5F6DD1F967E29000DFF15 /* libRNFirebase.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,6 +696,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				50B5F6D81F967E29000DFF15 /* RNFirebase.xcodeproj */,
 				508A4D501F82C99F007DBA63 /* ART.xcodeproj */,
 				5006C11E1F7D67FD00F85C23 /* BVLinearGradient.xcodeproj */,
 				5006C11C1F7D677500F85C23 /* react-native-linear-gradient */,
@@ -866,6 +947,10 @@
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
+				{
+					ProductGroup = 50B5F6D91F967E29000DFF15 /* Products */;
+					ProjectRef = 50B5F6D81F967E29000DFF15 /* RNFirebase.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1107,6 +1192,13 @@
 			fileType = archive.ar;
 			path = libRCTFBSDK.a;
 			remoteRef = 508B56621F7A729100ECD6A0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		50B5F6DD1F967E29000DFF15 /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 50B5F6DC1F967E29000DFF15 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
@@ -1432,6 +1524,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/max/Documents/FacebookSDK,
+					"/Users/max/Dispo/story_react_native/node_modules/react-native-firebase",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

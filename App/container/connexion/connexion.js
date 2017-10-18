@@ -49,7 +49,7 @@ class Connexion extends Component {
     if (this.props.isLoginPending) {
       return (
         <View style={[styles.container, styles.flexContainer]}>
-          <Bubbles size={10} color="#FFF" />
+          <Bubbles size={10} color="black" />
         </View>
       )
     } else {
@@ -102,7 +102,7 @@ const styles = ({
   },
   container: {
     flex: 1,
-    backgroundColor: 'rgb(54,54,54)',
+    backgroundColor: 'white',
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
     padding: StyleDimention.CARD_PADDING_X,
@@ -117,7 +117,7 @@ const styles = ({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgb(54,54,54)',
+    backgroundColor: 'white',
     marginTop: 100
   },
   linearGradientFacebook: {
@@ -138,19 +138,19 @@ const styles = ({
     marginTop: 30,
   },
   textButon: {
-    color: 'white',
+    color: 'black',
     fontSize: 20,
     backgroundColor: "transparent",
   },
   textTitle: {
-    color: 'white',
+    color: 'black',
     fontSize: 80,
     marginBottom: 10,
     textAlign: 'center',
     fontFamily: "TypoGraphica",
   },
   textTagline: {
-    color: 'white',
+    color: 'black',
     fontSize: 20,
     padding: 10,
     marginBottom: 50,
@@ -162,7 +162,7 @@ const styles = ({
   textColor: {
     fontSize: 12,
     padding: 3,
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontFamily: "ProximaNovaSoft-Regular",
   }

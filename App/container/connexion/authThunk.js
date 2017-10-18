@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { setLoginPending, setLoginSuccess, setLoginError, setLoginCanceled } from './authActions';
 import User_class from '../../classes/user';
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native';
 
 
 export const _fb_Auth = function (long, lat) {

@@ -50,8 +50,16 @@ export class Photo extends Component {
       if (this.props.isChange == true) {
          return (
             <View style={styles.containerNavBar}>
-                  <TouchableOpacity onPress={()=>Actions.swiper()}>
-                     <Text>back</Text>
+                  <View style={styles.componentNavBar}/>
+                  <View style={styles.componentNavBar}>
+                        <Text style={styles.titleText}>
+                              Photo
+                        </Text>
+                  </View>
+                  <TouchableOpacity style={styles.componentNavBar} onPress={()=>Actions.swiper()}>
+                     <Text style={styles.textNavbar}>
+                           back
+                     </Text>
                   </TouchableOpacity>
                </View>
          )
@@ -105,19 +113,34 @@ const styles = {
    },
    //-----------------------------------------------
    //navbar
-   navBarClose: {
-      width: 28,
-      height: 28,
-   },
-   containerNavBar:{
-      marginLeft: 300,
-      height:28
-   },
+  //navBarStyle
+  containerNavBar: {
+      width: StyleDimention.DEVICE_WIDTH,
+      height: 50,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    componentNavBar: {
+      width: StyleDimention.DEVICE_WIDTH / 3,
+      alignItems: 'center',
+      justifyContent: 'center',
+  
+    },
+    textNavbar: {
+      color: 'black',
+      fontSize: 16,
+    },
+    titleText: {
+      color: 'black',
+      fontSize: 18,
+    },
+    //--------------------------------
    //-----------------------------------------------
    //pitcture
    stylePhoto: {
-      width: StyleDimention.DEVICE_WIDTH - 20,
-      height: 386,
+      width: StyleDimention.DEVICE_WIDTH - 50,
+      height: 290,
       borderRadius: 20,
    },
    containerPhoto: {

@@ -20,18 +20,21 @@ class Home extends Component {
   componentWillMount() {
     this.props._match()
   }
-  componentWillReceiveProps(){
+  componentWillReceiveProps() {
     console.log(this.props.match)
   }
 
   Card(x) {
     return (
       <View style={styles.containerCard}>
-        <Image style={styles.cardPitcture} source={{uri: x.pictures.data[0].source.replace('http://', 'https://')}}/>
-        <View style={styles.cardInfo}>
-          <Text style={styles.cardText}>{x.first_name}, </Text>
-          <Text style={styles.cardText}>{x.age}</Text>
-        </View>
+        <TouchableOpacity activeOpacity={0.8}>
+          <Image style={styles.cardPitcture} source={{ uri: x.pictures.data[0].source.replace('http://', 'https://') }}>
+            <View style={styles.cardInfo}>
+              <Text style={styles.cardText}>{x.first_name}, </Text>
+              <Text style={styles.cardText}>{x.age}</Text>
+            </View>
+          </Image>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -52,12 +55,12 @@ class Home extends Component {
     )
   }
 
-  yup() {
+  yes() {
     console.log(this.refs['swiper'])
     this.refs['swiper']._goToNextCard()
   }
 
-  nope() {
+  no() {
     console.log(this.refs['swiper'])
     this.refs['swiper']._goToNextCard()
   }
@@ -74,6 +77,20 @@ class Home extends Component {
           handleYup={this.handleYes}
           handleNope={this.handleNo} />
         <View style={styles.containerButton}>
+          <View>
+            <TouchableOpacity style={styles.borderButton} onPress={() => this.no()}>
+              <Text style={styles.textButton}>
+                NO
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity style={styles.borderButton} onPress={() => this.yes()}>
+              <Text style={styles.textButton}>
+                YES
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -83,11 +100,11 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   console.log("------------ in home mapStateToProps view ------------", state.homeReducer.match);
   return {
-    user: state.homeReducer.user, 
+    user: state.homeReducer.user,
     match: state.homeReducer.match
   }
 }
-export default connect(mapStateToProps, { _currentUser,_match })(Home);
+export default connect(mapStateToProps, { _currentUser, _match })(Home);
 
 const HEADER_MAX_HEIGHT = 500;
 const HEADER_MIN_HEIGHT = 0;
@@ -98,7 +115,7 @@ const styles = {
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     backgroundColor: 'white',//'rgb(54,54,54)',
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
@@ -110,28 +127,29 @@ const styles = {
   //cardStyle
   containerCard: {
     borderRadius: 20,
-    shadowColor: '#000',
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
+    shadowOpacity: 0.8,
+    shadowRadius: 7,
   },
   cardPitcture: {
-    width: 300,
-    height: 300,
+    width: StyleDimention.DEVICE_WIDTH - 50,
+    height: 360,
     backgroundColor: 'white',
+    borderRadius: 7,
   },
   cardInfo: {
-    width: 300,
-    height: 70,
+    position: 'absolute',
+    marginTop: 320,
+    marginLeft: 15,
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
   cardText: {
-    fontSize: 20,
-    fontWeight: '300',
-    color: 'black'
+    fontSize: 28,
+    fontFamily: "ProximaNovaSoft-Bold",
+    color: 'white',
+    backgroundColor: 'transparent',
   },
   card: {
     borderRadius: 20
@@ -139,7 +157,23 @@ const styles = {
   //--------------------------------
   //button Like and Dislike style
   containerButton: {
-
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: StyleDimention.DEVICE_WIDTH - 100,
+  },
+  borderButton: {
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    height: 40,
+    width: 100,
+    backgroundColor: 'white',
+  },
+  textButton: {
+    fontSize: 20,
   },
   //--------------------------------
 
