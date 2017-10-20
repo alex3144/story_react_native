@@ -27,7 +27,7 @@ class Home extends Component {
   Card(x) {
     return (
       <View style={styles.containerCard}>
-        <TouchableOpacity activeOpacity={0.8}>
+        <TouchableOpacity activeOpacity={0.8} onPress={()=>Actions.profileUser({user: x})}>
           <Image style={styles.cardPitcture} source={{ uri: x.pictures.data[0].source.replace('http://', 'https://') }}>
             <View style={styles.cardInfo}>
               <Text style={styles.cardText}>{x.first_name}, </Text>

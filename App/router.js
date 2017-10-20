@@ -5,7 +5,7 @@ import Home from './container/home/home';
 import ProfileCurrent from './container/profileCurrent/profileCurrent';
 import Swiper from './container/swiper/swiper';
 import Contact from './container/contact/contact';
-
+import ProfileUser from './container/profileUser/profileUser';
 import Parameters from './container/parameters/parameters';
 import Photo from './container/photo/photo'
 import Messagerie from './container/messagerie/messagerie';
@@ -41,7 +41,13 @@ const RouterComponent = () => {
                               hideNavBar={true}
                               key="profileCurrent"
                               component={ProfileCurrent}
-                              direction='vertical'
+                              
+                        />
+                        <Scene
+                              hideNavBar={true}
+                              key="profileUser"
+                              component={ProfileUser}
+                              
                         />
                         <Scene
                               hideNavBar={true}

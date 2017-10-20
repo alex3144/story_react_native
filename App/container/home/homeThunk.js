@@ -21,7 +21,7 @@ export const _currentUser = function () {
 export const _match = function () {
     // console.log('----- in asynchrone get match ----- ')
     return (dispatch) => {
-        fetch('https://cryptic-retreat-36289.herokuapp.com/profils/qZrMzSeugPN32E2CWBhq9xaEeaw1/true/false/50/18')
+        fetch('https://cryptic-retreat-36289.herokuapp.com/profils/qZrMzSeugPN32E2CWBhq9xaEeaw1/false/true/50/18')
             .then((response) => { 
                 console.log("--------- in call API --------", JSON.parse(response._bodyText).users);
                 dispatch(getMatch(JSON.parse(response._bodyText).users))

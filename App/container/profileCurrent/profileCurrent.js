@@ -24,6 +24,7 @@ export default class Profile extends Component {
 
   render() {
     if (this.props.user != null) {
+      console.log(this.props.user)
       return (
         <View style={styles.container}>
 
@@ -37,18 +38,23 @@ export default class Profile extends Component {
           <View style={styles.containerSection}>
             <View>
               <TouchableOpacity onPress={() => Actions.photo(this.props.user)}>
-                <Image style={styles.photoStyle} source={{uri: this.props.user.picture[0].source}} />
+                <Image style={styles.photoStyle} source={[{uri: this.props.user.picture[0].source}]} />
               </TouchableOpacity>
             </View>
-            <Text style={styles.textStyle}>
-              {/* {this.props.user.nickname} */}
-            </Text>
           </View>
 
 
           <View style={styles.containerSocial}>
-            <Text style={styles.textFbStyle}>
-              Bla { this.props.user.last_name }
+            <Text style={styles.textStyle}>
+              { this.props.user.firstName }
+            </Text>
+            <Text style={styles.textStyle}>
+              { this.props.user.age }
+            </Text>
+          </View>
+          <View style={styles.containerSocial}>
+            <Text style={styles.textStyle}>
+              { this.props.user.bio }
             </Text>
           </View>
         </View>
