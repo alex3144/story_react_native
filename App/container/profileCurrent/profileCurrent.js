@@ -35,7 +35,7 @@ export default class Profile extends Component {
           </View>
 
 
-          <View style={styles.containerSection}>
+          <View style={styles.containerMain}>
             <View>
               <TouchableOpacity onPress={() => Actions.photo(this.props.user)}>
                 <Image style={styles.photoStyle} source={[{uri: this.props.user.picture[0].source}]} />
@@ -44,15 +44,12 @@ export default class Profile extends Component {
           </View>
 
 
-          <View style={styles.containerSocial}>
+          <View style={styles.containerMain}>
             <Text style={styles.textStyle}>
-              { this.props.user.firstName }
-            </Text>
-            <Text style={styles.textStyle}>
-              { this.props.user.age }
+              { this.props.user.firstName },  { this.props.user.age }
             </Text>
           </View>
-          <View style={styles.containerSocial}>
+          <View style={styles.containerMain}>
             <Text style={styles.textStyle}>
               { this.props.user.bio }
             </Text>
@@ -95,7 +92,7 @@ const styles = {
     paddingTop: StyleDimention.CARD_PADDING_Y,
     paddingBottom: StyleDimention.CARD_PADDING_Y,
   },
-  containerSection: {
+  containerMain: {
     marginTop: -55,
     alignItems: 'center',
   },
@@ -112,9 +109,6 @@ const styles = {
     paddingBottom: 0,
 
   },
-
-
-
   //profile picture style
   photoStyle: {
     height: 160,
@@ -124,97 +118,6 @@ const styles = {
     borderColor: 'black',
     marginBottom: 15,
   },
-  //--------------------------------
-  //style picture stylo
-  borderContainerStylo: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1,
-    width: 34,
-    height: 34,
-    position: 'absolute',
-    borderWidth: 5,
-    borderColor: 'rgb(54,54,54)',
-    borderRadius: 20,
-    marginLeft: 120,
-  },
-  innerContainerStylo: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 28,
-    height: 28,
-    backgroundColor: 'rgb(248,194,28)',
-    borderRadius: 20,
-  },
-  imageStylo: {
-    width: 18,
-    height: 17,
-  },
-  //--------------------------------
-  // style point
-  pointTextStyle: {
-    color: 'rgb(248,194,28)',
-    fontSize: 20,
-    fontFamily: "ProximaNovaSoft-Semibold",
-    marginLeft: 15,
-    marginTop: 12,
-  },
-  imageCoupe: {
-    width: 24,
-    height: 21,
-  },
-  buttonPoint: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'rgb(248,194,28)',
-    width: 166,
-    height: 46,
-    borderRadius: 30,
-    paddingBottom: 5,
-  },
-  //--------------------------------
-  // style botton social linklink 
-  textFbStyle: {
-    color: 'black',
-    fontSize: 20,
-    fontFamily: "ProximaNovaSoft-Semibold",
-    marginTop: 8
-  },
-  containerSocial: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 30,
-  },
-  imageFb: {
-    width: 42,
-    height: 31,
-  },
-  //--------------------------------
-  // style pictures
-  imageNinja: {
-    width: 57,
-    height: 57,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    position: 'absolute',
-    marginLeft: 90,
-    marginTop: 130,
-  },
-  imageRoulette: {
-    width: 28,
-    height: 28,
-    marginLeft: 300,
-  },
-
-  imageInsta: {
-    width: 26,
-    height: 26,
-  },
-
   //--------------------------------
   buttonStyle: {
     alignItems: 'center',
