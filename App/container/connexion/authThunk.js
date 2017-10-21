@@ -10,6 +10,13 @@ import { setLoginPending, setLoginSuccess, setLoginError, setLoginCanceled } fro
 import User_class from '../../classes/user';
 import { AsyncStorage } from 'react-native';
 
+const getAge = function (birthday) {
+    if (birthday != null) {
+      return new Date().getFullYear() - new Date(birthday).getFullYear();
+    } else {
+      return null;
+    }
+  };  
 
 export const _fb_Auth = function (long, lat) {
 
@@ -46,13 +53,13 @@ export const _fb_Auth = function (long, lat) {
                                                     const responseAlbumPhotoCallback = (error, resultPhoto) => {
                                                         let pictures = [];
                                                         pictures.push(resultPhoto.data[0], resultPhoto.data[1], resultPhoto.data[2])
-                                                        
+
                                                         if(result.email == undefined){
                                                             result.email = null
                                                         }
                                                         let user = new User_class(
                                                             result.email,
-                                                            result.birthday,
+                                                            getAge(result.birthday),
                                                             result.picture.data.url,
                                                             result.id,
                                                             result.first_name,
@@ -63,7 +70,7 @@ export const _fb_Auth = function (long, lat) {
                                                             lat,
                                                             long
                                                         )
-
+                                                        
                                                         console.log("---- User doesn't exist ----- ", user)
                                                         
                                                         firebase.database().ref('/users/' + connexion.uid).set(user).then(function (res) {
@@ -72,7 +79,7 @@ export const _fb_Auth = function (long, lat) {
                                                             const settingsObj = { user: user }
                                                             AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                                             dispatch(setLoginSuccess(true));
-                                                            Actions.swiper(user)
+                                                            Actions.swiper(user, index=1)
                                                         }, (error) => {
                                                             console.log(" ---- error in user save ----- ", error)
                                                             alert("Erreur lors de la connexion \r si cela persite contacter nous \r story@contact.com");
@@ -147,7 +154,7 @@ export const _tchek_user = function () {
             console.log("tcheck_user" , value)
             if (value != null) {
                 console.log(value)
-                Actions.swiper(value)
+                Actions.swiper(value, index=1)
             }
         }).done();
     }

@@ -46,7 +46,6 @@ export default class ProfileUser extends Component {
   }
 
   render() {
-    console.log(this.props.user.pictures.data[0].source)
     const pictureCount = Object.keys(this.state.cards[0].pictures.data).length;
     const picture = [...new Array(pictureCount)].map((it, idx) => {
       return this.renderPicture(idx);
@@ -57,7 +56,7 @@ export default class ProfileUser extends Component {
           <StatusBar
             hidden={true}
           />
-          <TouchableOpacity style={styles.buttonBack} onPress={() => Actions.swiper()}>
+          <TouchableOpacity style={styles.buttonBack} onPress={() => Actions.swiper(index=1)}>
             <Image  source={backLeft} />
           </TouchableOpacity>
           <Swiper style={styles.wrapper}
@@ -85,7 +84,6 @@ export default class ProfileUser extends Component {
                 Description
               </Text>
               <Text style={styles.infoText}>
-                {this.props.user.bio}
               </Text>
             </View>
           </View>

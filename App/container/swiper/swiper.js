@@ -23,8 +23,8 @@ class Swipper extends Component {
   constructor() {
     super()
     this.state = {
-      isEnable: false,
-      index: 1
+      isEnable: true,
+      index
     }
   }
   componentWillMount() {
@@ -34,18 +34,14 @@ class Swipper extends Component {
 
   disableSwipe(index) {
     if (index == 1) {
-      // console.log("-----------in disableFuction swiper false-------------", index)
-      this.setState({ isEnable: !this.state.isEnable });
+      this.setState({ isEnable: false});
     }
     else {
-      // console.log("-----------in disableFuction swiper true-------------", index)
       this.setState({ isEnable: true });
     }
   }
 
   componentWillReceiveProps(props, nextProps) {
-    // console.log("props", props)
-    // console.log("props", nextProps)
   }
 
 

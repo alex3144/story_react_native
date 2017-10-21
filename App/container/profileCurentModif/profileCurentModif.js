@@ -19,6 +19,7 @@ import modif from '../../asset/images/crayon.png'
 
 
 export default class Profile extends Component {
+
   render() {
     if (this.props.user != null) {
       console.log(this.props.user)
@@ -28,6 +29,10 @@ export default class Profile extends Component {
           <View style={styles.containerHead}>
             <View style={styles.containerMainPhoto}>
               <Image style={styles.mainPhotoStyle} source={[{ uri: this.props.user.picture[0].source }]} />
+            </View>
+            <View style={styles.containerSecondaryPhoto}>
+              <Image style={styles.secondaryPhotoStyle} source={[{ uri: this.props.user.picture[1].source }]} />
+              <Image style={styles.secondaryPhotoStyle} source={[{ uri: this.props.user.picture[2].source }]} />
             </View>
             <View style={styles.containerMainDescritpion}>
               <Text style={styles.textStyle}>
@@ -39,25 +44,7 @@ export default class Profile extends Component {
                 {this.props.user.bio}
               </Text>
             </View>
-
           </View>
-
-          <View style={styles.containerBottom}>
-            <View style={styles.rowBottom}>
-              <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.profileCurentModif(this.props.user)}>
-                  <Image style={styles.iconStyle} source={modif} />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.parameters(this.props.user)}>
-                  <Image style={[styles.iconStyle, { marginLeft: 2 }]} source={roulette} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-
-
         </View >
 
       )
@@ -98,7 +85,6 @@ const styles = {
     shadowOpacity: 0.8,
     shadowRadius: 2,
   },
-
   navBarStyle: {
     paddingTop: 18,
     paddingBottom: 0,
@@ -107,7 +93,7 @@ const styles = {
   //--------------------------------
   //profile picture style
   containerMainPhoto: {
-    marginTop:20,
+    marginTop:5,
     alignItems: 'center',
   },
   containerSecondaryPhoto: {
@@ -121,7 +107,6 @@ const styles = {
     height: 160,
     width: 160,
     borderRadius: 80,
-    marginBottom: 15,
   },
   //--------------------------------
   //description style
@@ -160,12 +145,12 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     width: 200,
-    marginTop: 20,
+    marginTop: 15,
   },
   containerBottom: {
     alignItems: 'center',
     justifyContent: 'space-between',
     width: StyleDimention.DEVICE_WIDTH,
-    height: 120,
+    height: 200,
   },
 };

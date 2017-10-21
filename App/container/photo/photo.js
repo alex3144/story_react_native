@@ -56,7 +56,7 @@ export class Photo extends Component {
                               Photo
                         </Text>
                   </View>
-                  <TouchableOpacity style={styles.componentNavBar} onPress={()=>Actions.swiper()}>
+                  <TouchableOpacity style={styles.componentNavBar} onPress={()=>Actions.swiper(index=0)}>
                      <Text style={styles.textNavbar}>
                            back
                      </Text>
