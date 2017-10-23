@@ -23,7 +23,7 @@ class Swipper extends Component {
   constructor() {
     super()
     this.state = {
-      isEnable: true,
+      isEnable: false,
       index
     }
   }
@@ -33,11 +33,13 @@ class Swipper extends Component {
   }
 
   disableSwipe(index) {
-    if (index == 1) {
-      this.setState({ isEnable: false});
-    }
-    else {
-      this.setState({ isEnable: true });
+    if (this.refs.swiper) {
+      if (index == 1) {
+        this.setState({ isEnable: false });
+      }
+      else {
+        this.setState({ isEnable: true });
+      }
     }
   }
 

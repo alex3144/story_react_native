@@ -70,7 +70,6 @@ export const _fb_Auth = function (long, lat) {
                                                             lat,
                                                             long
                                                         )
-                                                        
                                                         console.log("---- User doesn't exist ----- ", user)
                                                         
                                                         firebase.database().ref('/users/' + connexion.uid).set(user).then(function (res) {
@@ -126,7 +125,7 @@ export const _fb_Auth = function (long, lat) {
                                             const settingsObj = { user: snapshot.val() }
                                             AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                             dispatch(setLoginSuccess(true));
-                                            Actions.swiper(snapshot.val())
+                                            Actions.swiper(snapshot.val(),index=1)
                                         }
                                     })
                                 }, (error) => {
@@ -148,12 +147,12 @@ export const _fb_Auth = function (long, lat) {
 };
 
 export const _tchek_user = function () {
-    console.log(" ----- in tcheck user ------ ")
+    // console.log(" ----- in tcheck user ------ ")
     return (dispatch) => {
         AsyncStorage.getItem("current_user").then((value) => {
-            console.log("tcheck_user" , value)
+            // console.log("tcheck_user" , value)
             if (value != null) {
-                console.log(value)
+                // console.log(value)
                 Actions.swiper(value, index=1)
             }
         }).done();

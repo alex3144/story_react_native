@@ -21,7 +21,7 @@ class Home extends Component {
     this.props._match()
   }
   componentWillReceiveProps() {
-    console.log(this.props.match)
+    // console.log(this.props.match)
   }
 
   Card(x) {
@@ -98,7 +98,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("------------ in home mapStateToProps view ------------", state.homeReducer.match);
+  // console.log("------------ in home mapStateToProps view ------------", state.homeReducer.match);
   return {
     user: state.homeReducer.user,
     match: state.homeReducer.match
@@ -115,8 +115,7 @@ const styles = {
   container: {
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'space-between',
-    backgroundColor: 'white',//'rgb(54,54,54)',
+    backgroundColor: 'white',
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
     padding: StyleDimention.CARD_PADDING_X,

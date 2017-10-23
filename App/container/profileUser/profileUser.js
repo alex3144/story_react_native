@@ -42,7 +42,8 @@ export default class ProfileUser extends Component {
   }
 
   renderPicture(index) {
-    return (<Image style={styles.image} source={this.state.cards[0].pictures.data[index]} />)
+    id=index
+    return (<Image style={styles.image} source={this.state.cards[0].pictures.data[id]} />)
   }
 
   render() {
@@ -56,8 +57,8 @@ export default class ProfileUser extends Component {
           <StatusBar
             hidden={true}
           />
-          <TouchableOpacity style={styles.buttonBack} onPress={() => Actions.swiper(index=1)}>
-            <Image  source={backLeft} />
+          <TouchableOpacity style={styles.buttonBack} onPress={() => Actions.swiper(index = 1)}>
+            <Image source={backLeft} />
           </TouchableOpacity>
           <Swiper style={styles.wrapper}
             onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
@@ -67,23 +68,27 @@ export default class ProfileUser extends Component {
             paginationStyle={{
               bottom: -18
             }}
+            style={{marginBottom:50}}
           >
 
             {picture}
           </Swiper>
+
           <View style={styles.infoContainer}>
 
-            <View style={styles.infoCard}>
+            <View style={[styles.infoCard,{marginTop:40}]}>
               <Text style={styles.infoText}>
                 {this.props.user.first_name}, {this.props.user.age}
               </Text>
             </View>
-
+            <View style={styles.infoCard}>
+              <Text style={styles.infoText}>
+                Work
+              </Text>
+            </View>
             <View style={styles.infoCardDescription}>
               <Text style={styles.infoText}>
                 Description
-              </Text>
-              <Text style={styles.infoText}>
               </Text>
             </View>
           </View>
@@ -114,6 +119,7 @@ const styles = {
   image: {
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT / 2 - 50,
+
   },
   //---------------------------------------------------
   infoContainer: {
@@ -121,7 +127,7 @@ const styles = {
     alignItems: 'center',
   },
   infoCard: {
-    marginTop: 50,
+    marginTop: 10,
     width: StyleDimention.DEVICE_WIDTH - 20,
     borderWidth: 1,
     borderColor: 'black',

@@ -9,7 +9,7 @@ export const _disconnexion = function () {
     AsyncStorage.removeItem('current_user').then((result, error) => {
       firebase.auth().signOut().then((result, error) => {
         dispatch(setDisconnected(true));
-        Actions.login();
+        Actions.connexion();
       }, (error) => {
         alert("Erreur lors de la deconnection firebase");
       });

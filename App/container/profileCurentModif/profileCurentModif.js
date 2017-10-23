@@ -7,20 +7,34 @@ import {
   View,
   ScrollView,
   Image,
-  StatusBar
+  StatusBar,
+  TextInput,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { _currentUser } from '../home/homeThunk';
+import { _setUser } from './profileCurentModifThunk';
 import { connect } from 'react-redux';
 import StyleDimention from '../../style/dimention';
-import fb from '../../asset/images/fb.png'
-import roulette from '../../asset/images/roulette.png'
-import modif from '../../asset/images/crayon.png'
+import fb from '../../asset/images/fb.png';
+import roulette from '../../asset/images/roulette.png';
+import modif from '../../asset/images/crayon.png';
 
 
 
-export default class Profile extends Component {
+class ProfileCurentModif extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bio: this.props.user.bio,
+      work: this.props.user.work
+    };
+  }
+  componentDidMount() {
+    this.props._currentUser();
+  }
 
   render() {
+    const { _setBioUser } = this.props;
     if (this.props.user != null) {
       console.log(this.props.user)
       return (
@@ -39,10 +53,29 @@ export default class Profile extends Component {
                 {this.props.user.firstName},  {this.props.user.age}
               </Text>
             </View>
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.bio}
-              </Text>
+            <View style={styles.containerTextInputs}>
+              <TextInput
+                style={styles.containerBio}
+                onChangeText={(bio) => this.setState({ bio })}
+                value={this.state.bio}
+                multiline={true}
+                maxLength={140}
+                autoCorrect={true}
+              />
+              <TextInput
+                style={styles.containerWork}
+                onChangeText={(work) => this.setState({ work })}
+                value={this.state.work}
+                multiline={true}
+                maxLength={30}
+                autoCorrect={true}
+              />
+
+              <TouchableOpacity style={styles.buttonConnexion} onPress={() => { this.props._setUser(this.props.user, this.state.bio, this.state.work) }}>
+                <Text style={styles.textConnexion}>
+                  Save
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View >
@@ -63,7 +96,14 @@ export default class Profile extends Component {
     }
   }
 }
-
+const mapStateToProps = (state) => {
+  //    console.log("---------------in profile map state to props view ----------------", state.homeReducer)
+  const { user } = state.homeReducer
+  return {
+    user
+  }
+}
+export default connect(mapStateToProps, { _currentUser, _setUser })(ProfileCurentModif);
 const styles = {
   //general style
   container: {
@@ -76,7 +116,7 @@ const styles = {
     height: StyleDimention.DEVICE_HEIGHT,
   },
   containerHead: {
-    borderRadius:7,
+    borderRadius: 7,
     alignItems: 'center',
     justifyContent: 'space-between',
     width: StyleDimention.DEVICE_WIDTH - 20,
@@ -93,7 +133,7 @@ const styles = {
   //--------------------------------
   //profile picture style
   containerMainPhoto: {
-    marginTop:5,
+    marginTop: 5,
     alignItems: 'center',
   },
   containerSecondaryPhoto: {
@@ -118,39 +158,39 @@ const styles = {
     marginTop: 20,
     marginBottom: 20,
   },
-  containerMainDescritpion:{
+  containerTextInputs: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  containerBio: {
+    width: StyleDimention.DEVICE_WIDTH - 40,
+    height: 120,
+    borderColor: 'gray',
+    borderWidth: 1
+  },
+  containerWork: {
+    width: StyleDimention.DEVICE_WIDTH - 40,
+    height: 30,
+    borderColor: 'gray',
+    borderWidth: 1
   },
   //--------------------------------
-  //icon style
-  containerIconStyle: {
+  //button style
+  buttonConnexion: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
-    width: 60,
+    borderWidth: 1,
+    borderColor: 'black',
+    width: 208,
+    height: 53,
     borderRadius: 30,
-    backgroundColor: 'black',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    marginTop: 30,
+    marginBottom: 10,
   },
-  iconStyle: {
-    height: 40,
-    width: 40,
+  textConnexion: {
+    color: 'black',
+    fontFamily: "ProximaNovaSoft-Regular",
+    fontSize: 16,
   },
-  rowBottom: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: 200,
-    marginTop: 15,
-  },
-  containerBottom: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: StyleDimention.DEVICE_WIDTH,
-    height: 200,
-  },
+  //--------------------------------
 };

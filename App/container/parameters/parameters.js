@@ -215,7 +215,7 @@ const mapStateToProps = (state) => {
       user
    }
 }
-export default connect(mapStateToProps, { _disconnexion,_currentUser })(Reglages)
+export default connect(mapStateToProps, { _disconnexion,_currentUser })(Reglages);
 
 const styles = {
    //Style

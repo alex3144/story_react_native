@@ -23,7 +23,7 @@ class Connexion extends Component {
 
 
   componentWillMount() {
-    
+
     // console.log("--------- in connexion willMount view --------------")
 
     this.props._tchek_user()

@@ -7,7 +7,7 @@ import {
   View,
   ScrollView,
   Image,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -18,10 +18,9 @@ import modif from '../../asset/images/crayon.png'
 
 
 
-export default class Profile extends Component {
+export default class ProfileCurent extends Component {
   render() {
     if (this.props.user != null) {
-      console.log(this.props.user)
       return (
         <View style={styles.container}>
 
@@ -39,18 +38,23 @@ export default class Profile extends Component {
                 {this.props.user.bio}
               </Text>
             </View>
+            <View style={styles.containerMainDescritpion}>
+              <Text style={styles.textStyle}>
+                {this.props.user.work}
+              </Text>
+            </View>
 
           </View>
 
           <View style={styles.containerBottom}>
             <View style={styles.rowBottom}>
               <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.profileCurentModif(this.props.user)}>
+                <TouchableOpacity onPress={() => Actions.profileCurentModif()}>
                   <Image style={styles.iconStyle} source={modif} />
                 </TouchableOpacity>
               </View>
               <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.parameters(this.props.user)}>
+                <TouchableOpacity onPress={() => Actions.parameters()}>
                   <Image style={[styles.iconStyle, { marginLeft: 2 }]} source={roulette} />
                 </TouchableOpacity>
               </View>
@@ -84,7 +88,6 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'white',
-    marginTop: 30,
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
   },
