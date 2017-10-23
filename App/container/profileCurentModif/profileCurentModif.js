@@ -9,6 +9,8 @@ import {
   Image,
   StatusBar,
   TextInput,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { _currentUser } from '../home/homeThunk';
@@ -38,6 +40,7 @@ class ProfileCurentModif extends Component {
     if (this.props.user != null) {
       console.log(this.props.user)
       return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
 
           <View style={styles.containerHead}>
@@ -79,7 +82,7 @@ class ProfileCurentModif extends Component {
             </View>
           </View>
         </View >
-
+        </TouchableWithoutFeedback>
       )
     } else {
       return (

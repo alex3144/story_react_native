@@ -22,47 +22,45 @@ export default class ProfileCurent extends Component {
   render() {
     if (this.props.user != null) {
       return (
-        <View style={styles.container}>
+          <View style={styles.container}>
 
-          <View style={styles.containerHead}>
-            <View style={styles.containerMainPhoto}>
-              <Image style={styles.mainPhotoStyle} source={[{ uri: this.props.user.picture[0].source }]} />
-            </View>
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.firstName},  {this.props.user.age}
-              </Text>
-            </View>
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.bio}
-              </Text>
-            </View>
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.work}
-              </Text>
-            </View>
-
-          </View>
-
-          <View style={styles.containerBottom}>
-            <View style={styles.rowBottom}>
-              <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.profileCurentModif()}>
-                  <Image style={styles.iconStyle} source={modif} />
-                </TouchableOpacity>
+            <View style={styles.containerTop}>
+              <View style={styles.containerMainPhoto}>
+                <Image style={styles.mainPhotoStyle} source={[{ uri: this.props.user.picture[0].source }]} />
               </View>
-              <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.parameters()}>
-                  <Image style={[styles.iconStyle, { marginLeft: 2 }]} source={roulette} />
-                </TouchableOpacity>
+              <View style={styles.containerMainDescritpion}>
+                <Text style={styles.textStyle}>
+                  {this.props.user.firstName},  {this.props.user.age}
+                </Text>
+              </View>
+              <View style={styles.containerMainDescritpion}>
+                <Text style={styles.textStyle}>
+                  {this.props.user.bio}
+                </Text>
+              </View>
+              <View style={styles.containerMainDescritpion}>
+                <Text style={styles.textStyle}>
+                  {this.props.user.work}
+                </Text>
+              </View>
+
+            </View>
+
+            <View style={styles.containerBottom}>
+              <View style={styles.rowBottom}>
+                <View style={styles.containerIconStyle}>
+                  <TouchableOpacity onPress={() => Actions.profileCurentModif()}>
+                    <Image style={styles.iconStyle} source={modif} />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.containerIconStyle}>
+                  <TouchableOpacity onPress={() => Actions.parameters()}>
+                    <Image style={[styles.iconStyle, { marginLeft: 2 }]} source={roulette} />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-
-
-        </View >
+          </View >
 
       )
     } else {
@@ -91,8 +89,8 @@ const styles = {
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
   },
-  containerHead: {
-    borderRadius:7,
+  containerTop: {
+    borderRadius: 7,
     alignItems: 'center',
     justifyContent: 'space-between',
     width: StyleDimention.DEVICE_WIDTH - 20,
@@ -100,6 +98,12 @@ const styles = {
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+  },
+  containerBottom: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: StyleDimention.DEVICE_WIDTH,
+    height: 120,
   },
 
   navBarStyle: {
@@ -110,7 +114,7 @@ const styles = {
   //--------------------------------
   //profile picture style
   containerMainPhoto: {
-    marginTop:20,
+    marginTop: 20,
     alignItems: 'center',
   },
   containerSecondaryPhoto: {
@@ -136,7 +140,7 @@ const styles = {
     marginTop: 20,
     marginBottom: 20,
   },
-  containerMainDescritpion:{
+  containerMainDescritpion: {
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -165,10 +169,5 @@ const styles = {
     width: 200,
     marginTop: 20,
   },
-  containerBottom: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: StyleDimention.DEVICE_WIDTH,
-    height: 120,
-  },
+
 };
