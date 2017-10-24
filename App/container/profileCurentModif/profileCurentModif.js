@@ -35,22 +35,70 @@ class ProfileCurentModif extends Component {
     this.props._currentUser();
   }
 
+
+  renderPhoto(index) {
+    if (index == 0) {
+      if (this.props.user.picture[index] == null) {
+        return (
+          <View style={styles.shadowPrimary}>
+            <TouchableOpacity>
+              <Image style={[styles.primaryPhoto, { backgroundColor: 'grey' }]} />
+            </TouchableOpacity>
+          </View>
+        )
+
+      } else {
+        return (
+          <View style={styles.shadowPrimary}>
+            <TouchableOpacity>
+              <Image style={styles.primaryPhoto} source={[{ uri: this.props.user.picture[index].source }]} />
+            </TouchableOpacity>
+          </View>
+        )
+
+      }
+    } else {
+      if (this.props.user.picture[index] == null) {
+        return (
+          <View style={styles.shadowSecondary}>
+            <TouchableOpacity>
+              <Image style={[styles.secondaryPhoto, { backgroundColor: 'grey' }]} />
+            </TouchableOpacity>
+          </View>
+        )
+
+      } else {
+        return (
+          <View style={styles.shadowSecondary}>
+            <TouchableOpacity>
+              <Image style={styles.secondaryPhoto} source={[{ uri: this.props.user.picture[index].source }]} />
+            </TouchableOpacity>
+          </View>
+        )
+
+      }
+    }
+  }
+
   render() {
     const { _setBioUser } = this.props;
     if (this.props.user != null) {
       console.log(this.props.user)
       return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+          <View style={styles.container}>
 
-          <View style={styles.containerHead}>
-            <View style={styles.containerMainPhoto}>
-              <Image style={styles.mainPhotoStyle} source={[{ uri: this.props.user.picture[0].source }]} />
+            <View style={styles.mainContainerPhoto}>
+              <View style={styles.containerPrimaryPhoto}>
+                {this.renderPhoto(0)}
+              </View>
+              <View style={styles.containerSecondaryPhoto}>
+                {this.renderPhoto(1)}
+                {this.renderPhoto(2)}
+              </View>
             </View>
-            <View style={styles.containerSecondaryPhoto}>
-              <Image style={styles.secondaryPhotoStyle} source={[{ uri: this.props.user.picture[1].source }]} />
-              <Image style={styles.secondaryPhotoStyle} source={[{ uri: this.props.user.picture[2].source }]} />
-            </View>
+
+
             <View style={styles.containerMainDescritpion}>
               <Text style={styles.textStyle}>
                 {this.props.user.firstName},  {this.props.user.age}
@@ -80,8 +128,8 @@ class ProfileCurentModif extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
-          </View>
-        </View >
+
+          </View >
         </TouchableWithoutFeedback>
       )
     } else {
@@ -112,22 +160,11 @@ const styles = {
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
     backgroundColor: 'white',
-    marginTop: 30,
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
   },
-  containerHead: {
-    borderRadius: 7,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: StyleDimention.DEVICE_WIDTH - 20,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-  },
+
   navBarStyle: {
     paddingTop: 18,
     paddingBottom: 0,
@@ -135,21 +172,49 @@ const styles = {
   },
   //--------------------------------
   //profile picture style
-  containerMainPhoto: {
-    marginTop: 5,
+  mainContainerPhoto: {
+    justifyContent: 'space-between',
+    width: StyleDimention.DEVICE_WIDTH - 60,
+    height: 230,
+    flexDirection: 'row',
+    marginTop:30
+  },
+  containerPrimaryPhoto: {
     alignItems: 'center',
+    justifyContent: 'center',
   },
   containerSecondaryPhoto: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    marginLeft: 20,
-    marginRight: 20,
-    width: StyleDimention.DEVICE_WIDTH - 60,
+    margin: 20
   },
-  mainPhotoStyle: {
-    height: 160,
-    width: 160,
-    borderRadius: 80,
+  primaryPhoto: {
+    height: 190,
+    width: 190,
+    borderRadius: 8,
+  },
+  secondaryPhoto: {
+    height: 80,
+    width: 80,
+    borderRadius: 4,
+  },
+  shadowPrimary: {
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    height: 190,
+    width: 190,
+    borderRadius: 8,
+  },
+  shadowSecondary: {
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    height: 80,
+    width: 80,
+    borderRadius: 4,
   },
   //--------------------------------
   //description style
