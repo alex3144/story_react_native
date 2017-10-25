@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import Connexion from './container/connexion/connexion';
-import Home from './container/home/home';
-import ProfileCurrent from './container/profileCurrent/profileCurrent';
-import ProfileCurentModif from './container/profileCurentModif/profileCurentModif';
-import Swiper from './container/swiper/swiper';
-import Contact from './container/contact/contact';
-import ProfileUser from './container/profileUser/profileUser';
-import Parameters from './container/parameters/parameters';
-import Photo from './container/photo/photo'
-import Messagerie from './container/messagerie/messagerie';
+import Connexion from './container/viewContainer/connexion/connexion';
+import Home from './container/viewContainer/home/home';
+import ProfileCurrent from './container/viewContainer/profileCurrent/profileCurrent';
+import ProfileCurentModif from './container/viewContainer/profileCurentModif/profileCurentModif';
+import Swiper from './container/viewContainer/swiper/swiper';
+import ProfileUser from './container/viewContainer/profileUser/profileUser';
+import Parameters from './container/viewContainer/parameters/parameters';
+import Messagerie from './container/viewContainer/messagerie/messagerie';
 
 
 const RouterComponent = () => {
@@ -52,18 +50,8 @@ const RouterComponent = () => {
                         />
                         <Scene
                               hideNavBar={true}
-                              key="contact"
-                              component={Contact}
-                        />
-                        <Scene
-                              hideNavBar={true}
                               key="parameters"
                               component={Parameters}
-                        />
-                        <Scene
-                              hideNavBar={true}
-                              key="photo"
-                              component={Photo}
                         />
                         <Scene
                               hideNavBar={true}
