@@ -41,7 +41,7 @@ export const _setUser = function (currentUser, bio, work) {
         //check local storage
         AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
         // dispatch(setCurentUser());
-        Actions.swiper(user, index = 0)
+        Actions.swiper(user)
       })
     })
   }

@@ -32,12 +32,6 @@ const RouterComponent = () => {
                         />
                         <Scene
                               hideNavBar={true}
-                              key="home"
-                              component={Home}
-                              panHandlers={null}
-                        />
-                        <Scene
-                              hideNavBar={true}
                               key="profileCurrent"
                               component={ProfileCurrent}
                               

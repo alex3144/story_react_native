@@ -107,7 +107,7 @@ export const _fb_Auth = function (long, lat) {
                                             const settingsObj = { user: snapshot.val() }
                                             AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
                                             dispatch(setLoginSuccess(true));
-                                            Actions.swiper(snapshot.val(),index=1)
+                                            Actions.swiper(snapshot.val())
                                         }
                                     })
                                 }, (error) => {
@@ -135,7 +135,7 @@ export const _tchek_user = function () {
             // console.log("tcheck_user" , value)
             if (value != null) {
                 // console.log(value)
-                Actions.swiper(value, index=1)
+                Actions.swiper(value)
             }
         }).done();
     }

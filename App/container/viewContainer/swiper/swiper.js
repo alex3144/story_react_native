@@ -15,8 +15,10 @@ import ProfilCurrent from '../profileCurrent/profileCurrent';
 import Home from '../home/home';
 import Messagerie from '../messagerie/messagerie'
 import SwipeCards from 'react-native-swipe-cards';
+
 import { connect } from 'react-redux';
-import { _currentUser, } from '../../technicalContainer/user/userThunk';
+import { _currentUser, _match } from '../../technicalContainer/user/userThunk';
+
 
 
 class Swipper extends Component {
@@ -24,39 +26,183 @@ class Swipper extends Component {
     super()
     this.state = {
       isEnable: false,
-      index
     }
+    
   }
+
   componentWillMount() {
-    // console.log(" ------------ in swipper willMount view ----------------")
+    console.log(" ------------ in swipper willMount view ----------------")
     this.props._currentUser();
+    this.props._match()
+    let index=1
+    this.setState({index: index})
   }
 
   disableSwipe(index) {
     if (this.refs.swiper) {
       if (index == 1) {
-        this.setState({ isEnable: false });
+        return (
+          this.setState({ isEnable: false })
+        )
+
       }
       else {
-        this.setState({ isEnable: true });
+        return (
+          this.setState({ isEnable: true })
+        )
       }
     }
   }
 
   componentWillReceiveProps(props, nextProps) {
   }
-  renderDot(index) {
+  card(x) {
+    return (
+      <View style={styles.containerCard}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => Actions.profileUser({ user: x })}>
+          <Image style={styles.cardPitcture} source={{ uri: x.pictures.data[0].source.replace('http://', 'https://') }}>
+            <View style={styles.cardInfo}>
+              <Text style={styles.cardText}>{x.first_name}, </Text>
+              <Text style={styles.cardText}>{x.age}</Text>
+            </View>
+          </Image>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  handleYes(card) {
+    console.log(`Yes for ${card.text}`)
+  }
+
+  handleNo(card) {
+    console.log(`No for ${card.text}`)
+  }
+  noMore() {
+    return (
+      <View style={styles.card} >
+        <Text>...</Text>
+      </View>
+    )
+  }
+  setIndexLeftOne() {
+    if (this.state.index == 1) {
+      return(
+        this.setState({index: 0})
+      )
+      console.log("===============",this.state.index)
+    }
+    if (this.state.index == 2) {
+      this.setState({index:1})
+      console.log("===============",this.state.index)
+    }
+  }
+  setIndexRightOne() {
+    if (this.state.index == 1) {
+      this.setState({index:2})
+      console.log("===============",this.state.index)
+    }
+    if (this.state.index == 0) {
+      this.setState({index:1})  
+      console.log("===============",this.state.index)
+    }
+  }
+  setIndexLeftTwo() {
+    this.setState({index:0})  
+    console.log("===============",this.state.index)
+  }
+  setIndexRigthTwo() {
+    this.setState({index:2})  
+    console.log("===============",this.state.index)
+  }
+
+  yes() {
+    console.log(this.refs['swipe'])
+    this.refs['swipe']._goToNextCard()
+  }
+
+  no() {
+    console.log(this.refs['swipe'])
+    this.refs['swipe']._goToNextCard()
+  }
+
+  renderFooterNav(index) {
     if (this.refs.swiper) {
       switch (index) {
         case 0:
-        break;
-        
+          return (
+            <View style={styles.containerFooterNav}>
+              <View style={styles.containerFooterTextNav}>
+                <TouchableOpacity >
+                  <Text style={styles.textFooterNav}>
+                    Left
+                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPressOut={() => this.refs.swiper.scrollBy(1)} onPress={() => this.setIndexRightOne()}>
+                  <Text style={styles.textFooterNav}>
+                    Home
+                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPressOut={() => this.refs.swiper.scrollBy(2)} onPress={() => this.setIndexRigthTwo()}>
+                  <Text style={styles.textFooterNav}>
+                    Right
+                   </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.backgroundFooternav}>
+              </View>
+            </View>
+          )
+
         case 1:
-        break;
-        
+          return (
+            <View style={styles.containerFooterNav}>
+              <View style={styles.containerFooterTextNav}>
+                <TouchableOpacity onPressOut={() => this.refs.swiper.scrollBy(-1)} onPress={() => this.setIndexLeftOne()}>
+                  <Text style={styles.textFooterNav}>
+                    Left
+                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={styles.textFooterNav}>
+                    Home
+                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPressOut={() => this.refs.swiper.scrollBy(1)} onPress={() => this.setIndexRightOne()}>
+                  <Text style={styles.textFooterNav}>
+                    Right
+                   </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.backgroundFooternav}>
+              </View>
+            </View>
+          )
+
         case 2:
-        break;
-        
+          return (
+            <View style={styles.containerFooterNav}>
+              <View style={styles.containerFooterTextNav}>
+                <TouchableOpacity onPressOut={() => this.refs.swiper.scrollBy(-2)} onPress={() => this.setIndexLeftTwo()}>
+                  <Text style={styles.textFooterNav}>
+                    Left
+                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPressOut={() => this.refs.swiper.scrollBy(-1)} onPress={() => this.setIndexLeftOne()}>
+                  <Text style={styles.textFooterNav}>
+                    Home
+                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity >
+                  <Text style={styles.textFooterNav}>
+                    Right
+                   </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.backgroundFooternav}>
+              </View>
+            </View>
+          )
         default:
           break;
       }
@@ -65,181 +211,200 @@ class Swipper extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor:'transparent'}}>
-      <Swiper
-        horizontal={true}
-        showsPagination={true}
-        loop={false}
-        index={this.state.index}
-        scrollEnabled={this.state.isEnable}
-        onMomentumScrollEnd={(e, state, context) => this.disableSwipe(state.index)}
-        ref='swiper'>
+      <View style={styles.container}>
+        <Swiper
+          horizontal={true}
+          showsPagination={true}
+          loop={false}
+          index={this.state.index}
+          ref='swiper'
+          scrollEnabled={this.state.isEnable}
+          onScrollBeginDrag={() => console.log("----------scrolling")}
+        >
+          <View style={styles.container}>
+            <ProfilCurrent user={this.props.user} />
+          </View>
 
-        <View style={styles.container}>
-          <View style={styles.containerNavBar}>
-            <View style={styles.componentNavBar}>
-              <View style={styles.buttonNavBar}>
-                <TouchableOpacity>
-                  <Text style={styles.textNavbar}>
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.componentNavBar}>
-              <View>
-                <Text style={styles.titleText}>
-                  PROFIL
+          <View style={styles.container}>
+            <View style={styles.containerHome}>
+              <View style={styles.containerTitle}>
+                <Text style={styles.textTitle}>
+                  Dispo
                 </Text>
               </View>
-            </View>
-            <View style={styles.componentNavBar}>
-              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(1)}>
-                <Text style={styles.textNavbar}>
-                  Home
-                  </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <ProfilCurrent user={this.props.user} />
-        </View>
-
-
-
-
-
-
-        <View style={styles.container}>
-          <View style={styles.containerNavBar}>
-            <View style={styles.componentNavBar}>
-              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(-1)}>
-                <Text style={styles.textNavbar}>
-                  Profile
-                  </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.componentNavBar}>
-              <View>
-                <Text style={styles.titleText}>
-                  HOME
-              </Text>
-              </View>
-            </View>
-            <View style={styles.componentNavBar}>
-              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(1)}>
-                <Text style={styles.textNavbar}>
-                  Message
-                  </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <Home user={this.props.user} />
-        </View>
-
-
-
-
-
-        <View style={styles.container}>
-          <View style={styles.containerNavBar}>
-            <View style={styles.componentNavBar}>
-              <TouchableOpacity onPress={() => this.refs.swiper.scrollBy(-1)}>
-                <Text style={styles.textNavbar}>
-                  Home
-                  </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.componentNavBar}>
-              <View >
-                <Text style={styles.titleText}>
-                  MESSAGE
-                </Text>
-              </View>
-            </View>
-            <View style={styles.componentNavBar}>
-              <View >
+              <SwipeCards
+                ref={'swipe'}
+                cards={this.props.match}
+                containerStyle={{ backgroundColor: 'white', alignItems: 'center' }}
+                renderCard={(cardData) => this.card(cardData)}
+                renderNoMoreCards={() => this.noMore()}
+                handleYup={this.handleYes}
+                handleNope={this.handleNo} />
+              <View style={styles.containerButton}>
+                <View>
+                  <TouchableOpacity style={styles.borderButton} onPress={() => this.no()}>
+                    <Text style={styles.textButton}>
+                      NO
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity style={styles.borderButton} onPress={() => this.yes()}>
+                    <Text style={styles.textButton}>
+                      YES
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>
-          <Messagerie user={this.props.user} />
-        </View>
 
-      </Swiper>
-        <View style={{width:StyleDimention.DEVICE_WIDTH, height: 50, backgroundColor:'black'}}>
+          <View style={styles.container}>
+            <Messagerie user={this.props.user} />
+          </View>
+
+        </Swiper>
+        <View style={styles.containerFooterNav}>
+          {this.renderFooterNav(this.state.index)}
         </View>
       </View>
     );
   }
 }
-const mapStateToProps = (state, props) => {
-  // console.log("------------ in home mapStateToProps view ------------", state.homeReducer, props);
-  const user = state.userReducer
-  return (
-    user
-  )
+const mapStateToProps = (state) => {
+  console.log("------------ in swiper mapStateToProps view ------------", state);
+  const { user, match } = state.userReducer
+  return {
+    user,
+    match
+  }
 }
-export default connect(mapStateToProps, { _currentUser })(Swipper);
+export default connect(mapStateToProps, { _currentUser, _match })(Swipper);
 
-const HEADER_MAX_HEIGHT = 500;
-const HEADER_MIN_HEIGHT = 0;
-const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 const styles = {
   //main layout container
-  dotStyle: {
-    backgroundColor: 'red',
-    width: 20,
-    height: 20,
-    borderRadius: 4,
-    marginLeft: 40,
-    marginRight: 40,
-    marginTop: 3,
-    marginBottom: 10
-  },
-  dotActivStyle: {
-    backgroundColor: '#007aff',
-    width: 20,
-    height: 20,
-    borderRadius: 4,
-    marginLeft: 40,
-    marginRight: 40,
-    marginTop: 3,
-    marginBottom: 3
-  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'white',// 'rgb(54,54,54)'
     width: StyleDimention.DEVICE_WIDTH,
+  },
+  //main layout container
+  containerHome: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
     padding: StyleDimention.CARD_PADDING_X,
     paddingTop: StyleDimention.CARD_PADDING_Y,
     paddingBottom: StyleDimention.CARD_PADDING_Y,
   },
-  //--------------------------------
-  //navBarStyle
-  containerNavBar: {
+  swiper: {
+    flex: 1,
     width: StyleDimention.DEVICE_WIDTH,
-    height: 50,
-    flexDirection: 'row',
+    height: StyleDimention.DEVICE_HEIGHT,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  componentNavBar: {
-    width: StyleDimention.DEVICE_WIDTH / 3,
-    alignItems: 'center',
-    justifyContent: 'center',
 
+  containerFooterNav: {
+    zIndex: 10,
+    alignItems: 'center',
+    width: StyleDimention.DEVICE_WIDTH,
+    overflow: 'hidden', // for hide the not important parts from circle
+    height: 120,
+    backgroundColor: 'transparent'
   },
-  textNavbar: {
+  //-------------------------------------------------
+  //
+  backgroundFooternav: {
+    borderRadius: 1500, // border borderRadius same as width and height
+    width: 1500,
+    height: 1500,
+    top: 0, // show the bottom part of circle
+    overflow: 'hidden', // hide not important part of image
+    backgroundColor: 'rgb(248,194,28)',
+  },
+  containerFooterTextNav: {
+    zIndex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  textFooterNav: {
     color: 'black',
     fontSize: 16,
   },
-  titleText: {
-    color: 'black',
-    fontSize: 18,
+  //-------------------------------------------------
+
+
+
+  //--------------------------------
+  //cardStyle
+  containerCard: {
+    borderRadius: 20,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 7,
+  },
+  cardPitcture: {
+    width: StyleDimention.DEVICE_WIDTH - 50,
+    height: 380,
+    backgroundColor: 'white',
+    borderRadius: 14,
+  },
+  cardInfo: {
+    position: 'absolute',
+    marginTop: 320,
+    marginLeft: 15,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+  },
+  cardText: {
+    fontSize: 28,
+    fontFamily: "ProximaNovaSoft-Bold",
+    color: 'white',
+    backgroundColor: 'transparent',
+  },
+  card: {
+    borderRadius: 20
   },
   //--------------------------------
-
+  //button Like and Dislike style
+  containerButton: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: 0,
+    width: StyleDimention.DEVICE_WIDTH - 100,
+  },
+  borderButton: {
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    height: 40,
+    width: 100,
+    backgroundColor: 'white',
+  },
+  textButton: {
+    fontSize: 20,
+  },
+  //--------------------------------
+  containerTitle: {
+    marginTop: 10
+  },
+  textTitle: {
+    color: 'rgb(248,194,28)',
+    fontSize: 35,
+    marginBottom: 10,
+    textAlign: 'center',
+    fontFamily: "TypoGraphica",
+  }
 }

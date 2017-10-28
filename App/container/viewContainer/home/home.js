@@ -51,7 +51,7 @@ class Home extends Component {
       </View>
     )
   }
-
+  
   yes() {
     console.log(this.refs['swiper'])
     this.refs['swiper']._goToNextCard()
@@ -65,6 +65,11 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.conatinerTitle}>
+          <Text style={styles.textTitle}>
+            Dispo
+        </Text>
+        </View>
         <SwipeCards
           ref={'swiper'}
           cards={this.props.match}
@@ -131,9 +136,9 @@ const styles = {
   },
   cardPitcture: {
     width: StyleDimention.DEVICE_WIDTH - 50,
-    height: 360,
+    height: 380,
     backgroundColor: 'white',
-    borderRadius: 7,
+    borderRadius: 14,
   },
   cardInfo: {
     position: 'absolute',
@@ -157,6 +162,8 @@ const styles = {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: 0,
     width: StyleDimention.DEVICE_WIDTH - 100,
   },
   borderButton: {
@@ -173,5 +180,15 @@ const styles = {
     fontSize: 20,
   },
   //--------------------------------
+  conatinerTitle:{
+    marginTop:10
+  },
+  textTitle:{
+    color: 'rgb(248,194,28)',
+    fontSize: 35,
+    marginBottom: 10,
+    textAlign: 'center',
+    fontFamily: "TypoGraphica",
+  }
 
 }
