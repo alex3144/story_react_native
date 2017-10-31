@@ -10,10 +10,10 @@ import {
   ListView,
   View
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import StyleDimention from '../../../style/dimention';
 import SwipeCards from 'react-native-swipe-cards';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import Iconz from 'react-native-vector-icons/Ionicons';
+
 
 var image1 = require('../../../asset/images/profile/image1.jpeg')
 var image2 = require('../../../asset/images/profile/image2.jpeg')
@@ -151,7 +151,7 @@ class Messagerie extends Component {
 
   render() {
     return (
-      <View>
+      <LinearGradient colors={['rgb(255,255,255)', 'rgb(240,236,236)']} style={styles.containerMessage}>
         <ScrollView style={styles.scrollViewStyle}>
           <View style={{ margin: 10 }}>
             <ListView
@@ -164,14 +164,16 @@ class Messagerie extends Component {
             />
           </View>
         </ScrollView>
-      </View>
+      </LinearGradient>
     )
   }
 }
 export default Messagerie;
 
 const styles = {
-
+  containerMessage:{
+    backgroundColor: 'white',
+  },
   //scrollview
   scrollView: {
     flex: 1,
@@ -200,7 +202,8 @@ const styles = {
     marginTop: 5,
     marginBottom: 5,
     borderBottomWidth: 1,
-    borderColor: '#e3e3e3'
+    borderColor: '#e3e3e3',
+    backgroundColor:'transparent'
   },
   //-----------------------------
 

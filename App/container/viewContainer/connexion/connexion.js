@@ -7,6 +7,7 @@ import { _tchek_user, _fb_Auth } from './authThunk';
 import LinearGradient from 'react-native-linear-gradient';
 import { Bubbles } from 'react-native-loader';
 import AnimOpacity from './animeOpacity';
+import Swiper from'../swiper/swiper';
 
 
 
@@ -23,7 +24,7 @@ class Connexion extends Component {
 
 
   componentWillMount() {
-
+    <Swiper/>
     // console.log("--------- in connexion willMount view --------------")
 
     this.props._tchek_user()

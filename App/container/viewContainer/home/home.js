@@ -8,6 +8,7 @@ import {
   ScrollView,
   StatusBar
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 import StyleDimention from '../../../style/dimention';
@@ -17,6 +18,10 @@ import { _currentUser, _match } from '../../technicalContainer/user/userThunk';
 
 
 class Home extends Component {
+  constructor(props){
+    super(props);
+    this.yes = this.yes.bind(this)
+  }
   componentWillMount() {
     this.props._match()
   }
@@ -28,7 +33,7 @@ class Home extends Component {
           <Image style={styles.cardPitcture} source={{ uri: x.pictures.data[0].source.replace('http://', 'https://') }}>
             <View style={styles.cardInfo}>
               <Text style={styles.cardText}>{x.first_name}, </Text>
-              <Text style={styles.cardText}>{x.age}</Text>
+              <Text style={styles.cardText}>{x.age} ans</Text>
             </View>
           </Image>
         </TouchableOpacity>
@@ -64,8 +69,9 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.conatinerTitle}>
+      <LinearGradient colors={['rgb(255,255,255)', 'rgb(240,236,236)']} style={styles.containerHome}>
+        <StatusBar barStyle={'dark-content'}/>
+        <View style={styles.containerTitle}>
           <Text style={styles.textTitle}>
             Dispo
         </Text>
@@ -80,21 +86,21 @@ class Home extends Component {
           handleNope={this.handleNo} />
         <View style={styles.containerButton}>
           <View>
-            <TouchableOpacity style={styles.borderButton} onPress={() => this.no()}>
+            <TouchableOpacity style={[styles.borderButton, {backgroundColor:'rgb(254,80,104)'}]} onPress={() => this.no()}>
               <Text style={styles.textButton}>
                 NO
               </Text>
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity style={styles.borderButton} onPress={() => this.yes()}>
+            <TouchableOpacity style={[styles.borderButton,{backgroundColor: 'rgb(60,164,255)'}]} onPress={() => this.yes()}>
               <Text style={styles.textButton}>
                 YES
               </Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </LinearGradient>
     );
   }
 }
@@ -109,13 +115,9 @@ const mapStateToProps = (state) => {
 }
 export default connect(mapStateToProps, { _currentUser, _match })(Home);
 
-const HEADER_MAX_HEIGHT = 500;
-const HEADER_MIN_HEIGHT = 0;
-const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-
 const styles = {
   //main layout container
-  container: {
+  containerHome: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'white',
@@ -133,10 +135,11 @@ const styles = {
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.8,
     shadowRadius: 7,
+    marginTop:-60
   },
   cardPitcture: {
     width: StyleDimention.DEVICE_WIDTH - 50,
-    height: 380,
+    height: 400,
     backgroundColor: 'white',
     borderRadius: 14,
   },
@@ -159,34 +162,35 @@ const styles = {
   //--------------------------------
   //button Like and Dislike style
   containerButton: {
+    margin:8,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     position: 'absolute',
     bottom: 0,
-    width: StyleDimention.DEVICE_WIDTH - 100,
+    width: StyleDimention.DEVICE_WIDTH - 200,
   },
   borderButton: {
-    borderRadius: 30,
+    borderRadius: 32,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'black',
-    height: 40,
-    width: 100,
-    backgroundColor: 'white',
+    height: 64,
+    width: 64,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
   textButton: {
     fontSize: 20,
+    color:'white'
   },
   //--------------------------------
-  conatinerTitle:{
-    marginTop:10
+  containerTitle:{
   },
   textTitle:{
     color: 'rgb(248,194,28)',
     fontSize: 35,
-    marginBottom: 10,
     textAlign: 'center',
     fontFamily: "TypoGraphica",
   }

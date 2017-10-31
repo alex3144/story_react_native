@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { _currentUser } from '../../technicalContainer/user/userThunk';
 import StyleDimention from '../../../style/dimention';
 import fb from '../../../asset/images/fb.png'
 import roulette from '../../../asset/images/roulette.png'
@@ -18,49 +19,53 @@ import modif from '../../../asset/images/crayon.png'
 
 
 
-export default class ProfileCurent extends Component {
+class ProfileCurent extends Component {
+  componentWillMount() {
+    this.props._currentUser()
+  }
+
   render() {
     if (this.props.user != null) {
       return (
-          <View style={styles.container}>
+        <View style={styles.container}>
 
-            <View style={styles.containerTop}>
-              <View style={styles.containerMainPhoto}>
-                <Image style={styles.mainPhotoStyle} source={[{ uri: this.props.user.picture[0].source }]} />
-              </View>
-              <View style={styles.containerMainDescritpion}>
-                <Text style={styles.textStyle}>
-                  {this.props.user.firstName},  {this.props.user.age}
-                </Text>
-              </View>
-              <View style={styles.containerMainDescritpion}>
-                <Text style={styles.textStyle}>
-                  {this.props.user.bio}
-                </Text>
-              </View>
-              <View style={styles.containerMainDescritpion}>
-                <Text style={styles.textStyle}>
-                  {this.props.user.work}
-                </Text>
-              </View>
-
+          <View style={styles.containerTop}>
+            <View style={styles.containerMainPhoto}>
+              <Image style={styles.mainPhotoStyle} source={[{ uri: this.props.user.picture[0].source }]} />
+            </View>
+            <View style={styles.containerMainDescritpion}>
+              <Text style={styles.textStyle}>
+                {this.props.user.firstName},  {this.props.user.age}
+              </Text>
+            </View>
+            <View style={styles.containerMainDescritpion}>
+              <Text style={styles.textStyle}>
+                {this.props.user.bio}
+              </Text>
+            </View>
+            <View style={styles.containerMainDescritpion}>
+              <Text style={styles.textStyle}>
+                {this.props.user.work}
+              </Text>
             </View>
 
-            <View style={styles.containerBottom}>
-              <View style={styles.rowBottom}>
-                <View style={styles.containerIconStyle}>
-                  <TouchableOpacity onPress={() => Actions.profileCurentModif()}>
-                    <Image style={styles.iconStyle} source={modif} />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.containerIconStyle}>
-                  <TouchableOpacity onPress={() => Actions.parameters()}>
-                    <Image style={[styles.iconStyle, { marginLeft: 2 }]} source={roulette} />
-                  </TouchableOpacity>
-                </View>
+          </View>
+
+          <View style={styles.containerBottom}>
+            <View style={styles.rowBottom}>
+              <View style={styles.containerIconStyle}>
+                <TouchableOpacity onPress={() => Actions.profileCurentModif()}>
+                  <Image style={styles.iconStyle} source={modif} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.containerIconStyle}>
+                <TouchableOpacity onPress={() => Actions.parameters()}>
+                  <Image style={[styles.iconStyle, { marginLeft: 2 }]} source={roulette} />
+                </TouchableOpacity>
               </View>
             </View>
-          </View >
+          </View>
+        </View >
 
       )
     } else {
@@ -78,6 +83,14 @@ export default class ProfileCurent extends Component {
     }
   }
 }
+const mapStateToProps = (state) => {
+  console.log("------------ in home mapStateToProps view ------------", state.userReducer);
+  const { user } = state.userReducer
+  return {
+    user
+  }
+}
+export default connect(mapStateToProps, { _currentUser })(ProfileCurent);
 
 const styles = {
   //general style
