@@ -7,7 +7,7 @@ import { _tchek_user, _fb_Auth } from './authThunk';
 import LinearGradient from 'react-native-linear-gradient';
 import { Bubbles } from 'react-native-loader';
 import AnimOpacity from './animeOpacity';
-import Swiper from'../swiper/swiper';
+import Swiper from '../swiper/swiper';
 
 
 
@@ -23,15 +23,12 @@ class Connexion extends Component {
   }
 
 
-  componentWillMount() {
-    <Swiper/>
-    // console.log("--------- in connexion willMount view --------------")
-
+  componentDidMount() {
     this.props._tchek_user()
-
     ///ASK PERMISION FOR GEOLOCATION
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        console.log("=-=-=-==-=-=-==-=-=--==--", position)
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -41,6 +38,7 @@ class Connexion extends Component {
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
+
   };
 
 
@@ -57,12 +55,12 @@ class Connexion extends Component {
       return (
         <View style={styles.container}>
           <AnimOpacity style={styles.containerSecond}>
-            <Text style= {styles.textTitle} >Story
+            <Text style= {styles.textTitle} >Dispo
                 <Text style={{ fontSize: 16 }}>®
                 </Text>
             </Text>
             <Text style= {styles.textTagline} >
-              Ecrivez votre histoire
+              La simplicité
                 </Text>
             <TouchableOpacity style= {styles.buttonFacebook} onPress={() => { this.props._fb_Auth(this.state.latitude, this.state.longitude) }}>
               < LinearGradient colors={['rgb(15,131,222)', 'rgb(71,154,222)']} style={styles.linearGradientFacebook} >

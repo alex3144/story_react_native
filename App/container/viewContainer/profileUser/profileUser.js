@@ -57,7 +57,7 @@ export default class ProfileUser extends Component {
           <StatusBar
             hidden={true}
           />
-          <TouchableOpacity style={styles.buttonBack} onPress={() => Actions.swiper()}>
+          <TouchableOpacity style={styles.buttonBack} onPress={() => Actions.swiper({index:1, isEnable:false})}>
             <Image source={backLeft} />
           </TouchableOpacity>
           <Swiper style={styles.wrapper}

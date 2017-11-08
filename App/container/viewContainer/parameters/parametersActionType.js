@@ -1,4 +1,2 @@
-//export all of the 
-
-export const SET_IS_DISCONNECTING = 'SET_IS_DISCONNECTING';
-export const SET_DISCONNECTED = 'SET_DISCONECTED';
+export const SET_PARAMS ='SET_PARAMS';
+export const GET_PARAMS ='GET_PARAMS';

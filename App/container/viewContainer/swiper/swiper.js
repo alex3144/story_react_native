@@ -29,52 +29,51 @@ import { _currentUser, _match } from '../../technicalContainer/user/userThunk';
 
 export default
   class Swipper extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      index: this.props.index,
+      routes: [
+        { key: '1' },
+        { key: '2' },
+        { key: '3' },
+      ],
+      isEnable: this.props.isEnable,
+      // icon: [profileWhite, cardWhite, messageWhite]
+    }
+  }
 
-  state = {
-    index: 1,
-    routes: [
-      { key: '1' },
-      { key: '2' },
-      { key: '3' },
-    ],
-    isEnable: false,
-    bg: 'black',
-    icon: [profileWhite, cardWhite, messageWhite]
-  }
-  renderIcon() {
-    if (this.state.index == 0) {
-      return (icon = [profileBlack, cardBlack, messageBlack]
-      )
-    }
-    if (this.state.index == 1) {
-      return (icon = [
-        profileWhite, cardWhite, messageWhite]
-      )
-    }
-    if (this.state.index == 2) {
-      return (icon = [
-        profileBlack, cardBlack, messageBlack]
-      )
-    }
-  }
 
   _renderIcon = ({ route }) => {
-    switch (route.key) {
-      case '1':
-        return <Image style={{ marginTop: 20, width: 40, height: 40 }} source={this.state.icon[0]} />
-      case '2':
-        return <Image style={{ marginTop: 20, width: 40, height: 40 }} source={this.state.icon[1]} />
-      case '3':
-        return <Image style={{ marginTop: 20, width: 40, height: 40 }} source={this.state.icon[2]} />
-      default:
-        return null;
+    if (this.state.index == 2) {
+      switch (route.key) {
+        case '1':
+          return <Image style={styles.iconStyle} source={profileBlack} />
+        case '2':
+          return <Image style={styles.iconStyle} source={cardBlack} />
+        case '3':
+          return <Image style={styles.iconStyle} source={messageBlack} />
+        default:
+          return null;
+      }
+    } else {
+      switch (route.key) {
+        case '1':
+          return <Image style={styles.iconStyle} source={profileWhite} />
+        case '2':
+          return <Image style={styles.iconStyle} source={cardWhite} />
+        case '3':
+          return <Image style={styles.iconStyle} source={messageWhite} />
+        default:
+          return null;
+      }
     }
   }
 
   _renderScene = ({ route }) => {
     switch (route.key) {
       case '1':
-        return <ProfilCurrent />;
+        return<ProfilCurrent />
       case '2':
         return <Home />;
       case '3':
@@ -96,18 +95,18 @@ export default
   renderStyleFooter = props => {
     if (this.state.index == 0) {
       return (
-        [styles.tabBar, { backgroundColor: 'white' }]
+        [styles.tabBar, { backgroundColor: 'rgba(63,63,63,1)' }]
       )
     }
     if (this.state.index == 1) {
       return (
-        [styles.tabBar, { backgroundColor: 'rgb(248,194,28)' }]
+        [styles.tabBar, { backgroundColor: 'rgba(248,194,28,1)' }]
       )
 
     }
     if (this.state.index == 2) {
       return (
-        [styles.tabBar, { backgroundColor: 'rgba(255,255,255,1)' }]
+        [styles.tabBar, { backgroundColor: 'rgba(255,255,255,0.8)' }]
       )
     }
   }
@@ -116,7 +115,7 @@ export default
     <TabBar
       {...props}
       renderIcon={this._renderIcon}
-      style={[styles.tabBar, this.renderStyleFooter()]}
+      style={this.renderStyleFooter()}
     />;
 
   render() {
@@ -134,74 +133,23 @@ export default
   }
 }
 
-// const mapStateToProps = (state) => {
-//   console.log("------------ in swiper mapStateToProps view ------------", state.userReducer);
-//   const { user, match } = state.userReducer
-//   return {
-//     user,
-//     match
-//   }
-// }
-// export default connect(mapStateToProps, { _currentUser, _match })(Swipper);
-
 const styles = {
   //main layout container
   container: {
     flex: 1,
   },
-  //main layout container
-  containerHome: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white',
-    width: StyleDimention.DEVICE_WIDTH,
-    height: StyleDimention.DEVICE_HEIGHT,
-    padding: StyleDimention.CARD_PADDING_X,
-    paddingTop: StyleDimention.CARD_PADDING_Y,
-    paddingBottom: StyleDimention.CARD_PADDING_Y,
-  },
-  swiper: {
-    flex: 1,
-    width: StyleDimention.DEVICE_WIDTH,
-    height: StyleDimention.DEVICE_HEIGHT,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  containerFooterNav: {
-    zIndex: 10,
-    alignItems: 'center',
-    width: StyleDimention.DEVICE_WIDTH,
-    overflow: 'hidden', // for hide the not important parts from circle
-    height: 120,
-    backgroundColor: 'transparent'
-  },
   //-------------------------------------------------
   tabBar: {
-    height: 100,
-    borderColor: 'white',
-    borderWidth: 1,
-    width: StyleDimention.DEVICE_WIDTH + 2,
-    marginBottom: -1,
-    marginLeft: -1
+    height: StyleDimention.DEVICE_HEIGHT * 15 / 100,
+    position: 'absolute',
+    bottom: -1,
+    width: StyleDimention.DEVICE_WIDTH + 4,
+    marginBottom: -2,
+    marginLeft: -2
   },
-
-  backgroundFooternav: {
-    borderRadius: 1500, // border borderRadius same as width and height
-    width: 1500,
-    height: 1500,
-    top: 0, // show the bottom part of circle
-    overflow: 'hidden', // hide not important part of image
-    backgroundColor: 'rgb(248,194,28)',
-  },
-  containerFooterTextNav: {
-    zIndex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  textFooterNav: {
-    color: 'black',
-    fontSize: 16,
-  },
+  iconStyle: {
+    marginTop: 10,
+    width: 40,
+    height: 40
+  }
 }

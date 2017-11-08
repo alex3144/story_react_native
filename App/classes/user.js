@@ -12,7 +12,7 @@ export default class User {
         lastName,
         gender,
         uid,
-        picture,
+        pictures,
         lat,
         long,
 
@@ -29,7 +29,7 @@ export default class User {
         this.uid = uid;
         this.bio = null;
         this.work = null;
-        this.picture = picture
+        this.pictures = pictures
         this.location = new Location(lat, long);
         this.conversationsId = []
     }

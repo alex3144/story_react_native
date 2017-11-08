@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   ScrollView,
   ListView,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import StyleDimention from '../../../style/dimention';
@@ -152,6 +153,7 @@ class Messagerie extends Component {
   render() {
     return (
       <LinearGradient colors={['rgb(255,255,255)', 'rgb(240,236,236)']} style={styles.containerMessage}>
+        <StatusBar barStyle="dark-content" />
         <ScrollView style={styles.scrollViewStyle}>
           <View style={{ margin: 10 }}>
             <ListView
@@ -171,7 +173,7 @@ class Messagerie extends Component {
 export default Messagerie;
 
 const styles = {
-  containerMessage:{
+  containerMessage: {
     backgroundColor: 'white',
   },
   //scrollview
@@ -203,7 +205,7 @@ const styles = {
     marginBottom: 5,
     borderBottomWidth: 1,
     borderColor: '#e3e3e3',
-    backgroundColor:'transparent'
+    backgroundColor: 'transparent'
   },
   //-----------------------------
 

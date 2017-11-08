@@ -9,6 +9,7 @@ import {
   Image,
   StatusBar,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { _currentUser } from '../../technicalContainer/user/userThunk';
@@ -22,51 +23,33 @@ import modif from '../../../asset/images/crayon.png'
 class ProfileCurent extends Component {
   componentWillMount() {
     this.props._currentUser()
+    // this.props._getParameters()
   }
+
 
   render() {
     if (this.props.user != null) {
       return (
         <View style={styles.container}>
-
-          <View style={styles.containerTop}>
-            <View style={styles.containerMainPhoto}>
-              <Image style={styles.mainPhotoStyle} source={[{ uri: this.props.user.picture[0].source }]} />
-            </View>
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.firstName},  {this.props.user.age}
-              </Text>
-            </View>
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.bio}
-              </Text>
-            </View>
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.work}
-              </Text>
-            </View>
-
+          <StatusBar barStyle="dark-content" />
+          <View style={styles.buttonParameters}>
+            <TouchableOpacity onPress={() => Actions.parameters(this.props.parameters)}>
+              <Image style={[styles.iconParameters, { marginLeft: 2 }]} source={roulette} />
+            </TouchableOpacity>
           </View>
+          <Image style={styles.profilePhoto} source={[{ uri: this.props.user.pictures[0].source }]} />
+          <Text style={styles.textStyle}>
+            {this.props.user.firstName}
+          </Text>
 
           <View style={styles.containerBottom}>
-            <View style={styles.rowBottom}>
-              <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.profileCurentModif()}>
-                  <Image style={styles.iconStyle} source={modif} />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.containerIconStyle}>
-                <TouchableOpacity onPress={() => Actions.parameters()}>
-                  <Image style={[styles.iconStyle, { marginLeft: 2 }]} source={roulette} />
-                </TouchableOpacity>
-              </View>
-            </View>
+
+            <TouchableOpacity style={styles.buttonModification} onPress={() => Actions.profileCurentModif()}>
+              <Image style={styles.iconModification} source={modif} />
+              <Text style={styles.textButtonModif}>Modifier</Text>
+            </TouchableOpacity>
           </View>
         </View >
-
       )
     } else {
       return (
@@ -84,7 +67,7 @@ class ProfileCurent extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log("------------ in home mapStateToProps view ------------", state.userReducer);
+  console.log("-=-=-=-=-= in current mapStateToProps", state.userReducer);
   const { user } = state.userReducer
   return {
     user
@@ -92,95 +75,75 @@ const mapStateToProps = (state) => {
 }
 export default connect(mapStateToProps, { _currentUser })(ProfileCurent);
 
+const heightNav = StyleDimention.DEVICE_HEIGHT * 15 / 100;
 const styles = {
   //general style
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(63,63,63,1)',
     width: StyleDimention.DEVICE_WIDTH,
     height: StyleDimention.DEVICE_HEIGHT,
+    marginBottom: heightNav - 4
   },
   containerTop: {
-    borderRadius: 7,
+    width: StyleDimention.DEVICE_WIDTH + 4,
+    height: 150,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    width: StyleDimention.DEVICE_WIDTH - 20,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
+    backgroundColor: 'rgba(220,220,220,1)',
+    borderColor: 'rgb(248,194,28)',
+    borderWidth: 2,
+    marginTop: -2
   },
   containerBottom: {
     alignItems: 'center',
-    justifyContent: 'space-between',
-    width: StyleDimention.DEVICE_WIDTH,
-    height: 120,
+    justifyContent: 'center',
+    marginBottom: 30
   },
-
-  navBarStyle: {
-    paddingTop: 18,
-    paddingBottom: 0,
-
+  profilePhoto: {
+    height: 170,
+    width: 170,
+    borderRadius: 85,
+    borderWidth: 4,
+    borderColor: 'white'
   },
-  //--------------------------------
-  //profile picture style
-  containerMainPhoto: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  containerSecondaryPhoto: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: 20,
-    marginRight: 20,
-    width: StyleDimention.DEVICE_WIDTH - 60,
-  },
-  mainPhotoStyle: {
-    height: 160,
-    width: 160,
-    borderRadius: 80,
-    marginBottom: 15,
-  },
-  //--------------------------------
-  //description style
   textStyle: {
     fontSize: 24,
     fontFamily: "ProximaNovaSoft-Bold",
-    paddingTop: 5,
-    color: 'black',
-    marginTop: 20,
-    marginBottom: 20,
+    color: 'white',
+    backgroundColor: 'transparent',
   },
-  containerMainDescritpion: {
+  buttonParameters: {
+    marginLeft: StyleDimention.DEVICE_WIDTH - 100,
+    marginTop: 35,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  //--------------------------------
-  //icon style
-  containerIconStyle: {
+  buttonModification: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
-    width: 60,
-    borderRadius: 30,
-    backgroundColor: 'black',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  iconStyle: {
-    height: 40,
-    width: 40,
-  },
-  rowBottom: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: 200,
-    marginTop: 20,
+    borderWidth: 2,
+    borderColor: 'rgb(248,194,28)',
+    width: 208,
+    height: 53,
+    borderRadius: 30,
+  },
+  textButtonModif: {
+    color: 'rgb(248,194,28)',
+    fontFamily: "ProximaNovaSoft-Semibold",
+    fontSize: 20,
+    marginTop: 5,
+    marginLeft: 8
+  },
+  iconParameters: {
+    height: 30,
+    width: 30,
+  },
+  iconModification: {
+    height: 20,
+    width: 20,
   },
 
 };

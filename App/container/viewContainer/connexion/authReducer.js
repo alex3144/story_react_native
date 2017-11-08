@@ -1,6 +1,6 @@
 import * as types from './authActionTypes';
 
-export default function auth(state = {
+export default function authReducer(state = {
   isFetching: false,
   // isAuthenticated: localStorage.getItem('id_token') ? true : false
   isAuthenticated: false,

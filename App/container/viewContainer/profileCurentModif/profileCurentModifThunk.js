@@ -10,39 +10,22 @@ import firebase from 'firebase';
 import { setCurentUser } from './profileCurentModifAction';
 import { AsyncStorage } from 'react-native';
 
-export const _setUser = function (currentUser, bio, work) {
+export const _setUser = function (currentUser, bio, work, pictures) {
   return (dispatch) => {
-    //restructure object
-    if (currentUser.email == undefined) {
-      currentUser.email = null
-    }
-    let user = new User_class(
-      currentUser.email,
-      currentUser.birthday,
-      currentUser.avatarUrl,
-      currentUser.id,
-      currentUser.firstName,
-      currentUser.lastName,
-      currentUser.gender,
-      currentUser.uid,
-      currentUser.picture,
-      currentUser.lat,
-      currentUser.long,
-    );
-    user.bio = bio;
-    user.work = work;
-    //--------------------
-    //check firebase, then
-    firebase.database().ref('/users/' + currentUser.uid).child('bio').set(bio).then(function (res) {
-      firebase.database().ref('/users/' + currentUser.uid).child('work').set(work).then(function (res) {
-        // console.log("-------------in curentModifThunk---------", bio)
-        const SETTINGS_KEY = 'current_user'
-        const settingsObj = { user: user }
-        //check local storage
-        AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
-        // dispatch(setCurentUser());
-        Actions.swiper(user)
-      })
+    //reattribut new data 
+    currentUser.pictures = pictures;
+    currentUser.bio = bio;
+    currentUser.work = work;
+    console.log("after update ----", currentUser)
+
+    //update firebase
+    firebase.database().ref('/users/' + currentUser.uid).set(currentUser).then(function (res) {
+      const SETTINGS_KEY = 'current_user'
+      const settingsObj = { user: currentUser }
+      //update local base
+      AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj))
+      console.log(currentUser)
+      Actions.swiper({index: 0, isEnable:true})
     })
   }
 }

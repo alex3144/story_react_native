@@ -12,23 +12,26 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { Actions } from 'react-native-router-flux';
 import { _currentUser } from '../../technicalContainer/user/userThunk';
 import { _setUser } from './profileCurentModifThunk';
 import { connect } from 'react-redux';
 import StyleDimention from '../../../style/dimention';
+
 import fb from '../../../asset/images/fb.png';
 import roulette from '../../../asset/images/roulette.png';
 import modif from '../../../asset/images/crayon.png';
 import ImagePicker from 'react-native-image-picker';
-import {_setPhoto} from './profileCurentModifAction'
+
+import { _setPhoto } from './profileCurentModifAction'
 
 const options = {
-  mediaType:'photo',
+  mediaType: 'photo',
   title: 'Select Avatar',
   customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
+    { name: 'fb', title: 'Choose Photo from Facebook' },
   ],
   storageOptions: {
     skipBackup: true,
@@ -42,64 +45,57 @@ class ProfileCurentModif extends Component {
     this.state = {
       bio: this.props.user.bio,
       work: this.props.user.work,
+      pictures: this.props.user.pictures,
     };
-  }
-  // componentWillMount() {
-  //   this.props._currentUser();
-  // }
 
-  setPhoto = function (index, picture, options) {
-      ImagePicker.showImagePicker(options, (response) => {
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
+  }
+
+
+  setPhoto = function (index, options) {
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        if (index != null) {
+          console.log('------------------- response done ------------------', response.uri)
+          let pictures = this.state.pictures
+          pictures[index].source = response.uri
+          this.setState({ pictures: pictures })
         }
-        else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-        }
-        else if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
-        }
-        else {
-          console.log('------------------- response done ------------------')
-          let source = { uri: response.uri };
-        }
-      });
+      }
+    });
   }
 
   renderPhoto(index) {
     if (index == 0) {
-      if (this.props.user.picture[index] == null) {
-        return (
-          <View style={styles.shadowPrimary}>
-            <TouchableOpacity onPress={()=>{this.setPhoto(index, this.props.user.picture[index].source, options)}}>
-              <Image style={[styles.primaryPhoto, { backgroundColor: 'grey' }]} />
-            </TouchableOpacity>
-          </View>
-        )
-      } else {
-        return (
-          <View style={styles.shadowPrimary}>
-            <TouchableOpacity onPress={()=>{this.setPhoto(index, this.props.user.picture[index].source, options)}}>
-              <Image style={styles.primaryPhoto} source={{uri:this.props.user.picture[index].source}} />
-            </TouchableOpacity>
-          </View>
-        )
-      }
+      return (
+        <View style={styles.shadowPrimary}>
+          <TouchableOpacity onPress={() => { this.setPhoto(index, options) }}>
+            <Image style={styles.primaryPhoto} source={{ uri: this.state.pictures[index].source }} />
+          </TouchableOpacity>
+        </View>
+      )
     } else {
-      if (this.props.user.picture[index] == null) {
+      if (this.state.pictures[index].source == null) {
         return (
           <View style={styles.shadowSecondary}>
-            <TouchableOpacity onPress={()=>{this.setPhoto(index, this.props.user.picture, options)}}>
+            <TouchableOpacity onPress={() => { this.setPhoto(index, options) }}>
               <Image style={[styles.secondaryPhoto, { backgroundColor: 'grey' }]} />
             </TouchableOpacity>
           </View>
         )
-
       } else {
         return (
           <View style={styles.shadowSecondary}>
-            <TouchableOpacity onPress={()=>{this.setPhoto(index, this.props.user.picture, options)}}>
-              <Image style={styles.secondaryPhoto}  source={{ uri: this.props.user.picture[index].source }} />
+            <TouchableOpacity onPress={() => { this.setPhoto(index, options) }}>
+              <Image style={styles.secondaryPhoto} source={{ uri: this.state.pictures[index].source }} />
             </TouchableOpacity>
           </View>
         )
@@ -107,108 +103,124 @@ class ProfileCurentModif extends Component {
     }
   }
 
-  render() {
-    const { _setBioUser } = this.props;
-    if (this.props.user != null) {
-      console.log(this.props.user)
-      return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.container}>
+render() {
+  const { _setBioUser } = this.props;
+  if (this.props.user != null) {
+    return (
+      <KeyboardAwareScrollView style={styles.container}>
+        <StatusBar barStyle={'dark-content'} />
 
-            <View style={styles.mainContainerPhoto}>
-              <View style={styles.containerPrimaryPhoto}>
-                {this.renderPhoto(0)}
-              </View>
-              <View style={styles.containerSecondaryPhoto}>
-                {this.renderPhoto(1)}
-                {this.renderPhoto(2)}
-              </View>
-            </View>
-
-
-            <View style={styles.containerMainDescritpion}>
-              <Text style={styles.textStyle}>
-                {this.props.user.firstName},  {this.props.user.age}
+        <View style={styles.containerTitle}>
+          <Text style={styles.textTitle}>
+            Modification
               </Text>
-            </View>
-            <View style={styles.containerTextInputs}>
-              <TextInput
-                style={styles.containerBio}
-                onChangeText={(bio) => this.setState({ bio })}
-                value={this.state.bio}
-                multiline={true}
-                maxLength={140}
-                autoCorrect={true}
-              />
-              <TextInput
-                style={styles.containerWork}
-                onChangeText={(work) => this.setState({ work })}
-                value={this.state.work}
-                multiline={true}
-                maxLength={30}
-                autoCorrect={true}
-              />
+        </View>
 
-              <TouchableOpacity style={styles.buttonConnexion} onPress={() => { this.props._setUser(this.props.user, this.state.bio, this.state.work) }}>
-                <Text style={styles.textConnexion}>
-                  Save
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-          </View >
-        </TouchableWithoutFeedback>
-      )
-    } else {
-      return (
-        <View style={styles.container}>
-          <View>
+        <View style={styles.containerPhoto}>
+          <View style={styles.containerPrimaryPhoto}>
+            {this.renderPhoto(0)}
           </View>
-          <View>
-            <Text style={styles.textStyle}>
-              else
-            </Text>
+          <View style={styles.containerSecondaryPhoto}>
+            {this.renderPhoto(1)}
+            {this.renderPhoto(2)}
           </View>
         </View>
-      )
-    }
+
+        <View style={styles.containerTextInputs}>
+          <Text style={styles.textStyle}> A propos de moi..</Text>
+          <TextInput
+            style={styles.containerBio}
+            onChangeText={(bio) => this.setState({ bio })}
+            value={this.state.bio}
+            multiline={true}
+            maxLength={140}
+            autoCorrect={true}
+            blurOnSubmit={true}
+          />
+        </View>
+        <View style={styles.containerTextInputs}>
+          <Text style={styles.textStyle}> Quelle est ta profession!!</Text>
+          <TextInput
+            style={styles.containerWork}
+            onChangeText={(work) => this.setState({ work })}
+            value={this.state.work}
+            multiline={true}
+            maxLength={30}
+            autoCorrect={true}
+            blurOnSubmit={true}
+          />
+        </View>
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={styles.buttonSave} onPress={() => { this.props._setUser(this.props.user, this.state.bio, this.state.work, this.state.pictures)}}>
+            <Text style={styles.textBtnSave}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAwareScrollView>
+    )
+  } else {
+    return (
+      <View style={styles.container}>
+        <View>
+        </View>
+        <View>
+          <Text style={styles.textStyle}>
+            else
+            </Text>
+        </View>
+      </View>
+    )
   }
+}
 }
 
 const mapStateToProps = (state) => {
-  console.log("---------------in profile map state to props view ----------------", state)
+  console.log("-=-=-=-=-=in profile map state to props view", state)
   const { user } = state.userReducer
   return {
     user
   }
 }
 
-export default connect(mapStateToProps, { _currentUser, _setUser, _setPhoto})(ProfileCurentModif);
+export default connect(mapStateToProps, { _currentUser, _setUser, _setPhoto })(ProfileCurentModif);
 const styles = {
   //general style
   container: {
-    flex: 1,
-    alignItems: 'center',
     backgroundColor: 'white',
-    width: StyleDimention.DEVICE_WIDTH,
-    height: StyleDimention.DEVICE_HEIGHT,
+    flex: 1,
   },
   navBarStyle: {
     paddingTop: 18,
     paddingBottom: 0,
   },
   //--------------------------------
+  //
+  textTitle: {
+    alignItems: 'center',
+    fontFamily: "ProximaNovaSoft-Semibold",
+    fontSize: 22,
+    color: 'rgb(248,194,28)',
+    backgroundColor: "transparent",
+    paddingTop: 13
+  },
+  containerTitle: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  //--------------------------------
   //profile picture style
-  mainContainerPhoto: {
-    justifyContent: 'space-between',
-    width: StyleDimention.DEVICE_WIDTH - 60,
+  containerPhoto: {
+    justifyContent: 'center',
+    width: StyleDimention.DEVICE_WIDTH,
     height: 230,
     flexDirection: 'row',
-    marginTop:30
+    marginTop: 30
   },
   containerPrimaryPhoto: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft: 20
   },
   containerSecondaryPhoto: {
     flexDirection: 'column',
@@ -246,44 +258,56 @@ const styles = {
   //--------------------------------
   //description style
   textStyle: {
-    fontSize: 24,
+    fontSize: 21,
     fontFamily: "ProximaNovaSoft-Bold",
     paddingTop: 5,
     color: 'black',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 15,
   },
   containerTextInputs: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 40,
   },
   containerBio: {
+    backgroundColor: 'rgb(230,230,230)',
+    borderRadius: 10,
     width: StyleDimention.DEVICE_WIDTH - 40,
     height: 120,
-    borderColor: 'gray',
-    borderWidth: 1
+    fontFamily: 'ProximaNovaSoft-Medium',
+    fontSize: 18,
+    padding: 10,
   },
   containerWork: {
+    backgroundColor: 'rgb(230,230,230)',
+    borderRadius: 10,
     width: StyleDimention.DEVICE_WIDTH - 40,
-    height: 30,
-    borderColor: 'gray',
-    borderWidth: 1
+    height: 50,
+    fontSize: 18,
+    fontFamily: 'ProximaNovaSoft-Medium',
+    padding: 10,
   },
   //--------------------------------
   //button style
-  buttonConnexion: {
+  containerButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'black',
+    width: StyleDimention.DEVICE_WIDTH,
+  },
+  buttonSave: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: 'rgb(248,194,28)',
     width: 208,
     height: 53,
     borderRadius: 30,
     marginTop: 30,
     marginBottom: 10,
   },
-  textConnexion: {
-    color: 'black',
+  textBtnSave: {
+    color: 'rgb(248,194,28)',
     fontFamily: "ProximaNovaSoft-Regular",
     fontSize: 16,
   },

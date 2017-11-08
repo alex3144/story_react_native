@@ -1,9 +1,9 @@
 import * as types from './profileCurentModifType';
 
-export default function changeProfil(state = {
+export default function profileReducer(state = {
   isChange: false
   }, action) {
-  // console.log(" ------ current user modif reducer -----", action) 
+  console.log("---------- current user modif reducer ", action) 
   switch (action.type) {
     case types.SET_PHOTO:
       // console.log("photo", action.photo)

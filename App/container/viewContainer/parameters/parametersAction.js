@@ -1,18 +1,16 @@
-import * as type from './parametersActionType';
+import * as types from './parametersActionType';
 
-export const setIsDisconnecting = function () {
-  // console.log("setIsDisconnecting ACTION")
+export const setParameters = function (parameters) {
+  console.log("==========setParameters ACTION", parameters)
   return {
-    type: type.SET_IS_DISCONNECTING,
-    isDisconnecting: true,
-    disconnected: false
+    type: types.SET_PARAMS,
+    parameters
   };
 }
-export const setDisconnected = function () {
-  // console.log("setDisconnected ACTION")
-  return{
-    type: type.SET_DISCONNECTED,
-    isDisconnecting: false,
-    disconnected: true
-  }
+export const getParameters = function (parameters) {
+  console.log("==========getParameters ACTION", parameters)
+  return {
+    type: types.GET_PARAMS,
+    parameters
+  };
 }
